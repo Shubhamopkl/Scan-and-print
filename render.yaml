@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: scan-and-print
-    runtime: node
-    plan: free
-    buildCommand: npm install
-    startCommand: npm start
-    healthCheckPath: /api/health
