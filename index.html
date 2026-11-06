@@ -368,6 +368,27 @@
               </div>
             </div>
 
+            <!-- UPI QR Payment Card -->
+            <div id="upiQrCard" class="hidden rounded-2xl border border-cyan-400/30 bg-white/[0.04] p-4">
+              <div class="flex items-center justify-between mb-3">
+                <div>
+                  <div class="text-xs font-bold text-white">Scan to Pay</div>
+                  <div class="text-[10px] text-slate-400">Use any UPI app</div>
+                </div>
+                <span id="upiSelectedApp" class="text-[10px] px-2 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-400/20">UPI</span>
+              </div>
+              <div class="rounded-2xl bg-white p-3 flex justify-center">
+                <img src="/assets/upi-qr.png" alt="UPI QR code" class="w-full max-w-[260px] rounded-xl">
+              </div>
+              <div class="mt-3 text-center">
+                <div class="text-[11px] text-slate-400">UPI ID</div>
+                <div class="text-sm font-semibold text-white select-all">shubhamsubham4-2@okaxis</div>
+              </div>
+              <div class="mt-3 text-[10px] text-center text-slate-500">
+                After payment, tap “Pay & Dispense Print Now”.
+              </div>
+            </div>
+
             <!-- Main CTA Button -->
             <button onclick="triggerPrintProcess()" class="w-full py-4 px-6 rounded-2xl glow-cyan-btn text-black font-extrabold text-sm flex items-center justify-center gap-2 mt-2">
               <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -718,18 +739,35 @@
     let currentOrder = null;
 
     async function api(path, options = {}) {
-      const res = await fetch(path, options);
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
-      return data;
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 30000);
+      try {
+        const res = await fetch(path, { ...options, signal: controller.signal, cache: 'no-store' });
+        const raw = await res.text();
+        let data = {};
+        try { data = raw ? JSON.parse(raw) : {}; } catch (_) {
+          throw new Error(`Server returned an invalid response (${res.status})`);
+        }
+        if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
+        return data;
+      } catch (err) {
+        if (err.name === 'AbortError') throw new Error('Server response timeout. Please try again.');
+        throw err;
+      } finally {
+        clearTimeout(timeout);
+      }
     }
 
     async function handleFileChange(e) {
       const file = e.target.files[0];
       if (!file) return;
       try {
+        if (file.size > 25 * 1024 * 1024) throw new Error('File is too large. Maximum size is 25 MB.');
+        const allowed = ['application/pdf', 'image/png', 'image/jpeg'];
+        const extOk = /\.(pdf|png|jpe?g)$/i.test(file.name);
+        if (!allowed.includes(file.type) && !extOk) throw new Error('Please upload a PDF, PNG, or JPG file.');
         const form = new FormData();
-        form.append('document', file);
+        form.append('document', file, file.name);
         showQuickAlert('Uploading and reading document…');
         const data = await api('/api/upload', { method: 'POST', body: form });
         uploadedDocument = data;
@@ -760,15 +798,11 @@
         const order = await createOrder(appName);
         currentOrder = order;
         showQuickAlert(`${appName} selected · Order ${order.id} · ₹${order.amount.toFixed(2)}`);
-        // The actual UPI payment gateway/VPA is intentionally not hard-coded into the UI.
-        // If a UPI_VPA is configured on the server, open a native UPI payment intent.
-        try {
-          const cfg = await api('/api/payment-config');
-          if (cfg.upiVpa) {
-            const url = `upi://pay?pa=${encodeURIComponent(cfg.upiVpa)}&pn=${encodeURIComponent(cfg.payeeName || 'Scan and Print')}&am=${order.amount.toFixed(2)}&cu=INR&tn=${encodeURIComponent(order.id)}`;
-            window.location.href = url;
-          }
-        } catch (_) {}
+        const qrCard = document.getElementById('upiQrCard');
+        const selectedApp = document.getElementById('upiSelectedApp');
+        if (qrCard) qrCard.classList.remove('hidden');
+        if (selectedApp) selectedApp.innerText = appName;
+        if (qrCard) qrCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } catch (err) {
         showQuickAlert(err.message);
       }
@@ -849,6 +883,15 @@
         showQuickAlert(`Rates changed locally: ${err.message}`);
       }
     }
+
+    // Verify backend connection when the page opens.
+    window.addEventListener('load', async () => {
+      try {
+        await api('/api/health');
+      } catch (_) {
+        showQuickAlert('Backend is not connected. Please open the Render Web Service URL.');
+      }
+    });
 
     // Notification toast
     function showQuickAlert(msg) {
