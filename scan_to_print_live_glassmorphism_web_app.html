@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="hi" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ScanPrint — Instant Glassmorphism Cloud & Kiosk Print</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            neonCyan: '#00f0ff',
+            neonViolet: '#8b5cf6',
+            neonEmerald: '#10b981',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Ultra Modern Glassmorphism Styling */
+    .glass-panel {
+      background: rgba(18, 22, 34, 0.65);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+    .glass-card-interactive {
+      background: rgba(25, 30, 48, 0.5);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card-interactive:hover {
+      background: rgba(35, 42, 68, 0.65);
+      border-color: rgba(0, 240, 255, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px -10px rgba(0, 240, 255, 0.25);
+    }
+    .glass-active {
+      background: rgba(0, 240, 255, 0.08) !important;
+      border-color: rgba(0, 240, 255, 0.6) !important;
+      box-shadow: 0 0 24px rgba(0, 240, 255, 0.25), inset 0 0 12px rgba(0, 240, 255, 0.1) !important;
+    }
+    .glow-cyan-btn {
+      background: linear-gradient(135deg, #00f0ff 0%, #3b82f6 100%);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.35);
+      transition: all 0.2s ease;
+    }
+    .glow-cyan-btn:hover {
+      box-shadow: 0 0 35px rgba(0, 240, 255, 0.6);
+      transform: scale(1.01);
+    }
+    /* Hide scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(12, 14, 23, 0.8);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+    }
+  </style>
+</head>
+<body class="bg-[#090b11] text-slate-100 font-sans min-h-screen relative overflow-x-hidden selection:bg-cyan-500 selection:text-black">
+
+  <!-- Ambient Dynamic Neon Backlights -->
+  <div class="fixed top-[-10%] left-[20%] w-[550px] h-[550px] bg-cyan-500/12 rounded-full blur-[140px] pointer-events-none -z-10 animate-pulse" style="animation-duration: 7s;"></div>
+  <div class="fixed bottom-[-10%] right-[15%] w-[600px] h-[600px] bg-violet-600/12 rounded-full blur-[160px] pointer-events-none -z-10 animate-pulse" style="animation-duration: 9s;"></div>
+  <div class="fixed top-[45%] left-[-10%] w-[450px] h-[450px] bg-blue-600/10 rounded-full blur-[130px] pointer-events-none -z-10"></div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="sticky top-0 z-50 px-4 py-3 border-b border-white/10 glass-panel bg-[#090b11]/80">
+    <div class="max-w-5xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-cyan-400 to-blue-600 p-[1px] shadow-lg shadow-cyan-500/20">
+          <div class="w-full h-full bg-[#0d101a] rounded-2xl flex items-center justify-center">
+            <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-white via-slate-100 to-cyan-300 bg-clip-text text-transparent">ScanPrint</span>
+            <span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-400/30">KIOSK OS</span>
+          </div>
+          <p class="text-[11px] text-slate-400">Terminal #KP-4821 · Central Station Desk 3</p>
+        </div>
+      </div>
+
+      <!-- Mode Switcher: Customer vs Owner Portal -->
+      <div class="flex items-center gap-1.5 p-1 bg-white/5 border border-white/10 rounded-2xl">
+        <button id="navCustomerBtn" onclick="switchView('customer')" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 bg-cyan-400 text-black shadow-md shadow-cyan-500/20">
+          Customer Print
+        </button>
+        <button id="navOwnerBtn" onclick="switchView('owner')" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white transition-all duration-200">
+          Owner Portal 🔒
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-5xl mx-auto px-4 py-6">
+
+    <!-- ========================================== -->
+    <!-- VIEW 1: CUSTOMER SCAN TO PRINT (DEFAULT)   -->
+    <!-- ========================================== -->
+    <div id="customerView" class="space-y-6">
+
+      <!-- Hero Terminal Card -->
+      <div class="glass-panel rounded-3xl p-5 md:p-6 relative overflow-hidden">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-start gap-3.5">
+            <div class="w-12 h-12 rounded-2xl bg-cyan-500/15 border border-cyan-400/30 flex items-center justify-center text-cyan-400 shrink-0">
+              <svg class="w-6 h-6 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path>
+              </svg>
+            </div>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Kiosk Online
+                </span>
+                <span class="text-xs font-mono text-slate-400">ID: KP-4821</span>
+              </div>
+              <h1 class="text-xl md:text-2xl font-black text-white">Scan, Customize & Print Instantly</h1>
+              <p class="text-xs md:text-sm text-slate-300 mt-0.5">Apna document upload karein ya Kiosk screen se direct sync karein.</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <label for="fileUploadInput" class="cursor-pointer px-4 py-2.5 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/20 text-xs font-bold text-white flex items-center gap-2 transition">
+              <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+              </svg>
+              <span>Change PDF / File</span>
+            </label>
+            <input type="file" id="fileUploadInput" class="hidden" accept=".pdf,.doc,.docx,.png,.jpg" onchange="handleFileChange(event)" />
+            <button onclick="simulateScan()" class="px-4 py-2.5 rounded-2xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/40 text-xs font-bold text-cyan-300 transition">
+              Re-Scan QR
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dual Column Layout: Left Configuration, Right Receipt & Checkout -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Left Column: Document Preview & Print Controls (7 cols) -->
+        <div class="lg:col-span-7 space-y-6">
+
+          <!-- Uploaded Document Card -->
+          <div class="glass-panel rounded-3xl p-5 space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold text-xs">
+                  PDF
+                </div>
+                <div>
+                  <h3 id="docTitle" class="text-sm font-bold text-white truncate max-w-[220px] md:max-w-xs">Final_Semester_Project_Report.pdf</h3>
+                  <p id="docMeta" class="text-[11px] text-slate-400">14 Pages · 3.4 MB · High Res 600 DPI</p>
+                </div>
+              </div>
+              <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                Ready to Print ✓
+              </span>
+            </div>
+
+            <!-- Page Thumbnail Carousel Strip -->
+            <div class="p-3 bg-white/5 rounded-2xl border border-white/10">
+              <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
+                <span>Page Preview Strip</span>
+                <span class="text-cyan-400 cursor-pointer hover:underline text-[11px]">View All 14 Pages</span>
+              </div>
+              <div class="flex gap-2 overflow-x-auto pb-1">
+                <div class="w-16 h-20 rounded-xl bg-white/10 border border-cyan-400/40 flex flex-col items-center justify-center shrink-0 text-center p-1 relative shadow-sm">
+                  <div class="w-6 h-1 bg-cyan-400 rounded-full mb-1"></div>
+                  <div class="w-8 h-0.5 bg-slate-400 rounded mb-0.5"></div>
+                  <div class="w-8 h-0.5 bg-slate-400 rounded mb-0.5"></div>
+                  <span class="text-[9px] text-cyan-300 font-mono mt-1">p. 1 (Title)</span>
+                </div>
+                <div class="w-16 h-20 rounded-xl bg-white/5 border border-white/10 flex flex-col items-center justify-center shrink-0 text-center p-1">
+                  <div class="w-8 h-0.5 bg-slate-400 rounded mb-1"></div>
+                  <div class="w-8 h-0.5 bg-slate-400 rounded mb-1"></div>
+                  <div class="w-8 h-0.5 bg-slate-400 rounded"></div>
+                  <span class="text-[9px] text-slate-400 font-mono mt-1">p. 2</span>
+                </div>
+                <div class="w-16 h-20 rounded-xl bg-white/5 border border-white/10 flex flex-col items-center justify-center shrink-0 text-center p-1">
+                  <div class="w-6 h-3 bg-indigo-500/40 rounded mb-1 flex items-center justify-center text-[7px] text-indigo-300">Chart</div>
+                  <div class="w-8 h-0.5 bg-slate-400 rounded mb-1"></div>
+                  <span class="text-[9px] text-slate-400 font-mono mt-0.5">p. 3</span>
+                </div>
+                <div class="w-16 h-20 rounded-xl bg-white/5 border border-white/10 flex flex-col items-center justify-center shrink-0 text-center p-1">
+                  <div class="w-8 h-0.5 bg-slate-400 rounded mb-1"></div>
+                  <div class="w-8 h-0.5 bg-slate-400 rounded mb-1"></div>
+                  <span class="text-[9px] text-slate-400 font-mono mt-1">p. 4</span>
+                </div>
+                <div class="w-16 h-20 rounded-xl bg-white/5 border border-dashed border-white/20 flex items-center justify-center shrink-0 text-[10px] text-cyan-300 font-medium">
+                  +10 more
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Print Customization Controls -->
+          <div class="glass-panel rounded-3xl p-5 space-y-5">
+            <div class="flex items-center justify-between border-b border-white/10 pb-3">
+              <h3 class="font-bold text-sm text-white">Print Options & Quality</h3>
+              <span class="text-xs text-cyan-400 font-mono">Fast Laser Sync</span>
+            </div>
+
+            <!-- 1. Color Mode -->
+            <div>
+              <label class="text-xs text-slate-400 block mb-2 font-medium">Select Color Output</label>
+              <div class="grid grid-cols-2 gap-3">
+                <button type="button" id="btnBw" onclick="setColorMode('bw')" class="glass-card-interactive glass-active p-3.5 rounded-2xl flex items-center justify-between text-left">
+                  <div>
+                    <span class="text-xs font-bold text-white block">Black & White (B&W)</span>
+                    <span class="text-[11px] text-slate-400">Crisp monochrome text</span>
+                  </div>
+                  <div class="text-right">
+                    <span class="text-sm font-bold text-cyan-300 font-mono">₹2.00</span>
+                    <span class="text-[10px] text-slate-400 block">/ page</span>
+                  </div>
+                </button>
+
+                <button type="button" id="btnColor" onclick="setColorMode('color')" class="glass-card-interactive p-3.5 rounded-2xl flex items-center justify-between text-left">
+                  <div>
+                    <span class="text-xs font-bold text-white block">Full Color HD</span>
+                    <span class="text-[11px] text-slate-400">Vivid pigment ink</span>
+                  </div>
+                  <div class="text-right">
+                    <span class="text-sm font-bold text-cyan-300 font-mono">₹8.00</span>
+                    <span class="text-[10px] text-slate-400 block">/ page</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <!-- 2. Sides (Duplex vs Single) -->
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-xs text-slate-400 font-medium">Print Sides</label>
+                <span class="text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20 font-medium">
+                  Two-sided saves 50% paper 🌱
+                </span>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <button type="button" id="btnDuplex" onclick="setDuplex(true)" class="glass-card-interactive glass-active p-3.5 rounded-2xl flex items-center gap-3 text-left">
+                  <div class="w-8 h-8 rounded-xl bg-cyan-400/20 text-cyan-300 flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                  </div>
+                  <div>
+                    <span class="text-xs font-bold text-white block">Two-Sided (Duplex)</span>
+                    <span class="text-[10px] text-slate-400">Back-to-back print</span>
+                  </div>
+                </button>
+
+                <button type="button" id="btnSimplex" onclick="setDuplex(false)" class="glass-card-interactive p-3.5 rounded-2xl flex items-center gap-3 text-left">
+                  <div class="w-8 h-8 rounded-xl bg-white/10 text-slate-300 flex items-center justify-center shrink-0">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                  </div>
+                  <div>
+                    <span class="text-xs font-bold text-white block">Single-Sided</span>
+                    <span class="text-[10px] text-slate-400">Front page only</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <!-- 3. Copies Counter & Paper Size -->
+            <div class="grid grid-cols-2 gap-4 pt-1">
+              <div>
+                <label class="text-xs text-slate-400 block mb-2 font-medium">Copies</label>
+                <div class="flex items-center justify-between p-2 bg-white/5 border border-white/10 rounded-2xl">
+                  <button onclick="changeCopies(-1)" class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center font-bold text-base transition">−</button>
+                  <span id="copiesVal" class="font-mono font-bold text-base text-white">1</span>
+                  <button onclick="changeCopies(1)" class="w-8 h-8 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 flex items-center justify-center font-bold text-base transition">+</button>
+                </div>
+              </div>
+
+              <div>
+                <label class="text-xs text-slate-400 block mb-2 font-medium">Paper Stock</label>
+                <select id="paperSize" onchange="recalculatePrice()" class="w-full py-2.5 px-3 bg-white/5 border border-white/10 rounded-2xl text-xs font-medium text-white focus:outline-none focus:border-cyan-400">
+                  <option value="a4" class="bg-[#11131c]">Standard A4 (75 GSM)</option>
+                  <option value="legal" class="bg-[#11131c]">Legal Stamp Paper</option>
+                  <option value="glossy" class="bg-[#11131c]">Glossy Photo (180 GSM)</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right Column: Live Bill Summary, UPI Apps & Print Trigger (5 cols) -->
+        <div class="lg:col-span-5 space-y-6">
+
+          <!-- Order Summary Card -->
+          <div class="glass-panel rounded-3xl p-5 space-y-4 relative">
+            <h3 class="font-bold text-sm text-white flex items-center justify-between">
+              <span>Order Breakdown</span>
+              <span class="text-[10px] font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 px-2 py-0.5 rounded-full">INSTANT CLEARANCE</span>
+            </h3>
+
+            <div class="space-y-2.5 text-xs">
+              <div class="flex justify-between text-slate-300">
+                <span id="billPagesLine">14 Pages × ₹2.00 (B&W Duplex)</span>
+                <span id="billPagesTotal" class="font-mono font-semibold">₹28.00</span>
+              </div>
+              <div class="flex justify-between text-slate-300">
+                <span>GST (18%) & Platform Token</span>
+                <span class="font-mono text-slate-400">₹1.50</span>
+              </div>
+              <div class="flex justify-between text-emerald-400">
+                <span>Green Campus Saver discount</span>
+                <span class="font-mono">-₹2.00</span>
+              </div>
+              <div class="border-t border-white/10 pt-3 flex justify-between items-baseline">
+                <div>
+                  <span class="text-xs text-slate-400 block">Total Payable</span>
+                  <span class="text-[10px] text-slate-500">Zero extra queue fee</span>
+                </div>
+                <div class="text-right">
+                  <span id="grandTotal" class="text-3xl font-black text-cyan-300 font-mono tracking-tight">₹27.50</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Instant UPI 1-Tap Trigger -->
+            <div class="pt-2">
+              <label class="text-[11px] text-slate-400 block mb-2 font-medium">Select 1-Tap UPI Gateway</label>
+              <div class="grid grid-cols-2 gap-2 text-xs">
+                <button type="button" onclick="selectUpi('GPay')" class="upi-btn p-2.5 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-400/50 flex items-center justify-between text-left transition">
+                  <span class="font-semibold text-slate-200">Google Pay</span>
+                  <span class="text-cyan-400 text-xs">⚡</span>
+                </button>
+                <button type="button" onclick="selectUpi('PhonePe')" class="upi-btn p-2.5 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-400/50 flex items-center justify-between text-left transition">
+                  <span class="font-semibold text-slate-200">PhonePe</span>
+                  <span class="text-cyan-400 text-xs">⚡</span>
+                </button>
+                <button type="button" onclick="selectUpi('Paytm')" class="upi-btn p-2.5 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-400/50 flex items-center justify-between text-left transition">
+                  <span class="font-semibold text-slate-200">Paytm UPI</span>
+                  <span class="text-cyan-400 text-xs">⚡</span>
+                </button>
+                <button type="button" onclick="selectUpi('BHIM')" class="upi-btn p-2.5 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-400/50 flex items-center justify-between text-left transition">
+                  <span class="font-semibold text-slate-200">BHIM / Any UPI</span>
+                  <span class="text-cyan-400 text-xs">⚡</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Main CTA Button -->
+            <button onclick="triggerPrintProcess()" class="w-full py-4 px-6 rounded-2xl glow-cyan-btn text-black font-extrabold text-sm flex items-center justify-center gap-2 mt-2">
+              <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+              <span>Pay & Dispense Print Now</span>
+            </button>
+            <p class="text-[10px] text-center text-slate-400">File automatically shredded from server 10 minutes post print.</p>
+          </div>
+
+          <!-- Live Dispense Hardware Modal / Live State (Hidden by default, shown on click) -->
+          <div id="liveDispenseCard" class="hidden glass-panel rounded-3xl p-5 border-cyan-400/40 space-y-4 animate-fadeIn">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-cyan-400 animate-ping"></span>
+                <span class="text-xs font-bold text-cyan-300">Live Hardware Dispense</span>
+              </div>
+              <span id="dispensePercent" class="text-xs font-mono font-bold text-cyan-400">0%</span>
+            </div>
+
+            <div>
+              <p id="dispenseStatusText" class="text-xs text-slate-300 mb-2">Connecting to LaserJet Pro X400 Spooler...</p>
+              <div class="w-full h-3 bg-white/10 rounded-full overflow-hidden p-0.5">
+                <div id="dispenseProgressBar" class="h-full bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 rounded-full w-[0%] transition-all duration-300 shadow-[0_0_15px_#00f0ff]"></div>
+              </div>
+            </div>
+
+            <!-- 4 Digit Security PIN Box -->
+            <div class="p-3.5 bg-black/40 border border-cyan-500/30 rounded-2xl text-center">
+              <span class="text-[10px] text-slate-400 uppercase tracking-widest font-bold block mb-1">Terminal Release PIN</span>
+              <div class="flex justify-center gap-2 font-mono text-xl font-black text-cyan-300">
+                <span class="w-9 h-10 flex items-center justify-center bg-white/5 border border-white/20 rounded-xl">8</span>
+                <span class="w-9 h-10 flex items-center justify-center bg-white/5 border border-white/20 rounded-xl">4</span>
+                <span class="w-9 h-10 flex items-center justify-center bg-white/5 border border-white/20 rounded-xl">9</span>
+                <span class="w-9 h-10 flex items-center justify-center bg-white/5 border border-white/20 rounded-xl">2</span>
+              </div>
+              <p class="text-[10px] text-slate-400 mt-2">Enter this PIN on Kiosk touchscreen if paper tray is locked.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VIEW 2: STORE OWNER COMMAND PORTAL         -->
+    <!-- ========================================== -->
+    <div id="ownerView" class="hidden space-y-6">
+
+      <!-- Store Status Banner -->
+      <div class="glass-panel rounded-3xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2.5 mb-1">
+            <h2 class="text-lg font-black text-white">FastPrint Sector 18 Central</h2>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">ONLINE</span>
+          </div>
+          <p class="text-xs text-slate-400">Terminal IP: 192.168.1.42 · Laser Jet Pro X400 · Wi-Fi 5GHz (12ms Ping)</p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button onclick="showQuickAlert('Print queue paused for 5 mins')" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs font-semibold text-slate-200 transition">
+            Pause Queue ⏸️
+          </button>
+          <button onclick="showQuickAlert('Diagnostic test page sent to printer!')" class="px-3.5 py-2 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/40 text-xs font-semibold text-cyan-300 transition">
+            Test Print 🖨️
+          </button>
+        </div>
+      </div>
+
+      <!-- Pulse Metrics Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="glass-panel rounded-3xl p-4">
+          <span class="text-xs text-slate-400">Today's Revenue</span>
+          <div class="text-2xl font-black text-cyan-300 mt-1 font-mono">₹4,850</div>
+          <span class="text-[10px] text-emerald-400 font-semibold">+18.4% vs yesterday</span>
+        </div>
+        <div class="glass-panel rounded-3xl p-4">
+          <span class="text-xs text-slate-400">Pages Printed</span>
+          <div class="text-2xl font-black text-white mt-1 font-mono">1,842</div>
+          <span class="text-[10px] text-slate-400">Avg 3.4 pgs/min</span>
+        </div>
+        <div class="glass-panel rounded-3xl p-4">
+          <span class="text-xs text-slate-400">Active Queue</span>
+          <div class="text-2xl font-black text-amber-300 mt-1 font-mono">3 Jobs</div>
+          <span class="text-[10px] text-slate-400">~2 min est. wait</span>
+        </div>
+        <div class="glass-panel rounded-3xl p-4">
+          <span class="text-xs text-slate-400">Hardware Health</span>
+          <div class="text-2xl font-black text-emerald-400 mt-1 font-mono">99.4%</div>
+          <span class="text-[10px] text-emerald-400">0 Jam incidents (48h)</span>
+        </div>
+      </div>
+
+      <!-- Consumables & Live Rate Card Editor -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Consumables Card -->
+        <div class="glass-panel rounded-3xl p-5 space-y-4">
+          <div class="flex justify-between items-center border-b border-white/10 pb-3">
+            <h3 class="font-bold text-sm text-white">Printer Consumables & Trays</h3>
+            <span class="text-[11px] text-cyan-400">Auto Sensor Live</span>
+          </div>
+
+          <!-- Toner -->
+          <div>
+            <div class="flex justify-between text-xs text-slate-300 mb-1">
+              <span>Black Toner (HP Genuine)</span>
+              <span class="font-mono text-cyan-300 font-bold">78%</span>
+            </div>
+            <div class="w-full h-2.5 bg-white/10 rounded-full overflow-hidden">
+              <div class="h-full bg-cyan-400 rounded-full w-[78%]"></div>
+            </div>
+          </div>
+
+          <!-- Cyan / Magenta / Yellow -->
+          <div>
+            <div class="flex justify-between text-xs text-slate-300 mb-1">
+              <span>Color Toners (C/M/Y)</span>
+              <span class="font-mono text-slate-300">65% Avg</span>
+            </div>
+            <div class="w-full h-2.5 bg-white/10 rounded-full overflow-hidden flex">
+              <div class="h-full bg-cyan-400 w-[62%]"></div>
+              <div class="h-full bg-pink-500 w-[58%]"></div>
+              <div class="h-full bg-amber-400 w-[70%]"></div>
+            </div>
+          </div>
+
+          <!-- Paper Tray 1 -->
+          <div>
+            <div class="flex justify-between text-xs text-slate-300 mb-1">
+              <span>Tray 1 (A4 75 GSM Paper)</span>
+              <span class="font-mono text-emerald-300 font-bold">340 / 500 Sheets</span>
+            </div>
+            <div class="w-full h-2.5 bg-white/10 rounded-full overflow-hidden">
+              <div class="h-full bg-emerald-400 rounded-full w-[68%]"></div>
+            </div>
+          </div>
+
+          <!-- Paper Tray 2 -->
+          <div>
+            <div class="flex justify-between text-xs text-slate-300 mb-1">
+              <span>Tray 2 (Legal / Stamp Sheets)</span>
+              <span class="font-mono text-amber-300 font-bold">120 / 250 Sheets</span>
+            </div>
+            <div class="w-full h-2.5 bg-white/10 rounded-full overflow-hidden">
+              <div class="h-full bg-amber-400 rounded-full w-[48%]"></div>
+            </div>
+          </div>
+
+          <button onclick="showQuickAlert('Paper trays marked refilled & counter reset!')" class="w-full py-2.5 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/15 text-xs font-bold text-white transition">
+            Mark Trays Refilled (Reset Counter)
+          </button>
+        </div>
+
+        <!-- Dynamic Rate Card Manager (Owner controls prices) -->
+        <div class="glass-panel rounded-3xl p-5 space-y-4">
+          <div class="flex justify-between items-center border-b border-white/10 pb-3">
+            <h3 class="font-bold text-sm text-white">Dynamic Rate Card Settings</h3>
+            <span class="text-[11px] text-emerald-400">Syncs Live to Kiosk</span>
+          </div>
+
+          <div class="space-y-3 text-xs">
+            <div class="flex items-center justify-between p-3 bg-white/5 border border-white/10 rounded-2xl">
+              <div>
+                <span class="font-bold text-white block">B&W Single Side</span>
+                <span class="text-[11px] text-slate-400">A4 standard paper</span>
+              </div>
+              <div class="flex items-center gap-1 font-mono font-bold">
+                <span class="text-cyan-400">₹</span>
+                <input id="ownerRateBw" type="text" value="2.00" class="w-14 bg-black/40 border border-white/20 rounded-lg px-2 py-1 text-center text-cyan-300 focus:outline-none focus:border-cyan-400 font-mono" />
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between p-3 bg-white/5 border border-white/10 rounded-2xl">
+              <div>
+                <span class="font-bold text-white block">B&W Back-to-Back (Duplex)</span>
+                <span class="text-[11px] text-slate-400">Per side discounted rate</span>
+              </div>
+              <div class="flex items-center gap-1 font-mono font-bold">
+                <span class="text-cyan-400">₹</span>
+                <input id="ownerRateDuplex" type="text" value="3.50" class="w-14 bg-black/40 border border-white/20 rounded-lg px-2 py-1 text-center text-cyan-300 focus:outline-none focus:border-cyan-400 font-mono" />
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between p-3 bg-white/5 border border-white/10 rounded-2xl">
+              <div>
+                <span class="font-bold text-white block">Full Color Page</span>
+                <span class="text-[11px] text-slate-400">Laser high pigment</span>
+              </div>
+              <div class="flex items-center gap-1 font-mono font-bold">
+                <span class="text-cyan-400">₹</span>
+                <input id="ownerRateColor" type="text" value="8.00" class="w-14 bg-black/40 border border-white/20 rounded-lg px-2 py-1 text-center text-cyan-300 focus:outline-none focus:border-cyan-400 font-mono" />
+              </div>
+            </div>
+          </div>
+
+          <button onclick="saveOwnerRates()" class="w-full py-3 rounded-2xl glow-cyan-btn text-black font-extrabold text-xs transition">
+            Sync New Rates to Kiosk Terminals ⚡
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Live Print Spooler Queue -->
+      <div class="glass-panel rounded-3xl p-5 space-y-3">
+        <h3 class="font-bold text-sm text-white mb-2">Live Kiosk Queue (Current Jobs)</h3>
+        
+        <div class="space-y-2">
+          <div class="p-3.5 bg-white/5 border border-cyan-500/30 rounded-2xl flex items-center justify-between text-xs">
+            <div class="flex items-center gap-3">
+              <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+              <div>
+                <p class="font-bold text-white">Aarav Mehta <span class="font-mono text-slate-400 font-normal">#ORD-9021</span></p>
+                <p class="text-[11px] text-slate-400">14 pgs (Color) · ₹140.00 · Paid via UPI</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
+                Printing (8/14)
+              </span>
+              <button onclick="showQuickAlert('Reprint command dispatched')" class="px-2 py-1 bg-white/10 hover:bg-white/20 rounded-lg text-[10px] text-slate-300">
+                Reprint
+              </button>
+            </div>
+          </div>
+
+          <div class="p-3.5 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-between text-xs">
+            <div class="flex items-center gap-3">
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+              <div>
+                <p class="font-bold text-white">Neha Sharma <span class="font-mono text-slate-400 font-normal">#ORD-9020</span></p>
+                <p class="text-[11px] text-slate-400">4 pgs (B&W) · ₹8.00 · Paid via GPay</p>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">
+              Queue Pos #1
+            </span>
+          </div>
+
+          <div class="p-3.5 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-between text-xs">
+            <div class="flex items-center gap-3">
+              <span class="w-2.5 h-2.5 rounded-full bg-slate-500"></span>
+              <div>
+                <p class="font-bold text-white">Vikram Rajput <span class="font-mono text-slate-400 font-normal">#ORD-9019</span></p>
+                <p class="text-[11px] text-slate-400">32 pgs (Duplex) · ₹64.00 · Paid via Paytm</p>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-white/10 text-slate-300">
+              Queue Pos #2
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Interactive JavaScript Logic -->
+  <script>
+    // State
+    let state = {
+      pages: 14,
+      colorMode: 'bw', // 'bw' or 'color'
+      isDuplex: true,
+      copies: 1,
+      rateBw: 2.00,
+      rateColor: 8.00
+    };
+
+    // Tab Navigation Switcher
+    function switchView(view) {
+      const custView = document.getElementById('customerView');
+      const ownView = document.getElementById('ownerView');
+      const custBtn = document.getElementById('navCustomerBtn');
+      const ownBtn = document.getElementById('navOwnerBtn');
+
+      if (view === 'customer') {
+        custView.classList.remove('hidden');
+        ownView.classList.add('hidden');
+        custBtn.className = "px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 bg-cyan-400 text-black shadow-md shadow-cyan-500/20";
+        ownBtn.className = "px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white transition-all duration-200";
+      } else {
+        custView.classList.add('hidden');
+        ownView.classList.remove('hidden');
+        ownBtn.className = "px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 bg-cyan-400 text-black shadow-md shadow-cyan-500/20";
+        custBtn.className = "px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white transition-all duration-200";
+      }
+    }
+
+    // Toggle Color Mode
+    function setColorMode(mode) {
+      state.colorMode = mode;
+      const btnBw = document.getElementById('btnBw');
+      const btnColor = document.getElementById('btnColor');
+
+      if (mode === 'bw') {
+        btnBw.classList.add('glass-active');
+        btnColor.classList.remove('glass-active');
+      } else {
+        btnColor.classList.add('glass-active');
+        btnBw.classList.remove('glass-active');
+      }
+      recalculatePrice();
+    }
+
+    // Toggle Duplex Sides
+    function setDuplex(duplex) {
+      state.isDuplex = duplex;
+      const btnDuplex = document.getElementById('btnDuplex');
+      const btnSimplex = document.getElementById('btnSimplex');
+
+      if (duplex) {
+        btnDuplex.classList.add('glass-active');
+        btnSimplex.classList.remove('glass-active');
+      } else {
+        btnSimplex.classList.add('glass-active');
+        btnDuplex.classList.remove('glass-active');
+      }
+      recalculatePrice();
+    }
+
+    // Change Copies
+    function changeCopies(delta) {
+      state.copies = Math.max(1, state.copies + delta);
+      document.getElementById('copiesVal').innerText = state.copies;
+      recalculatePrice();
+    }
+
+    // Recalculate Live Price
+    function recalculatePrice() {
+      const rate = state.colorMode === 'color' ? state.rateColor : state.rateBw;
+      const subtotal = state.pages * rate * state.copies;
+      const tax = 1.50;
+      const discount = 2.00;
+      const finalAmount = Math.max(0, subtotal + tax - discount);
+
+      const modeName = state.colorMode === 'color' ? 'Full Color' : 'B&W';
+      const sideName = state.isDuplex ? 'Duplex' : 'Single';
+      
+      document.getElementById('billPagesLine').innerText = `${state.pages} Pages × ₹${rate.toFixed(2)} (${modeName} ${sideName}) × ${state.copies} copy`;
+      document.getElementById('billPagesTotal').innerText = `₹${subtotal.toFixed(2)}`;
+      document.getElementById('grandTotal').innerText = `₹${finalAmount.toFixed(2)}`;
+    }
+
+    // File Upload Simulation
+    function handleFileChange(e) {
+      const file = e.target.files[0];
+      if (file) {
+        document.getElementById('docTitle').innerText = file.name;
+        // Mock page calculation
+        state.pages = Math.floor(Math.random() * 15) + 3;
+        const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
+        document.getElementById('docMeta').innerText = `${state.pages} Pages · ${sizeMb} MB · Rendered OK`;
+        recalculatePrice();
+        showQuickAlert(`File loaded: ${file.name} (${state.pages} pages)`);
+      }
+    }
+
+    function simulateScan() {
+      showQuickAlert('Kiosk QR Re-scanned: Terminal KP-4821 Synced!');
+    }
+
+    // Select UPI Button
+    function selectUpi(appName) {
+      showQuickAlert(`${appName} selected for 1-Tap Authorization`);
+    }
+
+    // Trigger Print & Hardware Progress Simulation
+    function triggerPrintProcess() {
+      const liveCard = document.getElementById('liveDispenseCard');
+      liveCard.classList.remove('hidden');
+      liveCard.scrollIntoView({ behavior: 'smooth' });
+
+      let progress = 0;
+      const bar = document.getElementById('dispenseProgressBar');
+      const percentText = document.getElementById('dispensePercent');
+      const statusText = document.getElementById('dispenseStatusText');
+
+      const interval = setInterval(() => {
+        progress += 10;
+        if (progress > 100) progress = 100;
+
+        bar.style.width = progress + '%';
+        percentText.innerText = progress + '%';
+
+        if (progress < 30) {
+          statusText.innerText = 'Spooling document to LaserJet Pro X400...';
+        } else if (progress < 70) {
+          const currentPage = Math.ceil((progress / 100) * state.pages);
+          statusText.innerText = `Printing Tray 1: Page ${currentPage} of ${state.pages} dispensed...`;
+        } else if (progress < 100) {
+          statusText.innerText = 'Fusing toner & releasing to output tray...';
+        } else {
+          statusText.innerText = '✓ Print Completed! Please collect your document from Tray 1.';
+          clearInterval(interval);
+        }
+      }, 400);
+    }
+
+    // Owner Rate Card Sync
+    function saveOwnerRates() {
+      const bw = parseFloat(document.getElementById('ownerRateBw').value) || 2.0;
+      const clr = parseFloat(document.getElementById('ownerRateColor').value) || 8.0;
+
+      state.rateBw = bw;
+      state.rateColor = clr;
+      recalculatePrice();
+      showQuickAlert('✓ Rates Updated and Synced to all Kiosks!');
+    }
+
+    // Notification toast
+    function showQuickAlert(msg) {
+      let toast = document.getElementById('appToast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'appToast';
+        toast.className = 'fixed bottom-6 right-6 z-50 px-4 py-3 rounded-2xl glass-panel border border-cyan-400/50 text-xs font-bold text-white shadow-2xl transition-all duration-300 translate-y-10 opacity-0';
+        document.body.appendChild(toast);
+      }
+      toast.innerText = msg;
+      toast.classList.remove('translate-y-10', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-10', 'opacity-0');
+      }, 3000);
+    }
+
+    // Initialize initial calculations
+    recalculatePrice();
+  </script>
+</body>
+</html>

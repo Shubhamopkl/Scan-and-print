@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "secondary": "#d0bcff",
+          "tertiary": "#f4f5ff",
+          "primary-fixed": "#7df4ff",
+          "surface-container-high": "#282933",
+          "on-error-container": "#ffdad6",
+          "error": "#ffb4ab",
+          "on-surface-variant": "#b9cacb",
+          "on-tertiary-fixed-variant": "#004395",
+          "inverse-on-surface": "#2e303a",
+          "surface-bright": "#373943",
+          "inverse-primary": "#006970",
+          "tertiary-fixed": "#d8e2ff",
+          "outline": "#849495",
+          "primary-fixed-dim": "#00dbe9",
+          "on-tertiary-container": "#005ac3",
+          "on-primary-container": "#006970",
+          "surface-variant": "#32343f",
+          "on-tertiary": "#002e6a",
+          "background": "#11131c",
+          "tertiary-container": "#cad9ff",
+          "surface-container-low": "#191b25",
+          "primary": "#dbfcff",
+          "on-secondary-container": "#c4abff",
+          "on-primary": "#00363a",
+          "surface": "#11131c",
+          "on-error": "#690005",
+          "surface-container": "#1d1f29",
+          "on-surface": "#e1e1ef",
+          "surface-tint": "#00dbe9",
+          "on-primary-fixed": "#002022",
+          "surface-dim": "#11131c",
+          "secondary-container": "#571bc1",
+          "on-secondary-fixed": "#23005c",
+          "on-secondary": "#3c0091",
+          "secondary-fixed-dim": "#d0bcff",
+          "outline-variant": "#3b494b",
+          "surface-container-lowest": "#0c0e17",
+          "tertiary-fixed-dim": "#adc6ff",
+          "inverse-surface": "#e1e1ef",
+          "on-secondary-fixed-variant": "#5516be",
+          "error-container": "#93000a",
+          "surface-container-highest": "#32343f",
+          "secondary-fixed": "#e9ddff",
+          "on-primary-fixed-variant": "#004f54",
+          "primary-container": "#00f0ff",
+          "on-tertiary-fixed": "#001a42",
+          "on-background": "#e1e1ef"
+        },
+        "borderRadius": {
+          "DEFAULT": "1rem",
+          "lg": "1.5rem",
+          "xl": "2rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-md": "1rem",
+          "margin-desktop": "2.5rem",
+          "margin": "1rem",
+          "space-xxs": "0.25rem",
+          "gutter-mobile": "0.75rem",
+          "space-sm": "0.75rem",
+          "space-lg": "1.5rem",
+          "space-xs": "0.5rem",
+          "space-xl": "2rem",
+          "space-xxl": "3rem",
+          "gutter-desktop": "1.5rem",
+          "gutter": "1.25rem",
+          "margin-mobile": "1rem"
+        },
+        "fontFamily": {
+          "display-lg": ["Plus Jakarta Sans"],
+          "body-md": ["Plus Jakarta Sans"],
+          "body-sm": ["Plus Jakarta Sans"],
+          "label-sm": ["Space Grotesk"],
+          "label-md": ["Space Grotesk"],
+          "code-metric": ["Space Grotesk"],
+          "headline-md": ["Plus Jakarta Sans"],
+          "headline-xl-mobile": ["Plus Jakarta Sans"],
+          "label-lg": ["Space Grotesk"],
+          "display-lg-mobile": ["Plus Jakarta Sans"],
+          "body-xl": ["Plus Jakarta Sans"],
+          "headline-xl": ["Plus Jakarta Sans"],
+          "body-lg": ["Plus Jakarta Sans"],
+          "headline-sm": ["Plus Jakarta Sans"],
+          "headline-lg": ["Plus Jakarta Sans"]
+        },
+        "fontSize": {
+          "display-lg": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+          "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+          "body-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }],
+          "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "600" }],
+          "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "500" }],
+          "code-metric": ["13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "700" }],
+          "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+          "headline-xl-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+          "label-lg": ["14px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "600" }],
+          "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+          "body-xl": ["18px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+          "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.025em", "fontWeight": "600" }],
+          "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+          "headline-sm": ["18px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+          "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }]
+        }
+      }
+    }
+  }
+</script><style>
+  @layer base {
+    html, body {
+      width: 100vw;
+      margin: 0;
+      padding: 0;
+      background-color: #0c0e17;
+    }
+    body {
+      overscroll-behavior: none;
+    }
+    .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+    .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+  }
+  ::-webkit-scrollbar { display: none; }
+  .glass-card {
+    background: rgba(25, 27, 37, 0.55);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+  .glass-card-glow {
+    background: rgba(25, 27, 37, 0.6);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    box-shadow: 0 0 24px -4px rgba(0, 240, 255, 0.15), 0 8px 32px 0 rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  }
+  .glass-subtle {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .glass-tile {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .glass-tile:active {
+    background: rgba(0, 240, 255, 0.12);
+    border-color: rgba(0, 240, 255, 0.4);
+    transform: scale(0.97);
+  }
+</style></head><body class="bg-surface-container-lowest font-body-md text-on-surface flex flex-col min-h-screen relative overflow-x-hidden selection:bg-primary-container selection:text-surface-container-lowest"><!-- Ambient Luminous Glow Mesh Background -->
+<div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+<div class="absolute -top-[15%] left-1/2 -translate-x-1/2 w-[480px] h-[480px] bg-secondary-container/25 rounded-full blur-[120px]"></div>
+<div class="absolute top-[35%] -right-[20%] w-[380px] h-[380px] bg-primary-container/15 rounded-full blur-[110px]"></div>
+<div class="absolute bottom-[10%] -left-[20%] w-[420px] h-[420px] bg-secondary/15 rounded-full blur-[130px]"></div>
+<div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,240,255,0.06),transparent_60%)]"></div>
+</div>
+<!-- Glass Header Bar -->
+<header class="fixed top-0 w-full z-50 pt-safe bg-[#0c0e17]/65 backdrop-blur-2xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+<div class="h-16 px-margin flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<button class="w-10 h-10 flex items-center justify-center text-on-surface glass-subtle hover:bg-white/10 rounded-full transition-colors active:scale-95" onclick="history.back()">
+<span class="material-symbols-outlined text-[22px]">arrow_back</span>
+</button>
+<div class="flex items-center gap-2 pl-1">
+<div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-secondary-container to-primary-container p-[1px] flex items-center justify-center shadow-[0_0_12px_rgba(0,240,255,0.35)]">
+<div class="w-full h-full bg-[#11131c] rounded-[7px] flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-primary-container" style="font-variation-settings: 'FILL' 1;">print</span>
+</div>
+</div>
+<span class="font-headline-md text-[16px] font-bold tracking-tight bg-gradient-to-r from-white via-primary to-secondary bg-clip-text text-transparent">ScanPrint</span>
+</div>
+</div>
+<div class="flex flex-col text-center flex-grow min-w-0 px-space-xs">
+<h1 class="font-headline-md text-[15px] font-bold text-on-surface truncate">Print Job Preview</h1>
+<span class="font-label-sm text-[11px] text-on-surface-variant truncate">Shop #12 · Central Library</span>
+</div>
+<div class="flex items-center flex-shrink-0">
+<div class="relative p-[1.5px] rounded-full bg-gradient-to-tr from-primary-container via-secondary to-primary shadow-[0_0_12px_rgba(0,240,255,0.3)]">
+<img alt="Profile" class="w-8 h-8 rounded-full object-cover flex-shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNOSCzRj3EgR8Rm_kVR7ORL4I3yPAmbAV5yVAmIsoJgd5a2U2dc_a6-LH87IdJTQYl9SxxWquaU7rDLuGzzwA42eNucGUU1Och7kjV1y4rZyuAQ6KyAEwCM6_qVnnWc7-FOVpuVsBWANBh5xOfrwN2iNlUsg4K5wqmr-xZFOw1L2QSmx0ymHO9H4efWEoARX2BWvr4oPcv2pWv_EQXYz3DD5ALrSkwYT1U8Z1q_fg"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex flex-col relative w-full pt-16 z-10 flex-grow">
+<div class="flex flex-col w-full">
+<div class="flex flex-col gap-3.5 p-margin pb-32">
+<!-- Active Terminal Status Pill -->
+<div class="glass-card px-4 py-3 rounded-2xl flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary-container shadow-[0_0_8px_#00f0ff]"></span>
+</span>
+<div class="flex flex-col">
+<span class="font-headline-md text-[13px] font-semibold text-on-surface">Kiosk #04 · Tech Park Branch</span>
+<span class="font-code-metric text-[11px] text-primary-fixed-dim uppercase tracking-wider">ORDER ID: #SP-9921</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full glass-subtle border border-primary-container/20 shadow-[0_0_10px_rgba(0,240,255,0.1)]">
+<span class="material-symbols-outlined text-[14px] text-primary-container" style="font-variation-settings: 'FILL' 1;">wifi</span>
+<span class="font-code-metric text-[11px] text-primary-fixed-dim font-medium">Online 12ms</span>
+</div>
+</div>
+<!-- Live Hardware Dispense & Security Card (Frosted Glowing Glass) -->
+<div class="glass-card-glow rounded-2xl p-4 relative overflow-hidden">
+<div class="absolute -right-10 -top-10 w-32 h-32 bg-primary-container/10 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex items-start justify-between mb-3 relative z-10">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-secondary-container/40 to-primary-container/20 border border-primary-container/30 flex items-center justify-center text-primary-container shadow-[0_0_16px_rgba(0,240,255,0.25)]">
+<span class="material-symbols-outlined text-[24px]">print</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-[17px] font-bold text-on-surface">Live Dispense</span>
+<span class="bg-primary-container/15 text-primary-container border border-primary-container/30 px-2 py-0.5 rounded-full font-label-sm text-[10px] uppercase tracking-wider font-semibold shadow-[0_0_10px_rgba(0,240,255,0.2)]">Active</span>
+</div>
+<p class="font-body-sm text-[12px] text-on-surface-variant flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-primary-container animate-pulse">sensors</span>
+                Tray 1 dispensing securely...
+              </p>
+</div>
+</div>
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-error/15 text-error border border-error/30 hover:bg-error/25 active:scale-95 transition-all shadow-[0_0_12px_rgba(255,180,171,0.2)]" id="emergency-stop-btn">
+<span class="material-symbols-outlined text-[16px]">stop_circle</span>
+<span class="font-label-sm text-[11px] font-bold">E-Stop</span>
+</button>
+</div>
+<!-- Linear Progress Bar & Telemetry -->
+<div class="space-y-2 my-3 relative z-10">
+<div class="flex justify-between items-center text-[12px]">
+<span class="font-body-sm text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-primary-container animate-spin">sync</span>
+              Page <span class="font-code-metric text-on-surface font-bold text-[13px]" id="pages-printed">9</span> of 14 printed
+            </span>
+<span class="font-code-metric text-[13px] text-primary-container font-bold tracking-wide" id="percent-label">65%</span>
+</div>
+<div class="w-full bg-surface-container-high/60 h-2.5 rounded-full overflow-hidden p-0.5 border border-white/5">
+<div class="bg-gradient-to-r from-secondary to-primary-container h-full rounded-full transition-all duration-700 ease-out shadow-[0_0_12px_rgba(0,240,255,0.6)]" id="progress-bar" style="width: 65%;"></div>
+</div>
+</div>
+<!-- Secure Vault Retrieval Token (Frosted Glass Digits) -->
+<div class="mt-4 rounded-xl glass-subtle p-3 flex flex-col items-center justify-center text-center border border-white/10 relative z-10">
+<span class="font-label-sm text-[10px] text-secondary tracking-widest uppercase mb-1.5 font-semibold">
+            Secure Kiosk Release PIN
+          </span>
+<div class="flex items-center gap-2.5 my-1">
+<span class="w-11 h-13 py-2 px-3 rounded-xl bg-white/[0.08] border border-white/20 shadow-[0_4px_16px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.25)] flex items-center justify-center font-display-lg-mobile text-[24px] text-primary font-bold">8</span>
+<span class="w-11 h-13 py-2 px-3 rounded-xl bg-white/[0.08] border border-white/20 shadow-[0_4px_16px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.25)] flex items-center justify-center font-display-lg-mobile text-[24px] text-primary font-bold">4</span>
+<span class="w-11 h-13 py-2 px-3 rounded-xl bg-white/[0.08] border border-white/20 shadow-[0_4px_16px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.25)] flex items-center justify-center font-display-lg-mobile text-[24px] text-primary font-bold">9</span>
+<span class="w-11 h-13 py-2 px-3 rounded-xl bg-white/[0.08] border border-white/20 shadow-[0_4px_16px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.25)] flex items-center justify-center font-display-lg-mobile text-[24px] text-primary font-bold">2</span>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant/80 mt-1.5">
+<span class="material-symbols-outlined text-[14px]">dialpad</span>
+<span class="font-body-sm text-[11px]">Enter on physical terminal touchpad if locked</span>
+</div>
+</div>
+</div>
+<!-- Document Preview & Configuration Details Card -->
+<div class="glass-card rounded-2xl p-4 flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="font-headline-md text-[16px] font-bold text-on-surface">Document Details</span>
+<span class="glass-subtle px-2.5 py-0.5 rounded-full font-code-metric text-[11px] text-primary-fixed-dim border border-white/10">PDF • 3.2 MB</span>
+</div>
+<div class="flex items-center gap-3.5 glass-subtle p-3 rounded-xl border border-white/5">
+<div class="relative w-16 h-20 rounded-lg bg-surface-container-high/60 shadow-md overflow-hidden flex-shrink-0 flex items-center justify-center border border-white/10">
+<img class="w-full h-full object-cover opacity-90" data-alt="Clean minimal flat graphic representation of an official academic research document paper with crisp technical diagrams, neat sans-serif typography headers, and subtle blueprint grids under soft ambient white illumination matching a modern print utility interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg903ON_rFhKyjohQbAPhhWixhxLHEgxLGaibPfS1xteA-8pJhPCFC759rCGk2pzI_QLinhEErUS_2fuPD3l29SxgnaJ1DRx5rd5Tb_0jSoooZDz3aE2aMwGtzOfLwFdBxsjMcVe-KvkXAt485f8ayoM8cLC_9W8tvG70TbJEhCy1W-HTwRerpkWUX6-jw5a-9WiAYgVCO3l4GUDOfQRFqxny0gqCxZ2AI7vLQFf8"/>
+<div class="absolute bottom-1 right-1 bg-surface-container-lowest/80 text-primary-container text-[9px] px-1 py-0.5 rounded font-code-metric border border-white/10">P. 1/14</div>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<span class="font-body-lg text-[14px] text-on-surface font-semibold truncate">Q3_Final_Project_Report.pdf</span>
+<span class="font-body-sm text-[12px] text-on-surface-variant">Standard High Yield Black &amp; White</span>
+<!-- Glowing Glass Chips Row -->
+<div class="flex flex-wrap gap-1.5 mt-2">
+<span class="bg-white/[0.06] text-on-surface font-label-sm text-[10px] px-2 py-0.5 rounded-md border border-white/10">1 Copy</span>
+<span class="bg-white/[0.06] text-secondary font-label-sm text-[10px] px-2 py-0.5 rounded-md border border-secondary/20">B&amp;W Duplex</span>
+<span class="bg-white/[0.06] text-on-surface font-label-sm text-[10px] px-2 py-0.5 rounded-md border border-white/10">A4 · 75 GSM</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Itemized Billing Breakdown -->
+<div class="glass-card rounded-2xl p-4 flex flex-col gap-3">
+<span class="font-headline-md text-[16px] font-bold text-on-surface">Payment Summary</span>
+<div class="space-y-2 py-1 text-on-surface divide-y divide-white/5">
+<div class="flex justify-between items-center text-[13px] pt-1">
+<span class="font-body-md text-on-surface-variant">14 Pages × ₹2.00 (Duplex)</span>
+<span class="font-code-metric text-on-surface font-semibold">₹28.00</span>
+</div>
+<div class="flex justify-between items-center text-[13px] pt-2">
+<span class="font-body-md text-on-surface-variant">GST (18%) &amp; Platform Fee</span>
+<span class="font-code-metric text-on-surface font-semibold">₹1.50</span>
+</div>
+<div class="flex justify-between items-center text-[12px] pt-2 text-primary-fixed-dim">
+<span class="flex items-center gap-1 font-body-sm">
+<span class="material-symbols-outlined text-[15px] text-primary-container">eco</span>
+              Double-sided Paper Saver discount
+            </span>
+<span class="font-code-metric text-primary-container font-semibold">-₹2.00 (Applied)</span>
+</div>
+</div>
+<div class="glass-subtle p-3 rounded-xl flex items-center justify-between border border-primary-container/20 shadow-[0_0_18px_rgba(0,240,255,0.08)]">
+<div class="flex flex-col">
+<span class="font-label-sm text-[10px] text-on-surface-variant tracking-wider uppercase font-semibold">Total Payable</span>
+<span class="font-body-sm text-[11px] text-secondary font-medium">Includes all taxes</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="font-display-lg-mobile text-[28px] text-primary font-bold tracking-tight drop-shadow-[0_0_12px_rgba(0,240,255,0.4)]">₹29.50</span>
+</div>
+</div>
+</div>
+<!-- Instant 1-Tap UPI Quick Pay (Frosted Glass Tiles) -->
+<div class="glass-card rounded-2xl p-4 flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[20px] text-primary-container">qr_code_scanner</span>
+<span class="font-headline-md text-[16px] font-bold text-on-surface">Instant UPI Pay</span>
+</div>
+<span class="font-label-sm text-[10px] text-primary-container font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-primary-container/10 border border-primary-container/20">Instant Clearance</span>
+</div>
+<p class="font-body-sm text-[12px] text-on-surface-variant">Select your preferred app for 1-tap fast authorization:</p>
+<div class="grid grid-cols-2 gap-2.5 mt-0.5">
+<!-- Google Pay -->
+<button class="upi-pay-btn glass-tile flex items-center justify-between p-3 rounded-xl text-left hover:border-primary-container/40">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center border border-white/10 text-primary-container shadow-sm">
+<span class="material-symbols-outlined text-[18px]">account_balance_wallet</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-[13px] font-semibold text-on-surface">GPay</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant">Google Pay</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant/60">chevron_right</span>
+</button>
+<!-- PhonePe -->
+<button class="upi-pay-btn glass-tile flex items-center justify-between p-3 rounded-xl text-left hover:border-primary-container/40">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-secondary-container/40 flex items-center justify-center border border-secondary/30 text-secondary shadow-sm">
+<span class="material-symbols-outlined text-[18px]">payments</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-[13px] font-semibold text-on-surface">PhonePe</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant">UPI Direct</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant/60">chevron_right</span>
+</button>
+<!-- Paytm -->
+<button class="upi-pay-btn glass-tile flex items-center justify-between p-3 rounded-xl text-left hover:border-primary-container/40">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-primary-container/20 flex items-center justify-center border border-primary-container/30 text-primary-container shadow-sm">
+<span class="material-symbols-outlined text-[18px]">contactless</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-[13px] font-semibold text-on-surface">Paytm</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant">Wallet / UPI</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant/60">chevron_right</span>
+</button>
+<!-- BHIM UPI -->
+<button class="upi-pay-btn glass-tile flex items-center justify-between p-3 rounded-xl text-left hover:border-primary-container/40">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center border border-white/10 text-tertiary-fixed shadow-sm">
+<span class="material-symbols-outlined text-[18px]">hub</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-[13px] font-semibold text-on-surface">BHIM</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant">Any App</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant/60">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Quick Help & Hardware Assistance -->
+<div class="glass-card px-4 py-3 rounded-2xl flex items-center justify-between">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-secondary">help_center</span>
+<span class="font-body-sm text-[12px]">Need paper refill or manual receipt?</span>
+</div>
+<button class="text-primary-container font-label-md text-[12px] font-semibold active:underline tracking-wide">Call Desk</button>
+</div>
+</div>
+</div>
+<!-- Thumbsafe Sticky Action Footer (Frosted Glass) -->
+<div class="fixed bottom-0 left-0 right-0 z-40 bg-[#0c0e17]/75 backdrop-blur-2xl px-margin py-3.5 border-t border-white/10 shadow-[0_-8px_32px_rgba(0,0,0,0.6)] flex items-center justify-between gap-space-sm pb-safe">
+<div class="flex flex-col">
+<span class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-wider">Total Amount</span>
+<span class="font-display-lg-mobile text-[22px] text-white font-bold tracking-tight">₹29.50</span>
+</div>
+<div class="flex items-center gap-2.5 flex-1 justify-end max-w-xs">
+<button class="h-11 px-4 rounded-xl glass-subtle text-on-surface font-label-md text-[13px] hover:bg-white/10 border border-white/10 active:scale-95 transition-all flex items-center justify-center" id="cancel-btn">
+        Cancel
+      </button>
+<button class="h-11 px-5 rounded-xl bg-gradient-to-r from-secondary-container via-[#00c8e0] to-primary-container text-surface-container-lowest font-headline-md text-[14px] font-bold shadow-[0_0_20px_rgba(0,240,255,0.45)] hover:shadow-[0_0_28px_rgba(0,240,255,0.6)] active:scale-95 transition-all flex items-center justify-center gap-1.5 flex-grow" id="main-pay-btn">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+<span>Pay &amp; Release</span>
+</button>
+</div>
+</div>
+</main>
+<script>
+  // Dynamic Dispense Simulation
+  (function() {
+    let currentPage = 9;
+    const totalPages = 14;
+    const progressBar = document.getElementById('progress-bar');
+    const pagesLabel = document.getElementById('pages-printed');
+    const percentLabel = document.getElementById('percent-label');
+    const mainPayBtn = document.getElementById('main-pay-btn');
+    const eStopBtn = document.getElementById('emergency-stop-btn');
+    const cancelBtn = document.getElementById('cancel-btn');
+
+    let interval = setInterval(() => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        const pct = Math.round((currentPage / totalPages) * 100);
+        if (progressBar) progressBar.style.width = pct + '%';
+        if (pagesLabel) pagesLabel.textContent = currentPage;
+        if (percentLabel) percentLabel.textContent = pct + '%';
+
+        if (currentPage === totalPages) {
+          clearInterval(interval);
+          if (percentLabel) {
+            percentLabel.textContent = '100% Complete';
+            percentLabel.classList.add('text-secondary');
+          }
+          if (mainPayBtn) {
+            mainPayBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">check_circle</span> Collect Prints';
+            mainPayBtn.classList.remove('bg-gradient-to-r');
+            mainPayBtn.classList.add('bg-secondary', 'text-[#0c0e17]');
+          }
+        }
+      }
+    }, 4500);
+
+    // Micro-interactions
+    document.querySelectorAll('.upi-pay-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const title = this.querySelector('span.text-\\[13px\\]') ? this.querySelector('span.text-\\[13px\\]').innerText : 'UPI';
+        if (mainPayBtn) {
+          mainPayBtn.innerHTML = `<span class="material-symbols-outlined text-[18px]">check</span> Pay via ${title}`;
+          mainPayBtn.classList.add('brightness-125');
+          setTimeout(() => mainPayBtn.classList.remove('brightness-125'), 800);
+        }
+      });
+    });
+
+    if (eStopBtn) {
+      eStopBtn.addEventListener('click', function() {
+        clearInterval(interval);
+        alert('Print run halted immediately by user command.');
+      });
+    }
+
+    if (cancelBtn) {
+      cancelBtn.addEventListener('click', function() {
+        if (confirm('Cancel and refund unprinted pages?')) {
+          clearInterval(interval);
+          history.back();
+        }
+      });
+    }
+  })();
+</script>
+</body></html>

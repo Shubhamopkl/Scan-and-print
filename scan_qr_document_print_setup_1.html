@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "primary-container": "#2563eb", "surface-container-lowest": "#ffffff", "primary": "#004ac6", "surface-container-high": "#e2e7ff", "on-tertiary-container": "#ffede1", "inverse-primary": "#b4c5ff", "surface-container-highest": "#dae2fd", "error-container": "#ffdad6", "on-secondary-fixed-variant": "#005137", "secondary": "#006c4a", "surface-tint": "#0053db", "surface-container-low": "#f2f3ff", "on-primary-container": "#eeefff", "on-surface": "#131b2e", "secondary-container": "#82f5c1", "secondary-fixed": "#85f8c4", "tertiary-fixed": "#ffdcc3", "inverse-on-surface": "#eef0ff", "tertiary-fixed-dim": "#ffb77d", "surface-bright": "#faf8ff", "surface-dim": "#d2d9f4", "on-tertiary-fixed-variant": "#6e3900", "on-surface-variant": "#434655", "outline-variant": "#c3c6d7", "on-tertiary-fixed": "#2f1500", "error": "#ba1a1a", "surface": "#faf8ff", "secondary-fixed-dim": "#68dba9", "on-tertiary": "#ffffff", "on-secondary": "#ffffff", "on-error": "#ffffff", "on-secondary-fixed": "#002114", "tertiary": "#824500", "tertiary-container": "#a65900", "on-background": "#131b2e", "on-secondary-container": "#00714e", "on-primary-fixed-variant": "#003ea8", "primary-fixed-dim": "#b4c5ff", "on-primary": "#ffffff", "surface-container": "#eaedff", "surface-variant": "#dae2fd", "inverse-surface": "#283044", "primary-fixed": "#dbe1ff", "background": "#faf8ff", "on-primary-fixed": "#00174b", "on-error-container": "#93000a", "outline": "#737686" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-sm": "0.5rem", "margin-desktop": "2rem", "margin": "1rem", "space-xl": "2rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "gutter-desktop": "1.5rem", "gutter": "1rem", "space-md": "1rem" }, "fontFamily": { "label-sm": ["Inter"], "body-md": ["Inter"], "display-lg-mobile": ["Plus Jakarta Sans"], "code-stat": ["Inter"], "headline-lg": ["Plus Jakarta Sans"], "body-lg": ["Inter"], "headline-lg-mobile": ["Plus Jakarta Sans"], "label-md": ["Inter"], "display-lg": ["Plus Jakarta Sans"], "body-sm": ["Inter"], "headline-md": ["Plus Jakarta Sans"] }, "fontSize": { "label-sm": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.04em", "fontWeight": "600" }], "body-md": ["1rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "400" }], "display-lg-mobile": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.025em", "fontWeight": "800" }], "code-stat": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.05em", "fontWeight": "700" }], "headline-lg": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.005em", "fontWeight": "500" }], "headline-lg-mobile": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.015em", "fontWeight": "700" }], "label-md": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "600" }], "display-lg": ["3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.03em", "fontWeight": "800" }], "body-sm": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0em", "fontWeight": "400" }], "headline-md": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "700" }] } } } }</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="ScanPrint Logo" class="h-8 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1WqXKc_d6nw34pzI2WWyFKtkWJksEyzHNqvxQE7olsuzDsId-gAC1J1how2QzWk5x9Lq_j_9O3wKNMWZOzkg35QD-3KRueP_YylYW0ZFJbMZtSDZ-NHY2ZB2tXATjNmMiBRB31Ok-JP0N1G3wozRGCjP3y7uXJNg0PTeMuXX6ST9q4kSohCMj6FAufJg76cckhvVeDS4GCb9m7YKrNAEekB5JbqzD-2j7rEzxpPxcTb"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-md text-headline-md tracking-tight text-on-surface truncate">ScanPrint</span><span class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-secondary/10 text-secondary font-label-sm text-label-sm"><span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>Online</span></div><span class="font-label-sm text-label-sm text-on-surface-variant truncate flex items-center gap-1"><span class="material-symbols-outlined text-[13px]">store</span>Shop #12 · Central Library</span></div></div><div class="flex items-center gap-space-xs flex-shrink-0"><button class="min-h-[44px] min-w-[44px] px-space-xs py-1 rounded-full bg-surface-container-high hover:bg-surface-container-highest active:scale-95 transition-transform flex items-center justify-center gap-1 text-primary" title="Switch Mode"><span class="material-symbols-outlined text-[18px]">swap_horiz</span><span class="font-label-sm text-label-sm hidden sm:inline">Switch</span></button><img alt="Profile" class="w-8 h-8 rounded-full object-cover flex-shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNOSCzRj3EgR8Rm_kVR7ORL4I3yPAmbAV5yVAmIsoJgd5a2U2dc_a6-LH87IdJTQYl9SxxWquaU7rDLuGzzwA42eNucGUU1Och7kjV1y4rZyuAQ6KyAEwCM6_qVnnWc7-FOVpuVsBWANBh5xOfrwN2iNlUsg4K5wqmr-xZFOw1L2QSmx0ymHO9H4efWEoARX2BWvr4oPcv2pWv_EQXYz3DD5ALrSkwYT1U8Z1q_fg"/></div></div></header><main class="flex flex-col relative w-full pt-16 pb-20 bg-surface flex-grow"><div class="flex flex-col w-full">
+<!-- Progress Stepper Header -->
+<div class="px-margin pt-space-sm pb-space-sm bg-surface-container-low shadow-sm">
+<div class="flex items-center justify-between">
+<!-- Step 1 Done -->
+<div class="flex items-center gap-1.5">
+<div class="w-6 h-6 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px]">check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface font-bold">1. Kiosk</span>
+<span class="font-label-sm text-[10px] text-secondary font-semibold">KP-4821 Ready</span>
+</div>
+</div>
+<div class="h-0.5 w-6 bg-secondary/40 rounded-full"></div>
+<!-- Step 2 Active/Done -->
+<div class="flex items-center gap-1.5">
+<div class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-sm text-label-sm shadow-sm">
+<span class="material-symbols-outlined text-[15px]">description</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-primary font-bold">2. File</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant">1 Uploaded</span>
+</div>
+</div>
+<div class="h-0.5 w-6 bg-primary-container/30 rounded-full"></div>
+<!-- Step 3 Active Setting -->
+<div class="flex items-center gap-1.5">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest text-primary flex items-center justify-center font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px]">tune</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">3. Settings</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant">Configure</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-space-md p-margin">
+<!-- Viewfinder Simulated Card / Connected Terminal Badge -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container shadow-sm p-space-md">
+<!-- Ambient Graphic Glow -->
+<div class="absolute -right-12 -top-12 w-32 h-32 bg-primary/10 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-secondary animate-ping"></div>
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">Connected Terminal</span>
+</div>
+<button class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-high text-primary font-label-sm text-label-sm active:scale-95 transition-transform" id="rescan-btn">
+<span class="material-symbols-outlined text-[16px]">qr_code_scanner</span>
+<span>Re-scan</span>
+</button>
+</div>
+<!-- Kiosk Scanner Banner with live viewfinder overlay toggle -->
+<div class="relative rounded-lg bg-inverse-surface p-space-sm text-inverse-on-surface flex items-center justify-between shadow-inner">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest/15 flex items-center justify-center text-primary-fixed flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">print</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-code-stat text-code-stat font-bold text-inverse-on-surface tracking-wider">KP-4821</span>
+<span class="px-1.5 py-0.2 rounded bg-secondary-container/20 text-secondary-fixed text-[10px] font-label-sm font-semibold">Fast Duplex</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline-variant truncate">Desk 3 · Central Library Station</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary-fixed text-[20px]">verified</span>
+</div>
+<div class="mt-space-xs flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm px-0.5">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">speed</span> 42 ppm output ready
+        </span>
+<span class="text-primary font-semibold cursor-pointer">Change Kiosk</span>
+</div>
+</div>
+<!-- Active Document Preview Card -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[22px]">draft</span>
+          Document Loaded
+        </h2>
+<span class="font-label-sm text-label-sm text-secondary font-bold bg-secondary/10 px-2 py-0.5 rounded-full">Ready to Print</span>
+</div>
+<!-- Document Tile -->
+<div class="rounded-xl bg-surface-container-lowest p-space-md shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<!-- Rich Icon Graphic mimicking the prompt inspired logo -->
+<div class="w-14 h-14 rounded-xl bg-primary-container/15 flex-shrink-0 flex items-center justify-center relative overflow-hidden">
+<div class="w-9 h-10 rounded bg-primary flex flex-col items-center justify-center text-on-primary shadow-sm">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+<span class="font-label-sm text-[8px] font-black uppercase tracking-tighter">PDF</span>
+</div>
+<div class="absolute bottom-0 inset-x-0 h-1 bg-primary"></div>
+</div>
+<!-- Doc Details -->
+<div class="flex flex-col min-w-0 flex-1">
+<h3 class="font-body-lg text-body-lg text-on-surface font-bold truncate">Final_Semester_Project_Report.pdf</h3>
+<div class="flex items-center gap-2 mt-0.5 text-on-surface-variant font-label-sm text-label-sm flex-wrap">
+<span class="font-semibold text-primary">14 Pages</span>
+<span>•</span>
+<span>3.4 MB</span>
+<span>•</span>
+<span class="text-secondary font-medium">Rendered OK</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant flex-shrink-0 active:scale-95 transition-transform" title="Replace File">
+<span class="material-symbols-outlined text-[18px]">cached</span>
+</button>
+</div>
+<!-- Inline Visual Page Thumbnail Reel -->
+<div class="flex items-center gap-2 overflow-x-auto pt-1 pb-1">
+<div class="flex-shrink-0 w-16 h-20 rounded bg-surface-container-low p-1.5 flex flex-col justify-between shadow-xs">
+<div class="space-y-1">
+<div class="h-1.5 bg-primary/40 rounded w-3/4"></div>
+<div class="h-1 bg-outline-variant/60 rounded w-full"></div>
+<div class="h-1 bg-outline-variant/60 rounded w-4/5"></div>
+</div>
+<span class="font-label-sm text-[9px] text-center text-on-surface-variant">p. 1 (Cover)</span>
+</div>
+<div class="flex-shrink-0 w-16 h-20 rounded bg-surface-container-low p-1.5 flex flex-col justify-between shadow-xs">
+<div class="space-y-1">
+<div class="h-1 bg-outline-variant/60 rounded w-full"></div>
+<div class="h-1 bg-outline-variant/60 rounded w-full"></div>
+<div class="h-1 bg-outline-variant/60 rounded w-2/3"></div>
+</div>
+<span class="font-label-sm text-[9px] text-center text-on-surface-variant">p. 2</span>
+</div>
+<div class="flex-shrink-0 w-16 h-20 rounded bg-surface-container-low p-1.5 flex flex-col justify-between shadow-xs">
+<div class="space-y-1">
+<div class="h-1 bg-outline-variant/60 rounded w-full"></div>
+<div class="h-1 bg-outline-variant/60 rounded w-5/6"></div>
+<div class="h-1.5 bg-secondary/40 rounded w-1/2"></div>
+</div>
+<span class="font-label-sm text-[9px] text-center text-on-surface-variant">p. 3 (Chart)</span>
+</div>
+<div class="flex-shrink-0 w-16 h-20 rounded bg-surface-container-high/60 flex items-center justify-center font-label-sm text-[11px] text-primary font-bold">
+            +11 more
+          </div>
+</div>
+</div>
+</div>
+<!-- Quick Print Configuration Section -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface">Print Setup</h2>
+<span class="font-label-sm text-label-sm text-outline">Fast Preset Applied</span>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-space-md">
+<!-- Color Mode Selection -->
+<div>
+<div class="flex justify-between items-center mb-2">
+<label class="font-label-md text-label-md text-on-surface font-bold">Color Mode</label>
+<span class="font-label-sm text-label-sm text-primary font-semibold" id="color-rate-tag">₹2.00 / page</span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs">
+<button class="mode-select-btn flex items-center justify-between p-3 rounded-xl bg-surface-container-high shadow-xs transition-all active:scale-[0.98]" id="btn-bw" type="button">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded-full bg-inverse-surface flex items-center justify-center text-[10px] text-inverse-on-surface font-bold">B</span>
+<div class="text-left">
+<p class="font-label-md text-label-md text-on-surface font-bold">Black &amp; White</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">₹2 / page</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary text-[20px]" id="bw-check">check_circle</span>
+</button>
+<button class="mode-select-btn flex items-center justify-between p-3 rounded-xl bg-surface-container-low opacity-75 shadow-xs transition-all active:scale-[0.98]" id="btn-color" type="button">
+<div class="flex items-center gap-2">
+<div class="w-5 h-5 rounded-full bg-gradient-to-tr from-amber-500 via-rose-500 to-cyan-500 flex items-center justify-center shadow-xs"></div>
+<div class="text-left">
+<p class="font-label-md text-label-md text-on-surface font-bold">Full Color</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">₹8 / page</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-[20px]" id="color-check">radio_button_unchecked</span>
+</button>
+</div>
+</div>
+<!-- Sides (Duplex vs Single) -->
+<div>
+<div class="flex justify-between items-center mb-2">
+<label class="font-label-md text-label-md text-on-surface font-bold">Print Sides</label>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Duplex saves 50% paper!</span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs">
+<button class="side-select-btn flex items-center gap-2.5 p-3 rounded-xl bg-surface-container-high transition-all" id="btn-duplex" type="button">
+<span class="material-symbols-outlined text-primary text-[22px]">auto_stories</span>
+<div class="text-left">
+<p class="font-label-md text-label-md text-on-surface font-bold">Two-Sided</p>
+<p class="font-label-sm text-[11px] text-on-surface-variant">Double sided</p>
+</div>
+</button>
+<button class="side-select-btn flex items-center gap-2.5 p-3 rounded-xl bg-surface-container-low opacity-75 transition-all" id="btn-single" type="button">
+<span class="material-symbols-outlined text-outline text-[22px]">file_copy</span>
+<div class="text-left">
+<p class="font-label-md text-label-md text-on-surface font-bold">Single-Sided</p>
+<p class="font-label-sm text-[11px] text-on-surface-variant">One side only</p>
+</div>
+</button>
+</div>
+</div>
+<!-- Copies Stepper & Page Range Split -->
+<div class="grid grid-cols-2 gap-space-sm pt-1">
+<!-- Copies Stepper -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-bold">Copies</label>
+<div class="flex items-center justify-between bg-surface-container-low rounded-xl p-1 shadow-inner">
+<button class="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center text-on-surface active:scale-90 transition-transform shadow-xs" id="btn-minus" type="button">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<span class="font-headline-md text-headline-md text-on-surface font-bold tabular-nums" id="copies-count">1</span>
+<button class="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary active:scale-90 transition-transform shadow-xs" id="btn-plus" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+<!-- Page Range -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-bold">Pages</label>
+<div class="flex items-center gap-1 bg-surface-container-low rounded-xl p-1">
+<button class="flex-1 py-2 text-center rounded-lg bg-surface-container-lowest text-primary font-label-md text-label-md font-bold shadow-xs transition-all" id="range-all-btn">
+                All (14)
+              </button>
+<button class="flex-1 py-2 text-center rounded-lg text-on-surface-variant font-label-md text-label-md font-medium transition-all" id="range-custom-btn">
+                Custom
+              </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Security & Trust Micro-Badge -->
+<div class="flex items-center justify-center gap-2 py-1 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">encrypted</span>
+<span>Document automatically purged 10 mins post-print</span>
+</div>
+</div>
+<!-- Sticky Bottom Elevation Tray: Cost & Pay CTA -->
+<div class="sticky bottom-0 z-40 bg-surface-container-lowest p-margin shadow-[0_-4px_16px_rgba(19,27,46,0.08)]">
+<div class="flex items-center justify-between mb-space-xs">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">Total Estimated Cost</span>
+<div class="flex items-baseline gap-1">
+<span class="font-display-lg-mobile text-display-lg-mobile font-extrabold text-on-surface tracking-tight" id="total-price-display">₹28.00</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant" id="breakdown-tag">(14 pgs × ₹2.00)</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-secondary font-bold bg-secondary/10 px-2 py-0.5 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+          Instant Release
+        </span>
+<span class="font-label-sm text-[11px] text-on-surface-variant mt-0.5">UPI / Cards / Cash</span>
+</div>
+</div>
+<button class="w-full h-14 rounded-xl bg-primary text-on-primary font-headline-md text-headline-md flex items-center justify-center gap-2 shadow-md hover:bg-primary-container active:scale-[0.98] transition-all" id="proceed-btn" type="button">
+<span class="material-symbols-outlined text-[24px]">payments</span>
+<span id="cta-label">Proceed to Review &amp; Pay (₹28.00)</span>
+</button>
+</div>
+</div>
+<script>
+  (function() {
+    let pages = 14;
+    let ratePerPage = 2; // 2 for B&W, 8 for Color
+    let copies = 1;
+
+    const btnBw = document.getElementById('btn-bw');
+    const btnColor = document.getElementById('btn-color');
+    const bwCheck = document.getElementById('bw-check');
+    const colorCheck = document.getElementById('color-check');
+    const colorRateTag = document.getElementById('color-rate-tag');
+
+    const btnDuplex = document.getElementById('btn-duplex');
+    const btnSingle = document.getElementById('btn-single');
+
+    const btnMinus = document.getElementById('btn-minus');
+    const btnPlus = document.getElementById('btn-plus');
+    const copiesCount = document.getElementById('copies-count');
+
+    const totalPriceDisplay = document.getElementById('total-price-display');
+    const breakdownTag = document.getElementById('breakdown-tag');
+    const ctaLabel = document.getElementById('cta-label');
+
+    function updateCalculations() {
+      const total = pages * ratePerPage * copies;
+      const formattedTotal = '₹' + total.toFixed(2);
+      totalPriceDisplay.textContent = formattedTotal;
+      breakdownTag.textContent = '(' + (pages * copies) + ' pgs × ₹' + ratePerPage.toFixed(2) + ')';
+      ctaLabel.textContent = 'Proceed to Review & Pay (' + formattedTotal + ')';
+    }
+
+    // Toggle Color Mode
+    btnBw.addEventListener('click', function() {
+      ratePerPage = 2;
+      btnBw.className = 'mode-select-btn flex items-center justify-between p-3 rounded-xl bg-surface-container-high shadow-xs transition-all active:scale-[0.98]';
+      btnColor.className = 'mode-select-btn flex items-center justify-between p-3 rounded-xl bg-surface-container-low opacity-75 shadow-xs transition-all active:scale-[0.98]';
+      bwCheck.textContent = 'check_circle';
+      bwCheck.className = 'material-symbols-outlined text-primary text-[20px]';
+      colorCheck.textContent = 'radio_button_unchecked';
+      colorCheck.className = 'material-symbols-outlined text-outline-variant text-[20px]';
+      colorRateTag.textContent = '₹2.00 / page';
+      updateCalculations();
+    });
+
+    btnColor.addEventListener('click', function() {
+      ratePerPage = 8;
+      btnColor.className = 'mode-select-btn flex items-center justify-between p-3 rounded-xl bg-surface-container-high shadow-xs transition-all active:scale-[0.98]';
+      btnBw.className = 'mode-select-btn flex items-center justify-between p-3 rounded-xl bg-surface-container-low opacity-75 shadow-xs transition-all active:scale-[0.98]';
+      colorCheck.textContent = 'check_circle';
+      colorCheck.className = 'material-symbols-outlined text-primary text-[20px]';
+      bwCheck.textContent = 'radio_button_unchecked';
+      bwCheck.className = 'material-symbols-outlined text-outline-variant text-[20px]';
+      colorRateTag.textContent = '₹8.00 / page';
+      updateCalculations();
+    });
+
+    // Toggle Sides
+    btnDuplex.addEventListener('click', function() {
+      btnDuplex.className = 'side-select-btn flex items-center gap-2.5 p-3 rounded-xl bg-surface-container-high transition-all';
+      btnSingle.className = 'side-select-btn flex items-center gap-2.5 p-3 rounded-xl bg-surface-container-low opacity-75 transition-all';
+    });
+
+    btnSingle.addEventListener('click', function() {
+      btnSingle.className = 'side-select-btn flex items-center gap-2.5 p-3 rounded-xl bg-surface-container-high transition-all';
+      btnDuplex.className = 'side-select-btn flex items-center gap-2.5 p-3 rounded-xl bg-surface-container-low opacity-75 transition-all';
+    });
+
+    // Copies Counter
+    btnPlus.addEventListener('click', function() {
+      copies += 1;
+      copiesCount.textContent = copies;
+      updateCalculations();
+    });
+
+    btnMinus.addEventListener('click', function() {
+      if (copies > 1) {
+        copies -= 1;
+        copiesCount.textContent = copies;
+        updateCalculations();
+      }
+    });
+
+    // Simulated Action feedback
+    const proceedBtn = document.getElementById('proceed-btn');
+    proceedBtn.addEventListener('click', function() {
+      const orig = ctaLabel.textContent;
+      ctaLabel.textContent = 'Locking Job on Kiosk KP-4821...';
+      proceedBtn.classList.add('bg-secondary');
+      setTimeout(function() {
+        ctaLabel.textContent = 'Opening Payment Gateway...';
+      }, 700);
+      setTimeout(function() {
+        ctaLabel.textContent = orig;
+        proceedBtn.classList.remove('bg-secondary');
+      }, 2000);
+    });
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/80 backdrop-blur-xl shadow-[0_-4px_12px_rgba(15,23,42,0.06)]" data-active-classes="text-primary font-bold"><div class="flex justify-around items-center h-16 px-space-xs"><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-16 text-on-surface-variant transition-colors" data-path="scan-and-print" href="#"><span class="material-symbols-outlined text-[22px]">document_scanner</span><span class="font-label-sm text-label-sm tracking-tight text-center leading-none mt-1">Scan &amp; Print</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-16 text-on-surface-variant transition-colors" data-path="my-orders-queue" href="#"><span class="material-symbols-outlined text-[22px]">print_connect</span><span class="font-label-sm text-label-sm tracking-tight text-center leading-none mt-1">My Queue</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-16 text-on-surface-variant transition-colors" data-path="owner-dashboard" href="#"><span class="material-symbols-outlined text-[22px]">admin_panel_settings</span><span class="font-label-sm text-label-sm tracking-tight text-center leading-none mt-1">Owner Hub</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-16 text-on-surface-variant transition-colors" data-path="settings" href="#"><span class="material-symbols-outlined text-[22px]">tune</span><span class="font-label-sm text-label-sm tracking-tight text-center leading-none mt-1">Settings</span></a></div></nav></body></html>

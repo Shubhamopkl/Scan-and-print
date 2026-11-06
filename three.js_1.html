@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+  </style>
+</head>
+<body>
+<!-- STITCH_THREEJS_START:ANIMATION_20 class="fixed inset-0 w-full h-full bg-transparent" -->
+<div class="fixed inset-0 w-full h-full bg-transparent" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_20" style="width:100%;height:100%"></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_20');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  # 🚀 Scan to Print — Full Repository Code & Deployment Package (GitHub + Render)
+
+Yeh package aapko direct GitHub repo bana kar **Render** par free me deploy karne ke liye har file ka ready-to-use production code provide karta hai, jisme Glassmorphism UI, UPI payment order mock/webhook, live Kiosk connection, aur printer queue management shamil hai.
+
+---
+
+## 📂 1. Directory Structure
+
+Apne computer me ek folder banayein, e.g., `scan-to-print`:
+
+```text
+scan-to-print/
+├── render.yaml
+├── package.json
+├── .gitignore
+├── README.md
+├── server/
+│   ├── server.js
+│   └── package.json
+└── client/
+    ├── package.json
+    ├── vite.config.js
+    ├── index.html
+    └── src/
+        ├── main.jsx
+        ├── App.jsx
+        ├── index.css
+        └── components/
+            ├── Navbar.jsx
+            ├── CustomerScanPrint.jsx
+            ├── CustomerCheckout.jsx
+            ├── OwnerDashboard.jsx
+            └── OwnerHardwareDiagnostics.jsx
+```
+
+---
+
+## ⚡ 2. `render.yaml` (Root directory me)
+
+```yaml
+services:
+  # 1. Express API Web Service
+  - type: web
+    name: scan-print-api
+    runtime: node
+    region: singapore
+    plan: free
+    buildCommand: npm --prefix server install
+    startCommand: npm --prefix server start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: FRONTEND_URL
+        value: https://scan-print-web.onrender.com
+
+  # 2. Vite + React Static Frontend
+  - type: web
+    name: scan-print-web
+    runtime: static
+    buildCommand: npm --prefix client install && npm --prefix client run build
+    staticPublishPath: client/dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://scan-print-api.onrender.com
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+```
+
+---
+
+## 📦 3. Root `package.json` & `.gitignore`
+
+### `package.json`
+```json
+{
+  "name": "scan-to-print-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install:all": "npm --prefix server install && npm --prefix client install",
+    "start": "node server/server.js",
+    "build": "npm --prefix client run build"
+  }
+}
+```
+
+### `.gitignore`
+```text
+node_modules/
+.env
+dist/
+.DS_Store
+*.log
+```
+
+---
+
+## ⚙️ 4. Backend (`server/`)
+
+### `server/package.json`
+```json
+{
+  "name": "scan-print-server",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}
+```
+
+### `server/server.js`
+```javascript
+const express = require('express');
+const cors = require('cors');
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+app.use(cors());
+app.use(express.json());
+
+// In-memory demo kiosk state
+let kioskState = {
+  kioskId: 'KP-4821',
+  status: 'Online',
+  printerModel: 'LaserJet Pro X400',
+  tonerBlack: 88,
+  paperCount: 340,
+  paperMax: 500,
+  fuserTemp: '195°C',
+  ping: '12ms'
+};
+
+let rateCard = {
+  bwSingle: 2.00,
+  bwDuplex: 3.50,
+  color: 8.00,
+  glossy: 25.00
+};
+
+let orders = [
+  { id: 'ORD-9021', customer: 'Aarav Mehta', pages: 14, type: 'Color', amount: 140, status: 'Printing', progress: '8/14' },
+  { id: 'ORD-9020', customer: 'Neha Sharma', pages: 4, type: 'B&W', amount: 8, status: 'Waiting', progress: 'Queue #1' },
+  { id: 'ORD-9019', customer: 'Vikram Rajput', pages: 32, type: 'Duplex B&W', amount: 64, status: 'Waiting', progress: 'Queue #2' }
+];
+
+// Health Check
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', time: new Date() });
+});
+
+// Telemetry & Rate Card
+app.get('/api/kiosk/status', (req, res) => {
+  res.json({ kiosk: kioskState, rateCard, queue: orders });
+});
+
+app.post('/api/kiosk/rate-card', (req, res) => {
+  rateCard = { ...rateCard, ...req.body };
+  res.json({ message: 'Rate card updated successfully', rateCard });
+});
+
+// Order creation & UPI checkout
+app.post('/api/order/create', (req, res) => {
+  const { fileName, pages, colorMode, duplex, copies, customerPhone } = req.body;
+  
+  let rate = colorMode === 'color' ? rateCard.color : (duplex ? rateCard.bwDuplex / 2 : rateCard.bwSingle);
+  let totalAmount = (pages * rate * (copies || 1)).toFixed(2);
+  let releasePin = Math.floor(1000 + Math.random() * 9000).toString();
+  let orderId = 'ORD-' + Math.floor(1000 + Math.random() * 9000);
+
+  const newOrder = {
+    id: orderId,
+    customer: customerPhone || 'Kiosk Guest',
+    fileName: fileName || 'Document.pdf',
+    pages,
+    colorMode,
+    amount: totalAmount,
+    status: 'Ready',
+    releasePin,
+    createdAt: new Date()
+  };
+
+  orders.unshift(newOrder);
+
+  res.json({
+    success: true,
+    orderId,
+    totalAmount,
+    releasePin,
+    kioskId: kioskState.kioskId,
+    upiIntentUrl: `upi://pay?pa=merchant@upi&pn=ScanPrintKiosk&am=${totalAmount}&tr=${orderId}&cu=INR`
+  });
+});
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Scan to Print API running on port ${PORT}`);
+});
+```
+
+---
+
+## 💻 5. Frontend (`client/`)
+
+### `client/package.json`
+```json
+{
+  "name": "scan-print-client",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lucide-react": "^0.395.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.0",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.4",
+    "vite": "^5.2.11"
+  }
+}
+```
+
+### `client/vite.config.js`
+```javascript
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 3000
+  }
+});
+```
+
+### `client/tailwind.config.js`
+```javascript
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        glowCyan: '#00f0ff',
+        glowIndigo: '#6366f1',
+        darkSurface: '#0c0e17'
+      }
+    },
+  },
+  plugins: [],
+}
+```
+
+### `client/src/index.css` (Glassmorphism Styles)
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  background-color: #0c0e17;
+  color: #f1f5f9;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism Card Utility */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-panel-active {
+  background: rgba(0, 240, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.2);
+}
+
+.glass-button {
+  background: linear-gradient(135deg, #00f0ff 0%, #3b82f6 100%);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.35);
+}
+```
+
+### `client/src/App.jsx`
+```jsx
+import React, { useState } from 'react';
+import CustomerScanPrint from './components/CustomerScanPrint';
+import CustomerCheckout from './components/CustomerCheckout';
+import OwnerDashboard from './components/OwnerDashboard';
+import OwnerHardwareDiagnostics from './components/OwnerHardwareDiagnostics';
+
+export default function App() {
+  const [activeTab, setActiveTab] = useState('customer-scan');
+  const [orderData, setOrderData] = useState({
+    fileName: 'Final_Semester_Project.pdf',
+    pages: 14,
+    colorMode: 'bw',
+    duplex: true,
+    copies: 1,
+    total: 28.00
+  });
+
+  return (
+    <div className="min-h-screen bg-[#0c0e17] text-white flex flex-col items-center p-3 relative overflow-hidden">
+      {/* Dynamic Background Neon Blobs for Glass Refraction */}
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-96 h-96 bg-cyan-500/15 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-20 left-10 w-80 h-80 bg-indigo-600/15 rounded-full blur-[100px] pointer-events-none" />
+
+      {/* Top Demo Switcher Bar */}
+      <div className="w-full max-w-md mb-4 glass-panel rounded-2xl p-1.5 flex justify-between z-10 text-xs font-medium">
+        <button
+          onClick={() => setActiveTab('customer-scan')}
+          className={`flex-1 py-2 rounded-xl transition ${activeTab === 'customer-scan' ? 'bg-cyan-500 text-black font-semibold' : 'text-slate-400'}`}
+        >
+          Customer Setup
+        </button>
+        <button
+          onClick={() => setActiveTab('customer-checkout')}
+          className={`flex-1 py-2 rounded-xl transition ${activeTab === 'customer-checkout' ? 'bg-cyan-500 text-black font-semibold' : 'text-slate-400'}`}
+        >
+          Live Dispense
+        </button>
+        <button
+          onClick={() => setActiveTab('owner-dashboard')}
+          className={`flex-1 py-2 rounded-xl transition ${activeTab === 'owner-dashboard' ? 'bg-indigo-500 text-white font-semibold' : 'text-slate-400'}`}
+        >
+          Owner Hub
+        </button>
+        <button
+          onClick={() => setActiveTab('owner-hardware')}
+          className={`flex-1 py-2 rounded-xl transition ${activeTab === 'owner-hardware' ? 'bg-indigo-500 text-white font-semibold' : 'text-slate-400'}`}
+        >
+          Diagnostics
+        </button>
+      </div>
+
+      {/* Screen Frame */}
+      <main className="w-full max-w-md z-10 pb-16">
+        {activeTab === 'customer-scan' && (
+          <CustomerScanPrint 
+            orderData={orderData} 
+            setOrderData={setOrderData} 
+            onProceed={() => setActiveTab('customer-checkout')} 
+          />
+        )}
+        {activeTab === 'customer-checkout' && (
+          <CustomerCheckout 
+            orderData={orderData} 
+            onBack={() => setActiveTab('customer-scan')} 
+          />
+        )}
+        {activeTab === 'owner-dashboard' && (
+          <OwnerDashboard 
+            onOpenHardware={() => setActiveTab('owner-hardware')} 
+          />
+        )}
+        {activeTab === 'owner-hardware' && (
+          <OwnerHardwareDiagnostics 
+            onBack={() => setActiveTab('owner-dashboard')} 
+          />
+        )}
+      </main>
+    </div>
+  );
+}
+```
+
+### `client/src/components/CustomerScanPrint.jsx`
+```jsx
+import React from 'react';
+
+export default function CustomerScanPrint({ orderData, setOrderData, onProceed }) {
+  const calculateTotal = (colorMode, duplex, copies) => {
+    const rate = colorMode === 'color' ? 8.00 : 2.00;
+    return (orderData.pages * rate * copies).toFixed(2);
+  };
+
+  const handleColorChange = (mode) => {
+    const total = calculateTotal(mode, orderData.duplex, orderData.copies);
+    setOrderData({ ...orderData, colorMode: mode, total });
+  };
+
+  const handleDuplexChange = (isDuplex) => {
+    setOrderData({ ...orderData, duplex: isDuplex });
+  };
+
+  const handleCopies = (delta) => {
+    const next = Math.max(1, orderData.copies + delta);
+    const total = calculateTotal(orderData.colorMode, orderData.duplex, next);
+    setOrderData({ ...orderData, copies: next, total });
+  };
+
+  return (
+    <div className="space-y-4">
+      {/* Terminal Card */}
+      <div className="glass-panel p-4 rounded-3xl relative overflow-hidden">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse" />
+            <span className="text-xs uppercase tracking-wider text-slate-300 font-semibold">Connected Terminal</span>
+          </div>
+          <button className="text-xs bg-white/10 hover:bg-white/20 border border-white/20 px-3 py-1 rounded-full text-cyan-300">
+            Re-scan
+          </button>
+        </div>
+        <div className="flex items-center justify-between">
+          <div>
+            <div className="flex items-center gap-2">
+              <h3 className="font-bold text-lg text-white">KP-4821</h3>
+              <span className="text-[10px] bg-indigo-500/30 text-indigo-300 border border-indigo-400/40 px-2 py-0.5 rounded-full">
+                Fast Duplex
+              </span>
+            </div>
+            <p className="text-xs text-slate-400">Desk 3 · Central Library Station</p>
+          </div>
+          <div className="text-emerald-400 text-xs flex items-center gap-1 font-mono">
+            42 ppm ready
+          </div>
+        </div>
+      </div>
+
+      {/* Document Loaded */}
+      <div className="glass-panel p-4 rounded-3xl space-y-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="text-cyan-400 text-lg">📄</span>
+            <span className="font-semibold text-sm">Document Loaded</span>
+          </div>
+          <span className="text-[11px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">
+            Ready to Print
+          </span>
+        </div>
+
+        <div className="p-3 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-between">
+          <div>
+            <p className="font-medium text-sm text-slate-200">{orderData.fileName}</p>
+            <p className="text-xs text-slate-400">{orderData.pages} Pages · 3.4 MB · Rendered OK</p>
+          </div>
+        </div>
+
+        {/* Thumbnail Preview strip */}
+        <div className="flex gap-2">
+          {[1, 2, 3].map((p) => (
+            <div key={p} className="flex-1 h-14 bg-white/5 border border-white/10 rounded-xl flex flex-col items-center justify-center text-[10px] text-slate-400">
+              <span>p. {p}</span>
+            </div>
+          ))}
+          <div className="w-16 h-14 bg-white/5 border border-dashed border-white/20 rounded-xl flex items-center justify-center text-[10px] text-cyan-300">
+            +{orderData.pages - 3} more
+          </div>
+        </div>
+      </div>
+
+      {/* Print Setup Customizer */}
+      <div className="glass-panel p-4 rounded-3xl space-y-4">
+        <div className="flex justify-between items-center">
+          <h4 className="font-semibold text-sm">Print Setup</h4>
+          <span className="text-xs text-slate-400">Fast Preset Applied</span>
+        </div>
+
+        {/* Color Mode */}
+        <div>
+          <label className="text-xs text-slate-400 block mb-2">Color Mode</label>
+          <div className="grid grid-cols-2 gap-3">
+            <button
+              onClick={() => handleColorChange('bw')}
+              className={`p-3 rounded-2xl flex flex-col items-start transition ${
+                orderData.colorMode === 'bw' ? 'glass-panel-active' : 'bg-white/5 border border-white/10'
+              }`}
+            >
+              <span className="font-bold text-sm">Black & White</span>
+              <span className="text-xs text-cyan-400">₹2.00 / page</span>
+            </button>
+            <button
+              onClick={() => handleColorChange('color')}
+              className={`p-3 rounded-2xl flex flex-col items-start transition ${
+                orderData.colorMode === 'color' ? 'glass-panel-active' : 'bg-white/5 border border-white/10'
+              }`}
+            >
+              <span className="font-bold text-sm">Full Color</span>
+              <span className="text-xs text-cyan-400">₹8.00 / page</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Duplex */}
+        <div>
+          <label className="text-xs text-slate-400 block mb-2">Print Sides (Duplex saves 50% paper!)</label>
+          <div className="grid grid-cols-2 gap-3">
+            <button
+              onClick={() => handleDuplexChange(true)}
+              className={`p-3 rounded-2xl text-left ${orderData.duplex ? 'glass-panel-active' : 'bg-white/5 border border-white/10'}`}
+            >
+              <div className="font-medium text-sm">Two-Sided</div>
+              <div className="text-[11px] text-slate-400">Double sided</div>
+            </button>
+            <button
+              onClick={() => handleDuplexChange(false)}
+              className={`p-3 rounded-2xl text-left ${!orderData.duplex ? 'glass-panel-active' : 'bg-white/5 border border-white/10'}`}
+            >
+              <div className="font-medium text-sm">Single-Sided</div>
+              <div className="text-[11px] text-slate-400">One side only</div>
+            </button>
+          </div>
+        </div>
+
+        {/* Copies Counter */}
+        <div className="flex justify-between items-center pt-2">
+          <span className="text-sm text-slate-300">Copies</span>
+          <div className="flex items-center gap-3 bg-white/5 border border-white/10 px-3 py-1.5 rounded-2xl">
+            <button onClick={() => handleCopies(-1)} className="text-lg text-slate-400 hover:text-white px-2">−</button>
+            <span className="font-bold text-sm w-4 text-center">{orderData.copies}</span>
+            <button onClick={() => handleCopies(1)} className="text-lg text-cyan-400 hover:text-white px-2">+</button>
+          </div>
+        </div>
+      </div>
+
+      {/* Floating CTA Bottom Bar */}
+      <div className="glass-panel p-4 rounded-3xl flex items-center justify-between">
+        <div>
+          <div className="text-[10px] text-slate-400 uppercase tracking-wider">Total Estimated Cost</div>
+          <div className="text-2xl font-black text-white">₹{orderData.total}</div>
+        </div>
+        <button
+          onClick={onProceed}
+          className="glass-button text-black font-bold px-6 py-3 rounded-2xl flex items-center gap-2 hover:opacity-95 transition"
+        >
+          <span>Pay & Print</span>
+          <span>→</span>
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+### `client/src/components/CustomerCheckout.jsx`
+```jsx
+import React, { useState } from 'react';
+
+export default function CustomerCheckout({ orderData, onBack }) {
+  const [pinCopied, setPinCopied] = useState(false);
+  const releasePin = '8492';
+
+  const copyPin = () => {
+    navigator.clipboard.writeText(releasePin);
+    setPinCopied(true);
+    setTimeout(() => setPinCopied(false), 2000);
+  };
+
+  return (
+    <div className="space-y-4">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-2">
+        <button onClick={onBack} className="text-xs bg-white/10 px-3 py-1.5 rounded-xl border border-white/15">
+          ← Back to Setup
+        </button>
+        <span className="text-xs text-slate-400">Order #SP-9921</span>
+      </div>
+
+      {/* Live Dispense Hardware Progress */}
+      <div className="glass-panel p-5 rounded-3xl relative overflow-hidden border-cyan-500/30">
+        <div className="flex justify-between items-center mb-3">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 bg-cyan-400 rounded-full animate-ping" />
+            <span className="font-bold text-sm text-cyan-300">Live Dispense Active</span>
+          </div>
+          <span className="text-xs font-mono text-cyan-400 font-bold">65% Complete</span>
+        </div>
+
+        <p className="text-xs text-slate-300 mb-2">Tray 1 dispensing securely: Page 9 of 14 printed</p>
+        
+        {/* Glowing Progress bar */}
+        <div className="w-full h-3 bg-white/10 rounded-full overflow-hidden p-0.5">
+          <div className="h-full bg-gradient-to-r from-cyan-400 to-indigo-500 rounded-full w-[65%] transition-all duration-500 shadow-[0_0_12px_#00f0ff]" />
+        </div>
+
+        {/* 4-Digit Release PIN Block */}
+        <div className="mt-5 p-4 bg-white/5 border border-white/15 rounded-2xl text-center">
+          <p className="text-[11px] text-slate-400 uppercase tracking-widest mb-2 font-semibold">Secure Kiosk Release PIN</p>
+          <div className="flex justify-center gap-3 font-mono text-2xl font-black text-cyan-300">
+            {releasePin.split('').map((char, i) => (
+              <span key={i} className="w-11 h-12 flex items-center justify-center bg-black/40 border border-cyan-500/40 rounded-xl shadow-inner">
+                {char}
+              </span>
+            ))}
+          </div>
+          <button 
+            onClick={copyPin} 
+            className="mt-3 text-xs text-slate-300 hover:text-white underline decoration-cyan-400"
+          >
+            {pinCopied ? 'PIN Copied to Clipboard!' : 'Click to Copy PIN'}
+          </button>
+        </div>
+      </div>
+
+      {/* Payment Summary */}
+      <div className="glass-panel p-4 rounded-3xl space-y-2 text-sm">
+        <h4 className="font-semibold text-slate-200 mb-2">Payment Summary</h4>
+        <div className="flex justify-between text-slate-400 text-xs">
+          <span>{orderData.pages} Pages × ₹2.00 ({orderData.duplex ? 'Duplex' : 'Single'})</span>
+          <span>₹28.00</span>
+        </div>
+        <div className="flex justify-between text-slate-400 text-xs">
+          <span>GST (18%) & Platform Fee</span>
+          <span>₹1.50</span>
+        </div>
+        <div className="flex justify-between text-emerald-400 text-xs">
+          <span>Paper Saver discount</span>
+          <span>-₹2.00</span>
+        </div>
+        <div className="border-t border-white/10 pt-2 flex justify-between font-bold text-base text-white">
+          <span>Total Payable</span>
+          <span className="text-cyan-400">₹29.50</span>
+        </div>
+      </div>
+
+      {/* Instant UPI Payment apps */}
+      <div className="glass-panel p-4 rounded-3xl space-y-3">
+        <div className="flex justify-between items-center">
+          <span className="text-xs font-semibold text-slate-300">1-Tap Instant UPI Authorization</span>
+          <span className="text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+            Instant Clearance
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 gap-2 text-xs">
+          {['GPay', 'PhonePe', 'Paytm', 'BHIM UPI'].map((app) => (
+            <button
+              key={app}
+              className="p-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl flex items-center justify-between transition"
+            >
+              <span className="font-medium text-slate-200">{app}</span>
+              <span className="text-cyan-400 text-sm">⚡</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+### `client/src/components/OwnerDashboard.jsx`
+```jsx
+import React from 'react';
+
+export default function OwnerDashboard({ onOpenHardware }) {
+  return (
+    <div className="space-y-4">
+      {/* Store Header */}
+      <div className="glass-panel p-4 rounded-3xl flex items-center justify-between">
+        <div>
+          <h2 className="font-bold text-base text-white">FastPrint Sector 18</h2>
+          <p className="text-xs text-slate-400">Kiosk #K-4821 · Online</p>
+        </div>
+        <span className="text-xs bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-full font-medium">
+          Accepting Orders
+        </span>
+      </div>
+
+      {/* Pulse Metrics */}
+      <div className="grid grid-cols-2 gap-3">
+        <div className="glass-panel p-4 rounded-3xl">
+          <span className="text-xs text-slate-400">Today's Revenue</span>
+          <div className="text-2xl font-black text-cyan-400 mt-1">₹4,850</div>
+          <span className="text-[10px] text-emerald-400 font-semibold">+18% vs yesterday</span>
+        </div>
+        <div className="glass-panel p-4 rounded-3xl">
+          <span className="text-xs text-slate-400">Pages Printed</span>
+          <div className="text-2xl font-black text-white mt-1">1,842</div>
+          <span className="text-[10px] text-slate-400">Avg 3.4 pgs/min</span>
+        </div>
+      </div>
+
+      {/* Hardware Status Preview */}
+      <div className="glass-panel p-4 rounded-3xl space-y-3">
+        <div className="flex justify-between items-center">
+          <h3 className="font-semibold text-sm">Printer Consumables</h3>
+          <button onClick={onOpenHardware} className="text-xs text-cyan-400 hover:underline">
+            Manage →
+          </button>
+        </div>
+
+        <div>
+          <div className="flex justify-between text-xs text-slate-400 mb-1">
+            <span>Black Toner (Cartridge OEM)</span>
+            <span className="font-mono text-cyan-300">78%</span>
+          </div>
+          <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+            <div className="h-full bg-cyan-400 rounded-full w-[78%]" />
+          </div>
+        </div>
+
+        <div>
+          <div className="flex justify-between text-xs text-slate-400 mb-1">
+            <span>Tray 1 (A4 Paper 75gsm)</span>
+            <span className="font-mono text-emerald-300">340 / 500 sheets</span>
+          </div>
+          <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+            <div className="h-full bg-emerald-400 rounded-full w-[68%]" />
+          </div>
+        </div>
+      </div>
+
+      {/* Live Order Spooler */}
+      <div className="glass-panel p-4 rounded-3xl space-y-2">
+        <h3 className="font-semibold text-sm mb-2">Live Queue (3 Jobs)</h3>
+        {[
+          { name: 'Aarav Mehta', id: '#ORD-9021', pgs: '14 pgs (Color)', price: '₹140', status: 'Printing 8/14' },
+          { name: 'Neha Sharma', id: '#ORD-9020', pgs: '4 pgs (B&W)', price: '₹8', status: 'Waiting' }
+        ].map((job, idx) => (
+          <div key={idx} className="p-3 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-between text-xs">
+            <div>
+              <p className="font-semibold text-white">{job.name} <span className="text-slate-400 font-normal">{job.id}</span></p>
+              <p className="text-slate-400 text-[11px]">{job.pgs} · {job.price}</p>
+            </div>
+            <span className={`px-2 py-0.5 rounded-full text-[10px] ${idx === 0 ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30' : 'bg-white/10 text-slate-300'}`}>
+              {job.status}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+### `client/src/components/OwnerHardwareDiagnostics.jsx`
+```jsx
+import React, { useState } from 'react';
+
+export default function OwnerHardwareDiagnostics({ onBack }) {
+  const [bwRate, setBwRate] = useState('2.00');
+  const [colorRate, setColorRate] = useState('8.00');
+  const [saved, setSaved] = useState(false);
+
+  const saveRate = () => {
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2000);
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <button onClick={onBack} className="text-xs bg-white/10 px-3 py-1.5 rounded-xl border border-white/15">
+          ← Back to Dashboard
+        </button>
+        <span className="text-xs text-emerald-400">12ms Ping · 5GHz Wi-Fi</span>
+      </div>
+
+      {/* Diagnostics Grid */}
+      <div className="glass-panel p-4 rounded-3xl space-y-3">
+        <h3 className="font-semibold text-sm">LaserJet Pro X400 Telemetry</h3>
+        <div className="grid grid-cols-2 gap-2 text-xs">
+          <div className="p-3 bg-white/5 rounded-2xl border border-white/10">
+            <span className="text-slate-400 block text-[10px]">Thermal Fuser</span>
+            <span className="font-bold text-white text-base">195°C</span>
+            <span className="text-emerald-400 text-[10px] block">Normal</span>
+          </div>
+          <div className="p-3 bg-white/5 rounded-2xl border border-white/10">
+            <span className="text-slate-400 block text-[10px]">Roller & Feeder</span>
+            <span className="font-bold text-white text-base">Aligned</span>
+            <span className="text-emerald-400 text-[10px] block">0 Jams (48h)</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Dynamic Rate Card Manager */}
+      <div className="glass-panel p-4 rounded-3xl space-y-3">
+        <h3 className="font-semibold text-sm">Pricing & Rate Card (Syncs to Kiosk)</h3>
+        <div className="space-y-2 text-xs">
+          <div className="flex items-center justify-between p-2.5 bg-white/5 border border-white/10 rounded-2xl">
+            <div>
+              <p className="font-medium">B&W Single Page</p>
+              <p className="text-[10px] text-slate-400">Standard 75 GSM A4</p>
+            </div>
+            <div className="flex items-center gap-1 font-mono">
+              <span>₹</span>
+              <input 
+                type="text" 
+                value={bwRate} 
+                onChange={(e) => setBwRate(e.target.value)} 
+                className="w-12 bg-black/40 border border-white/20 rounded px-1 text-center text-cyan-300" 
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between p-2.5 bg-white/5 border border-white/10 rounded-2xl">
+            <div>
+              <p className="font-medium">Color Page</p>
+              <p className="text-[10px] text-slate-400">High pigment pigment</p>
+            </div>
+            <div className="flex items-center gap-1 font-mono">
+              <span>₹</span>
+              <input 
+                type="text" 
+                value={colorRate} 
+                onChange={(e) => setColorRate(e.target.value)} 
+                className="w-12 bg-black/40 border border-white/20 rounded px-1 text-center text-cyan-300" 
+              />
+            </div>
+          </div>
+        </div>
+
+        <button 
+          onClick={saveRate}
+          className="w-full glass-button text-black font-bold py-2.5 rounded-2xl text-xs transition"
+        >
+          {saved ? 'Rates Updated on Kiosks! ✓' : 'Update & Sync Kiosk Rates'}
+        </button>
+      </div>
+
+      {/* Instant Settlement */}
+      <div className="glass-panel p-4 rounded-3xl flex items-center justify-between">
+        <div>
+          <span className="text-[11px] text-slate-400">Available Merchant Payout</span>
+          <div className="text-xl font-black text-white">₹4,850.00</div>
+        </div>
+        <button className="bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs px-4 py-2 rounded-xl transition">
+          Settle Now
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+---
+
+## 🚀 6. GitHub se Render Par Live Deploy Karne ke Exact Commands
+
+### Terminal me run karein:
+```bash
+# 1. Folder banayein aur enter karein
+mkdir scan-to-print && cd scan-to-print
+
+# 2. Upar di gayi files create karein
+# 3. Git initialize karein
+git init
+git add .
+git commit -m "feat: complete glassmorphism scan-to-print fullstack app"
+
+# 4. GitHub repo create karke push karein
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/scan-to-print.git
+git push -u origin main
+```
+
+### Render.com me:
+1. **[render.com](https://render.com)** par login karein.
+2. Top right par **New +** click karein aur **Blueprint** select karein.
+3. Apna GitHub repo `scan-to-print` select karein.
+4. Render `render.yaml` ko automatically read karke **Frontend (Static Site)** aur **Backend (API)** dono ek click me deploy kar dega!
+
+})();
+</script>
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_20 -->
+</body>
+</html>
