@@ -1,279 +1,207 @@
 ---
-name: Luminous Glass
+name: Precision Print Utility
 colors:
-  surface: '#11131c'
-  surface-dim: '#11131c'
-  surface-bright: '#373943'
-  surface-container-lowest: '#0c0e17'
-  surface-container-low: '#191b25'
-  surface-container: '#1d1f29'
-  surface-container-high: '#282933'
-  surface-container-highest: '#32343f'
-  on-surface: '#e1e1ef'
-  on-surface-variant: '#b9cacb'
-  inverse-surface: '#e1e1ef'
-  inverse-on-surface: '#2e303a'
-  outline: '#849495'
-  outline-variant: '#3b494b'
-  surface-tint: '#00dbe9'
-  primary: '#dbfcff'
-  on-primary: '#00363a'
-  primary-container: '#00f0ff'
-  on-primary-container: '#006970'
-  inverse-primary: '#006970'
-  secondary: '#d0bcff'
-  on-secondary: '#3c0091'
-  secondary-container: '#571bc1'
-  on-secondary-container: '#c4abff'
-  tertiary: '#f4f5ff'
-  on-tertiary: '#002e6a'
-  tertiary-container: '#cad9ff'
-  on-tertiary-container: '#005ac3'
-  error: '#ffb4ab'
-  on-error: '#690005'
-  error-container: '#93000a'
-  on-error-container: '#ffdad6'
-  primary-fixed: '#7df4ff'
-  primary-fixed-dim: '#00dbe9'
-  on-primary-fixed: '#002022'
-  on-primary-fixed-variant: '#004f54'
-  secondary-fixed: '#e9ddff'
-  secondary-fixed-dim: '#d0bcff'
-  on-secondary-fixed: '#23005c'
-  on-secondary-fixed-variant: '#5516be'
-  tertiary-fixed: '#d8e2ff'
-  tertiary-fixed-dim: '#adc6ff'
-  on-tertiary-fixed: '#001a42'
-  on-tertiary-fixed-variant: '#004395'
-  background: '#11131c'
-  on-background: '#e1e1ef'
-  surface-variant: '#32343f'
+  surface: '#faf8ff'
+  surface-dim: '#d2d9f4'
+  surface-bright: '#faf8ff'
+  surface-container-lowest: '#ffffff'
+  surface-container-low: '#f2f3ff'
+  surface-container: '#eaedff'
+  surface-container-high: '#e2e7ff'
+  surface-container-highest: '#dae2fd'
+  on-surface: '#131b2e'
+  on-surface-variant: '#434655'
+  inverse-surface: '#283044'
+  inverse-on-surface: '#eef0ff'
+  outline: '#737686'
+  outline-variant: '#c3c6d7'
+  surface-tint: '#0053db'
+  primary: '#004ac6'
+  on-primary: '#ffffff'
+  primary-container: '#2563eb'
+  on-primary-container: '#eeefff'
+  inverse-primary: '#b4c5ff'
+  secondary: '#006c4a'
+  on-secondary: '#ffffff'
+  secondary-container: '#82f5c1'
+  on-secondary-container: '#00714e'
+  tertiary: '#824500'
+  on-tertiary: '#ffffff'
+  tertiary-container: '#a65900'
+  on-tertiary-container: '#ffede1'
+  error: '#ba1a1a'
+  on-error: '#ffffff'
+  error-container: '#ffdad6'
+  on-error-container: '#93000a'
+  primary-fixed: '#dbe1ff'
+  primary-fixed-dim: '#b4c5ff'
+  on-primary-fixed: '#00174b'
+  on-primary-fixed-variant: '#003ea8'
+  secondary-fixed: '#85f8c4'
+  secondary-fixed-dim: '#68dba9'
+  on-secondary-fixed: '#002114'
+  on-secondary-fixed-variant: '#005137'
+  tertiary-fixed: '#ffdcc3'
+  tertiary-fixed-dim: '#ffb77d'
+  on-tertiary-fixed: '#2f1500'
+  on-tertiary-fixed-variant: '#6e3900'
+  background: '#faf8ff'
+  on-background: '#131b2e'
+  surface-variant: '#dae2fd'
 typography:
   display-lg:
     fontFamily: Plus Jakarta Sans
-    fontSize: 56px
-    fontWeight: '700'
-    lineHeight: 64px
+    fontSize: 3rem
+    fontWeight: '800'
+    lineHeight: 3.5rem
     letterSpacing: -0.03em
   display-lg-mobile:
     fontFamily: Plus Jakarta Sans
-    fontSize: 36px
-    fontWeight: '700'
-    lineHeight: 44px
-    letterSpacing: -0.02em
-  headline-xl:
-    fontFamily: Plus Jakarta Sans
-    fontSize: 40px
-    fontWeight: '600'
-    lineHeight: 48px
+    fontSize: 2.25rem
+    fontWeight: '800'
+    lineHeight: 2.75rem
     letterSpacing: -0.025em
-  headline-xl-mobile:
-    fontFamily: Plus Jakarta Sans
-    fontSize: 28px
-    fontWeight: '600'
-    lineHeight: 36px
-    letterSpacing: -0.02em
   headline-lg:
     fontFamily: Plus Jakarta Sans
-    fontSize: 32px
-    fontWeight: '600'
-    lineHeight: 40px
+    fontSize: 2rem
+    fontWeight: '700'
+    lineHeight: 2.5rem
     letterSpacing: -0.02em
+  headline-lg-mobile:
+    fontFamily: Plus Jakarta Sans
+    fontSize: 1.5rem
+    fontWeight: '700'
+    lineHeight: 2rem
+    letterSpacing: -0.015em
   headline-md:
     fontFamily: Plus Jakarta Sans
-    fontSize: 24px
-    fontWeight: '600'
-    lineHeight: 32px
-    letterSpacing: -0.015em
-  headline-sm:
-    fontFamily: Plus Jakarta Sans
-    fontSize: 20px
-    fontWeight: '600'
-    lineHeight: 28px
-    letterSpacing: -0.01em
-  body-xl:
-    fontFamily: Plus Jakarta Sans
-    fontSize: 18px
-    fontWeight: '400'
-    lineHeight: 28px
+    fontSize: 1.25rem
+    fontWeight: '700'
+    lineHeight: 1.75rem
     letterSpacing: -0.01em
   body-lg:
-    fontFamily: Plus Jakarta Sans
-    fontSize: 16px
-    fontWeight: '400'
-    lineHeight: 24px
+    fontFamily: Inter
+    fontSize: 1.125rem
+    fontWeight: '500'
+    lineHeight: 1.75rem
     letterSpacing: -0.005em
   body-md:
-    fontFamily: Plus Jakarta Sans
-    fontSize: 14px
+    fontFamily: Inter
+    fontSize: 1rem
     fontWeight: '400'
-    lineHeight: 20px
+    lineHeight: 1.5rem
     letterSpacing: 0em
   body-sm:
-    fontFamily: Plus Jakarta Sans
-    fontSize: 12px
+    fontFamily: Inter
+    fontSize: 0.875rem
     fontWeight: '400'
-    lineHeight: 18px
+    lineHeight: 1.25rem
     letterSpacing: 0em
-  label-lg:
-    fontFamily: Space Grotesk
-    fontSize: 14px
-    fontWeight: '600'
-    lineHeight: 18px
-    letterSpacing: 0.04em
   label-md:
-    fontFamily: Space Grotesk
-    fontSize: 12px
-    fontWeight: '500'
-    lineHeight: 16px
-    letterSpacing: 0.06em
-  label-sm:
-    fontFamily: Space Grotesk
-    fontSize: 10px
+    fontFamily: Inter
+    fontSize: 0.875rem
     fontWeight: '600'
-    lineHeight: 14px
-    letterSpacing: 0.08em
-  code-metric:
-    fontFamily: Space Grotesk
-    fontSize: 13px
+    lineHeight: 1.25rem
+    letterSpacing: 0.01em
+  label-sm:
+    fontFamily: Inter
+    fontSize: 0.75rem
+    fontWeight: '600'
+    lineHeight: 1rem
+    letterSpacing: 0.04em
+  code-stat:
+    fontFamily: Inter
+    fontSize: 0.875rem
     fontWeight: '700'
-    lineHeight: 16px
-    letterSpacing: 0.02em
+    lineHeight: 1.25rem
+    letterSpacing: 0.05em
 rounded:
-  sm: 0.5rem
-  DEFAULT: 1rem
-  md: 1.5rem
-  lg: 2rem
-  xl: 3rem
+  sm: 0.25rem
+  DEFAULT: 0.5rem
+  md: 0.75rem
+  lg: 1rem
+  xl: 1.5rem
   full: 9999px
 spacing:
-  gutter: 1.25rem
-  gutter-mobile: 0.75rem
+  gutter: 1rem
   gutter-desktop: 1.5rem
-  margin: 1.5rem
-  margin-mobile: 1rem
-  margin-desktop: 2.5rem
-  space-xxs: 0.25rem
-  space-xs: 0.5rem
-  space-sm: 0.75rem
+  margin: 1rem
+  margin-desktop: 2rem
+  space-xs: 0.25rem
+  space-sm: 0.5rem
   space-md: 1rem
   space-lg: 1.5rem
   space-xl: 2rem
-  space-xxl: 3rem
 ---
 
 ## Brand & Style
 
-This design system delivers a futuristic, fluid, and tactile experience tailored for next-generation document capture, optical processing, and remote printing workflows. Merging high-precision utility with ethereal optical aesthetics, the interface is defined by **Liquid Glassmorphism** layered directly over an atmospheric multi-spectral mesh.
+This design system embodies a modern, ultra-reliable utility aesthetic engineered for rapid, zero-friction document workflows. It serves two distinct archetypes: on-the-go kiosk users needing immediate, self-serve printing with zero ambiguity, and shop owners requiring dense, rapid-glance terminal telemetry. 
 
-### Core Philosophy & Brand Persona
-- **Luminous Precision:** Hardware interactions (cameras, sensors, print spools) feel weightless, immediate, and fluid rather than mechanical or bureaucratic.
-- **Optic Clarity:** Interfaces rely on crystalline surfaces, realistic optical refraction simulation, and translucent sheets that stack naturally in 3D space, echoing physical transparencies and glass flatbed scanners.
-- **Atmospheric Vitality:** Rather than sterile void darks, the backdrop is a dynamic, living chromatic mesh gradient (violet, cyan, indigo, and deep obsidian) that illuminates foreground actions through frosted diffusions.
-
-### Emotional Response
-Users should feel an instant sense of speed, modern craft, and immaculate digital-to-physical cohesion. The interface mirrors the premium tactile fidelity of advanced iOS and macOS platforms while pushing depth, glow physics, and optical surface tension to create a distinctive, tactile utility.
+The aesthetic is built on high-utility tactile minimalism—functional, crisp, and robust. It removes decorative ornamentation in favor of purposeful contrast, explicit boundary definitions, instantaneous tactile feedback, and unmistakable state signals. The emotional response should be immediate trust, speed, and relief: "This machine works, my file is secure, and my print is dispensing."
 
 ## Colors
 
-The palette leverages a dark chromatic anchor infused with radiant, high-energy spectral accents designed to simulate illuminated glass layers and optical laser scanning feeds.
+The palette balances intense utility blues with high-visibility operational signaling against stark, pristine slate surfaces:
 
-### Spectral Roles
-- **Primary (`#00F0FF` - Electric Cyan):** Represents active scanning lasers, successful hardware links, optical edge detection, and primary focal highlights. Emits ambient cyan glows on interactive peaks.
-- **Secondary (`#8B5CF6` - Vivid Violet):** Governs processing phases, OCR indexing, conversion pipelines, and rich gradient blends across elevated control elements.
-- **Tertiary (`#3B82F6` - Cobalt Neon):** Provides infrastructural reinforcement for print spool queues, progress arcs, and secondary interactive layers.
-- **Neutral (`#090B14` - Deep Obsidian Void):** The low-luminance bedrock over which deep radial chromatic nodes (violet, cyan, indigo) are cast.
-
-### Glass & Luminous Surface Specs
-- **Deep Mesh Base:** Multi-point radial mesh combining `#090B14` (60%), `#1E0B36` (violet aura), and `#061B2E` (deep cyan aura).
-- **Glass Sheet (Standard):** `rgba(255, 255, 255, 0.08)` to `rgba(255, 255, 255, 0.14)` with `backdrop-filter: blur(20px) saturate(180%)`.
-- **Glass Sheet (Elevated / Floating):** `rgba(255, 255, 255, 0.18)` to `rgba(255, 255, 255, 0.24)` with `backdrop-filter: blur(28px) saturate(200%)`.
-- **Luminous Edge Speculars:** Subtle directional top/left border gradient: `linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.05) 60%, rgba(0, 240, 255, 0.2) 100%)`.
-- **Status & Diagnostic Tints:**
-  - *Ready / Spooled:* Electric Mint (`#10B981`)
-  - *Calibrating / Warning:* Amber Solar (`#F59E0B`)
-  - *Print Error / Jam:* Radiant Crimson (`#F43F5E`)
+- **Primary (`#2563EB` - Royal Cobalt):** Directs the primary interaction path (upload, print trigger, active navigation, focused input borders). Conveys enterprise-grade precision and digital reliability.
+- **Secondary (`#059669` - Emerald Signal):** Reserved strictly for successful file parsing, printer readiness, payment validations (UPI/card), and dispensed jobs. Must stand out cleanly against neutral white backgrounds.
+- **Tertiary (`#D97706` - Alert Amber):** High-priority operational warnings (low toner, tray empty, unsupported paper weight, connectivity lag). Demands immediate intervention without signaling outright failure.
+- **Neutral (`#0F172A` - Slate Carbon):** The foundational ink for typography and structural anchors. The neutral ramp sits on clean slate grays (`#F8FAFC` base surface, `#F1F5F9` container fills, `#E2E8F0` structural borders), guaranteeing zero glare under bright convenience store or campus kiosk lighting.
+- **Critical / Danger (`#DC2626` - Hardware Fault):** Reserved for paper jams, print queue cancellations, and payment rejections.
 
 ## Typography
 
-Typography balances hyper-refined, modern geometric readability (`Plus Jakarta Sans`) with precision instrument readout markers (`Space Grotesk`).
+The type scale marries the structural authority and contemporary geometric curves of **Plus Jakarta Sans** for primary display numbers, total costs, and flow headlines with the ultra-legible utilitarian character of **Inter** for forms, document parameters, and kiosk operational metadata.
 
-### Hierarchy & Readout Mechanics
-- **Display & Headline:** Rendered in `Plus Jakarta Sans` with tightened letterforms to cut crisply through diffused glass backgrounds. High-contrast pure white (`#FFFFFF`) or off-white (`rgba(255, 255, 255, 0.92)`) ensures total optical legibility over shifting mesh gradients.
-- **Body:** Uses balanced line heights and slight negative trackings on larger tiers to maintain a streamlined editorial posture.
-- **Labels, Telemetry & Specs:** Driven by `Space Grotesk` in uppercase or tracked small caps for technical camera parameters (DPI, ISO, Paper Size, CMYK levels, Printer IP, Spool Latency).
+- **Numerics & Currencies:** All pricing line items, page counters, and tray indicators utilize tabular figures (`font-variant-numeric: tabular-nums`) to prevent jittering during real-time page count calculations.
+- **Kiosk Readability:** Under handheld sunlight or distance scanning, headlines and labels use tight letter spacing and strict medium-to-bold weights to avoid stroke degradation on lower-quality mobile screens.
 
 ## Layout & Spacing
 
-The structural layout utilizes a responsive fluid grid optimized for mobile camera viewfinders, tablet multi-document review, and desktop workstation management.
+The layout operates on an 8pt base grid within a fluid grid framework designed to scale between handheld mobile devices, self-service kiosk tablets, and desktop owner dashboards.
 
-### Responsive Structure
-- **Mobile (< 768px):** 4-column fluid layout with `margin-mobile` (16px) and `gutter-mobile` (12px). Viewfinder actions and bottom sheets anchor to dynamic thumb safe areas.
-- **Tablet (768px - 1024px):** 8-column layout. Split-pane architecture with dynamic document preview on the left and print queue/parameter controls on the right.
-- **Desktop (> 1024px):** 12-column layout max-width constrained to 1440px with `margin-desktop` (40px) and `gutter-desktop` (24px). Floating dock arrays and glass inspector sidebars.
-
-### Component Spacing Rhythm
-Glass panels require generous internal breathing room to prevent frosted refraction edges from crowding content. Cards use `space-lg` (24px) inner padding, while micro-controls and action pills utilize `space-sm` (12px) vertical and `space-md` (16px) horizontal pads.
+- **Mobile Kiosk Viewport (< 640px):** Single-column stack with dynamic viewport padding. Outer margins lock to `margin: 1rem` to maximize touch footprint. Bottom areas are reserved for sticky primary action trays (e.g., "Pay & Print") elevated with fixed thumbsafe heights (min 56px).
+- **Tablet / Countertop Kiosk (640px - 1024px):** 6-column grid with `gutter: 1rem`. Document preview occupies the left 3 columns; configuration, duplex options, and payment checkout dock into the right 3 columns.
+- **Owner Admin Portal (> 1024px):** 12-column grid with `margin-desktop: 2rem` and `gutter-desktop: 1.5rem`. Max container constraint of `1440px`. Telemetry widgets, tray capacities, and live queue lists adopt dense multi-card row arrangements.
 
 ## Elevation & Depth
 
-Visual depth is achieved through **Simulated Optical Dispersion and Multi-Layered Frosted Refraction** rather than opaque drop shadows.
+Visual hierarchy employs crisp tonal surface layering paired with ultra-diffused, ambient slate shadows and micro-borders (`1px`). This avoids blurry visual mud and keeps interactions sharp under kiosk lighting.
 
-### Atmospheric Tiers
-1. **Backdrop Canvas (Base 0):** Pure dark substrate layered with persistent, slow-moving SVG/CSS mesh gradients featuring blurred nodes (blur: 80px to 140px) of cyan `#00F0FF`, violet `#8B5CF6`, and deep sapphire.
-2. **Surface Level 1 (Trough / Recessed):**
-   - Background: `rgba(255, 255, 255, 0.04)`
-   - Blur: `backdrop-filter: blur(12px)`
-   - Border: `1px solid rgba(255, 255, 255, 0.08)`
-   - Shadow: `none`
-   - Use: Inactive trays, paper format selectors, scan document history lists.
-3. **Surface Level 2 (Standard Glass Container):**
-   - Background: `rgba(255, 255, 255, 0.12)`
-   - Blur: `backdrop-filter: blur(20px) saturate(180%)`
-   - Border: `1px solid rgba(255, 255, 255, 0.22)`
-   - Shadow: `0 8px 32px 0 rgba(0, 0, 0, 0.36), inset 0 1px 1px 0 rgba(255, 255, 255, 0.35)`
-   - Use: Document inspection cards, scanner controls, parameter sheets.
-4. **Surface Level 3 (Floating HUD & Focus Trays):**
-   - Background: `rgba(255, 255, 255, 0.18)`
-   - Blur: `backdrop-filter: blur(28px) saturate(220%)`
-   - Border: `1px solid rgba(255, 255, 255, 0.38)`
-   - Shadow: `0 16px 48px 0 rgba(0, 0, 0, 0.5), 0 0 24px 0 rgba(0, 240, 255, 0.15), inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.5)`
-   - Use: Capture shutter dock, print spool execution modal, high-priority notifications.
-
-### Neon Edge Highlights & Glows
-Critical active targets project a low-opacity neon glow (`box-shadow: 0 0 20px rgba(0, 240, 255, 0.4)`), mimicking real-world collimated optical light passing through beveled crystal slabs.
+- **Level 0 (Canvas Base):** Background canvas (`#F8FAFC`). Flat, non-elevated.
+- **Level 1 (Card & Modular Panel):** Background surface (`#FFFFFF`), outline (`1px solid #E2E8F0`), shadow: `0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.03)`. Used for file tiles, paper config blocks, and admin metric widgets.
+- **Level 2 (Interactive Floating / Dropdowns / Popovers):** Elevated surface (`#FFFFFF`), outline (`1px solid #CBD5E1`), shadow: `0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.04)`.
+- **Level 3 (Modal / Sticky Kiosk Action Footer):** Elevated pinned trays (`#FFFFFF`), outline top (`1px solid #E2E8F0`), shadow: `0 -4px 12px 0 rgba(15, 23, 42, 0.06)`. Ensures the primary transaction action is uncoupled from page scroll.
 
 ## Shapes
 
-The design system adopts a fluid, pill-centric geometry (Level 3) to mimic smooth cast-glass surfaces, contoured optical lenses, and Apple-grade industrial precision.
+The design system maintains a tactile, compact roundedness scale (`level 2`):
 
-### Geometric Values
-- **Micro Pills & Action Badges (`rounded-full`):** All telemetry pills, status tags, toggle rails, and single-action triggers have fully rounded caps (`9999px`).
-- **Cards & Primary Glass Sheets (`rounded-3xl` / 24px - 32px):** All containers feature soft, continuous curvature (squircle-like transitions) with zero sharp edges.
-- **Viewfinder Reticles & Overlay Guides (`rounded-2xl` / 16px):** Optical framing guides use smooth intermediate radii with illuminated corner crop marks.
+- **Default Components (Inputs, Buttons, Segmented Tabs):** `0.5rem` (8px). Delivers a modern, welcoming feel while retaining structural discipline.
+- **Cards, Panels, Document Dropzones:** `rounded-lg` at `1rem` (16px). Creates distinct modular grouping without excessive pillowy bubble effects.
+- **Full Modals & Bottom Sheets:** `rounded-xl` at `1.5rem` (24px) on top radii to establish physical containment.
+- **Status Badges, Indicators, and Mini Chips:** Fully rounded / pill (`9999px`) to create an immediate visual contrast against geometric layout cards.
 
 ## Components
 
-### Buttons & Shutter Triggers
-- **Primary Shutter / Print Action:** Pill-shaped (`height: 56px`), filled with vibrant gradient `linear-gradient(135deg, #00F0FF 0%, #3B82F6 50%, #8B5CF6 100%)`. Border: `1px solid rgba(255, 255, 255, 0.6)`. Glow: `0 0 24px rgba(0, 240, 255, 0.45)`. Text: High-contrast obsidian `#090B14`, font: `Space Grotesk 600`.
-- **Secondary Glass Action:** Translucent pill `rgba(255, 255, 255, 0.12)`, border `1px solid rgba(255, 255, 255, 0.25)`, text: Pure white with hover state brightening to `rgba(255, 255, 255, 0.22)`.
-- **Icon Glass Button:** Circular (`44px` or `52px`), identical glass styling with centered high-contrast vector icon.
+### Buttons & Touch Targets
+- **Kiosk Target Sizing:** All primary actions require a minimum interactive bounding box of `48px` (height `52px` preferred on mobile web) to ensure zero tap-error on greasy or outdoors mobile screens.
+- **Primary Print Action:** Solid `#2563EB` fill, white text, bold weight, subtle active press feedback (`transform: scale(0.98)`).
+- **Secondary / Ghost:** White background, `1px solid #E2E8F0`, hover `#F8FAFC`, active `#F1F5F9`.
+- **Success Confirm (Pay & Release):** Solid `#059669` fill with explicit payment icon (e.g., UPI, NFC contact symbol).
 
-### Cards & Document Canvases
-- **Glass Document Preview:** Multi-layered canvas container. Features a translucent glass tray holding a high-definition document thumbnail with rounded corners (`12px`) and subtle paper drop shadow.
-- **Scanner Feed HUD:** Overlays direct camera output with a semi-translucent boundary perimeter, corner reticle indicators in Cyan (`#00F0FF`), and real-time edge detection polygons.
+### Status Badges & Chips
+- **Hardware / Job Badges:** Rounded-full pill styling with a dot pulse indicator.
+  - *Ready / Online:* Background `#ECFDF5`, text `#065F46`, border `#A7F3D0`, dot `#059669`.
+  - *Warning (Paper/Ink Low):* Background `#FFFBEB`, text `#92400E`, border `#FDE68A`, dot `#D97706`.
+  - *Offline / Error:* Background `#FEF2F2`, text `#991B1B`, border `#FECACA`, dot `#DC2626`.
+- **Print Option Chips (Color, B&W, Duplex):** Compact toggles with `0.5rem` radius. Inactive states feature `#F1F5F9` fill with muted text; active states feature `#2563EB` stroke (`1.5px`) with a light `#EFF6FF` tint.
 
-### Chips & Telemetry Pills
-- **Spec Pills:** Height `28px`, padding `0 12px`, radius `9999px`. Translucent base `rgba(255, 255, 255, 0.08)`, border `rgba(255, 255, 255, 0.16)`.
-- **Status Indicator:** Features an interior 6px pulsing LED dot (e.g., `#10B981` with matching radial drop glow for "Printer Online").
+### Inputs & Counter Controls
+- **Page Selectors & Copies:** Stepper components featuring oversized `+` and `-` touch segments enclosing a central tabular numeric value.
+- **File Upload / QR Dropzone:** `2px dashed #CBD5E1` border on `#F8FAFC` background. Dynamic hover/drag transitions to `#2563EB` border with a `#EFF6FF` wash.
 
-### Inputs & Numeric Steppers
-- **Glass Text / IP Input:** Flat glass surface with `rgba(255, 255, 255, 0.06)`, inset border `1px solid rgba(255, 255, 255, 0.15)`. On focus: Border brightens to `#00F0FF` with a subtle external glow `0 0 12px rgba(0, 240, 255, 0.25)`.
-- **Copy Count Stepper:** Integrated pill segmented into `[-]`, `[ count ]`, `[+]` divided by fine `1px rgba(255, 255, 255, 0.12)` luminous hairline separators.
-
-### Checkboxes, Radio Pills & Segmented Controls
-- **Segmented Filter Switcher (Color / Grayscale / OCR):** Pill background `rgba(255, 255, 255, 0.07)` containing a sliding luminous glass thumb that glides beneath the active selection with a spring transition.
-- **Checkboxes:** Rounded squares (`8px` radius) in frosted glass; selected state fills with cyan `#00F0FF` displaying an obsidian check icon.
-
-### Print Queue & Job Progress Rail
-- **Progress Glass Arc / Bar:** Rail background `rgba(255, 255, 255, 0.1)`. Active fill uses a vivid violet-to-cyan gradient with an ultra-bright leading edge dot emitting a running specular flare.
+### Cards & Pricing Breakdown
+- **Print Job Summary Card:** White card (`rounded-lg`, Level 1 elevation). Houses file preview icon, name, total pages, breakdown (Pages × Unit Cost + Tax), and dynamic totals formatted in large `display-lg-mobile` tabular figures.
+- **Kiosk Device Health Card (Admin Portal):** Compact container featuring a visual tray progress bar (0–100%), estimated sheets remaining, and network ping indicator.

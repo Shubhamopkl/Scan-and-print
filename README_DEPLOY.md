@@ -1,15 +1,30 @@
-# ScanPrint — Render Static Deployment
+# Scan & Print — Render deployment
 
-This bundle keeps the original supplied project under `original/` unchanged.
-The root `index.html` is a copy of the supplied `scan_to_print_live_glassmorphism_web_app/code.html` and is used only as the Render landing page.
+This package keeps the supplied UI/design and adds the missing server-side workflow:
+- exact PDF page counting with `pdf-lib`
+- document upload/storage
+- order creation and pricing
+- server-side rate storage
+- order/print status API
+- local browser print dialog for the uploaded PDF
+- optional UPI intent using environment variables
 
 ## Render
-- Service type: Static Site
-- Build Command: leave blank
-- Publish Directory: `.`
-- Branch: `main`
+Create a **Web Service** from this GitHub repository (not Static Site).
 
-No build step is required for these supplied HTML screens.
+- Runtime: Node
+- Build Command: `npm install`
+- Start Command: `npm start`
+- Health Check Path: `/api/health`
 
-## Direct screens
-Each supplied `code.html` is also exposed under `pages/` as a static HTML page.
+## Optional UPI
+Add these Render environment variables if you have a merchant UPI VPA:
+- `UPI_VPA` = your merchant VPA
+- `UPI_PAYEE_NAME` = your business name
+
+The UPI intent opens the installed UPI app. Payment verification is not claimed as complete without a real payment gateway/webhook.
+
+## Printer note
+A normal Render server cannot directly control a printer connected to a customer's phone/PC. The implemented print flow opens the uploaded PDF in the browser and invokes the local browser print dialog, which is the part that can reach a printer installed on that device.
+
+For unattended remote kiosk printing, add a small local kiosk/print-agent on the kiosk machine later; the existing API is ready to be used for that integration.

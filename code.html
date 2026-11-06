@@ -1,510 +1,876 @@
 <!DOCTYPE html>
 
-<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = {
-  darkMode: "class",
-  theme: {
-    extend: {
-      "colors": {
-        "secondary": "#d0bcff",
-        "tertiary": "#f4f5ff",
-        "primary-fixed": "#7df4ff",
-        "surface-container-high": "#282933",
-        "on-error-container": "#ffdad6",
-        "error": "#ffb4ab",
-        "on-surface-variant": "#b9cacb",
-        "on-tertiary-fixed-variant": "#004395",
-        "inverse-on-surface": "#2e303a",
-        "surface-bright": "#373943",
-        "inverse-primary": "#006970",
-        "tertiary-fixed": "#d8e2ff",
-        "outline": "#849495",
-        "primary-fixed-dim": "#00dbe9",
-        "on-tertiary-container": "#005ac3",
-        "on-primary-container": "#006970",
-        "surface-variant": "#32343f",
-        "on-tertiary": "#002e6a",
-        "background": "#11131c",
-        "tertiary-container": "#cad9ff",
-        "surface-container-low": "#191b25",
-        "primary": "#dbfcff",
-        "on-secondary-container": "#c4abff",
-        "on-primary": "#00363a",
-        "surface": "#11131c",
-        "on-error": "#690005",
-        "surface-container": "#1d1f29",
-        "on-surface": "#e1e1ef",
-        "surface-tint": "#00dbe9",
-        "on-primary-fixed": "#002022",
-        "surface-dim": "#11131c",
-        "secondary-container": "#571bc1",
-        "on-secondary-fixed": "#23005c",
-        "on-secondary": "#3c0091",
-        "secondary-fixed-dim": "#d0bcff",
-        "outline-variant": "#3b494b",
-        "surface-container-lowest": "#0c0e17",
-        "tertiary-fixed-dim": "#adc6ff",
-        "inverse-surface": "#e1e1ef",
-        "on-secondary-fixed-variant": "#5516be",
-        "error-container": "#93000a",
-        "surface-container-highest": "#32343f",
-        "secondary-fixed": "#e9ddff",
-        "on-primary-fixed-variant": "#004f54",
-        "primary-container": "#00f0ff",
-        "on-tertiary-fixed": "#001a42",
-        "on-background": "#e1e1ef"
-      },
-      "borderRadius": {
-        "DEFAULT": "1rem",
-        "lg": "2rem",
-        "xl": "3rem",
-        "full": "9999px"
-      },
-      "spacing": {
-        "space-md": "1rem",
-        "margin-desktop": "2.5rem",
-        "margin": "1.5rem",
-        "space-xxs": "0.25rem",
-        "gutter-mobile": "0.75rem",
-        "space-sm": "0.75rem",
-        "space-lg": "1.5rem",
-        "space-xs": "0.5rem",
-        "space-xl": "2rem",
-        "space-xxl": "3rem",
-        "gutter-desktop": "1.5rem",
-        "gutter": "1.25rem",
-        "margin-mobile": "1rem"
-      },
-      "fontFamily": {
-        "display-lg": ["Plus Jakarta Sans"],
-        "body-md": ["Plus Jakarta Sans"],
-        "body-sm": ["Plus Jakarta Sans"],
-        "label-sm": ["Space Grotesk"],
-        "label-md": ["Space Grotesk"],
-        "code-metric": ["Space Grotesk"],
-        "headline-md": ["Plus Jakarta Sans"],
-        "headline-xl-mobile": ["Plus Jakarta Sans"],
-        "label-lg": ["Space Grotesk"],
-        "display-lg-mobile": ["Plus Jakarta Sans"],
-        "body-xl": ["Plus Jakarta Sans"],
-        "headline-xl": ["Plus Jakarta Sans"],
-        "body-lg": ["Plus Jakarta Sans"],
-        "headline-sm": ["Plus Jakarta Sans"],
-        "headline-lg": ["Plus Jakarta Sans"]
-      },
-      "fontSize": {
-        "display-lg": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
-        "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
-        "body-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }],
-        "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "600" }],
-        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "500" }],
-        "code-metric": ["13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "700" }],
-        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
-        "headline-xl-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
-        "label-lg": ["14px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "600" }],
-        "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
-        "body-xl": ["18px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "400" }],
-        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.025em", "fontWeight": "600" }],
-        "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
-        "headline-sm": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
-        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }]
-      }
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
     }
+  </style>
+</head>
+<body>
+<!-- STITCH_THREEJS_START:ANIMATION_25 class="fixed inset-0 w-full h-full bg-transparent" -->
+<div class="fixed inset-0 w-full h-full bg-transparent" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_25" style="width:100%;height:100%"></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_25');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  # 📦 Scan to Print — Full Project Code & GitHub Repository Files
+
+Aap yahan se har ek file ka code seedhe copy karke apne computer ke project folder mein paste kar sakte hain.
+
+---
+
+### 📂 Folder Structure
+```text
+scan-to-print/
+├── render.yaml
+├── package.json
+├── .gitignore
+├── README.md
+├── server/
+│   ├── package.json
+│   └── server.js
+└── client/
+    ├── package.json
+    ├── vite.config.js
+    ├── index.html
+    └── src/
+        ├── main.jsx
+        ├── App.jsx
+        ├── index.css
+        └── components/
+            ├── CustomerScanPrint.jsx
+            ├── CustomerCheckout.jsx
+            ├── OwnerDashboard.jsx
+            └── OwnerHardwareDiagnostics.jsx
+```
+
+---
+
+## ⚡ File 1: `render.yaml` (Root Directory)
+```yaml
+services:
+  # 1. Backend Web Service (Node.js API)
+  - type: web
+    name: scan-print-api
+    runtime: node
+    region: singapore
+    plan: free
+    buildCommand: npm --prefix server install
+    startCommand: npm --prefix server start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: FRONTEND_URL
+        value: https://scan-print-web.onrender.com
+
+  # 2. Frontend Web App (Static Vite React Site)
+  - type: web
+    name: scan-print-web
+    runtime: static
+    buildCommand: npm --prefix client install && npm --prefix client run build
+    staticPublishPath: client/dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://scan-print-api.onrender.com
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+```
+
+---
+
+## 📦 File 2: `package.json` (Root Directory)
+```json
+{
+  "name": "scan-to-print-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install:all": "npm --prefix server install && npm --prefix client install",
+    "start": "node server/server.js",
+    "build": "npm --prefix client run build"
   }
-};</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
-    body {
-      min-height: max(884px, 100dvh);
-      background-color: #0b0d14;
-    }
-    .glass-card {
-      background: rgba(25, 27, 40, 0.45);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.18), 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    }
-    .glass-panel-subtle {
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
-    }
-    .glass-pill {
-      background: rgba(255, 255, 255, 0.07);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
-    }
-  </style></head><body class="bg-[#0b0d14] font-body-md text-on-surface flex flex-col min-h-screen relative overflow-x-hidden selection:bg-primary-container selection:text-black"><!-- Glowing mesh backdrop with vibrant neon cyan and violet ambients -->
-<div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-<div class="absolute -top-[120px] -left-[100px] w-[380px] h-[380px] bg-[#00f0ff]/15 rounded-full blur-[110px]"></div>
-<div class="absolute top-[28%] -right-[80px] w-[340px] h-[340px] bg-[#571bc1]/25 rounded-full blur-[120px]"></div>
-<div class="absolute bottom-[10%] left-[-60px] w-[320px] h-[320px] bg-[#00dbe9]/12 rounded-full blur-[100px]"></div>
-<div class="absolute bottom-[-100px] right-[-40px] w-[300px] h-[300px] bg-[#7a22ff]/20 rounded-full blur-[110px]"></div>
-<!-- Subtle grid overlay -->
-<div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] opacity-40"></div>
-</div><header class="fixed top-0 w-full z-50 pt-safe bg-[#0d101a]/70 backdrop-blur-2xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]"><div class="h-16 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="ScanPrint Logo" class="h-8 w-auto object-contain flex-shrink-0 drop-shadow-[0_0_12px_rgba(0,240,255,0.35)]" src="https://lh3.googleusercontent.com/aida/AEtjO1WqXKc_d6nw34pzI2WWyFKtkWJksEyzHNqvxQE7olsuzDsId-gAC1J1how2QzWk5x9Lq_j_9O3wKNMWZOzkg35QD-3KRueP_YylYW0ZFJbMZtSDZ-NHY2ZB2tXATjNmMiBRB31Ok-JP0N1G3wozRGCjP3y7uXJNg0PTeMuXX6ST9q4kSohCMj6FAufJg76cckhvVeDS4GCb9m7YKrNAEekB5JbqzD-2j7rEzxpPxcTb"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-md text-headline-md tracking-tight text-white font-extrabold truncate">ScanPrint</span><span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 font-label-sm text-label-sm shadow-[0_0_10px_rgba(52,211,153,0.2)]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_6px_#34d399]"></span>Online</span></div><span class="font-label-sm text-label-sm text-on-surface-variant truncate flex items-center gap-1"><span class="material-symbols-outlined text-[13px] text-primary-fixed-dim">store</span>Shop #12 · Central Library</span></div></div><div class="flex items-center gap-space-xs flex-shrink-0"><button class="min-h-[44px] min-w-[44px] px-space-xs py-1 rounded-full glass-pill hover:bg-white/15 active:scale-95 transition-all flex items-center justify-center gap-1 text-primary-fixed border border-white/15" title="Switch Mode"><span class="material-symbols-outlined text-[18px]">swap_horiz</span><span class="font-label-sm text-label-sm hidden sm:inline">Switch</span></button><img alt="Profile" class="w-8 h-8 rounded-full object-cover flex-shrink-0 ring-2 ring-primary-container/40 shadow-[0_0_12px_rgba(0,240,255,0.3)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNOSCzRj3EgR8Rm_kVR7ORL4I3yPAmbAV5yVAmIsoJgd5a2U2dc_a6-LH87IdJTQYl9SxxWquaU7rDLuGzzwA42eNucGUU1Och7kjV1y4rZyuAQ6KyAEwCM6_qVnnWc7-FOVpuVsBWANBh5xOfrwN2iNlUsg4K5wqmr-xZFOw1L2QSmx0ymHO9H4efWEoARX2BWvr4oPcv2pWv_EQXYz3DD5ALrSkwYT1U8Z1q_fg"/></div></div></header><main class="flex flex-col relative z-10 w-full pt-16 pb-24 flex-grow"><div class="flex flex-col w-full">
-<!-- Progress Stepper Header (Glass Strip) -->
-<div class="px-margin pt-3 pb-3 bg-white/[0.03] backdrop-blur-xl border-b border-white/10 shadow-[0_4px_16px_rgba(0,0,0,0.2)]">
-<div class="flex items-center justify-between">
-<!-- Step 1 Done -->
-<div class="flex items-center gap-2">
-<div class="w-6 h-6 rounded-full bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 flex items-center justify-center font-label-sm text-label-sm shadow-[0_0_8px_rgba(52,211,153,0.3)]">
-<span class="material-symbols-outlined text-[14px]">check</span>
+}
+```
+
+---
+
+## 📄 File 3: `.gitignore` (Root Directory)
+```text
+node_modules/
+.env
+dist/
+.DS_Store
+*.log
+```
+
+---
+
+## ⚙️ File 4: `server/package.json`
+```json
+{
+  "name": "scan-print-server",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}
+```
+
+---
+
+## ⚙️ File 5: `server/server.js`
+```javascript
+const express = require('express');
+const cors = require('cors');
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+app.use(cors());
+app.use(express.json());
+
+// In-memory demo kiosk state
+let kioskState = {
+  kioskId: 'KP-4821',
+  status: 'Online',
+  printerModel: 'LaserJet Pro X400',
+  tonerBlack: 88,
+  paperCount: 340,
+  paperMax: 500,
+  fuserTemp: '195°C',
+  ping: '12ms'
+};
+
+let rateCard = {
+  bwSingle: 2.00,
+  bwDuplex: 3.50,
+  color: 8.00,
+  glossy: 25.00
+};
+
+let orders = [
+  { id: 'ORD-9021', customer: 'Aarav Mehta', pages: 14, type: 'Color', amount: 140, status: 'Printing', progress: '8/14' },
+  { id: 'ORD-9020', customer: 'Neha Sharma', pages: 4, type: 'B&W', amount: 8, status: 'Waiting', progress: 'Queue #1' },
+  { id: 'ORD-9019', customer: 'Vikram Rajput', pages: 32, type: 'Duplex B&W', amount: 64, status: 'Waiting', progress: 'Queue #2' }
+];
+
+// Health Check
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date() });
+});
+
+// Telemetry & Rate Card
+app.get('/api/kiosk/status', (req, res) => {
+  res.json({ kiosk: kioskState, rateCard, queue: orders });
+});
+
+app.post('/api/kiosk/rate-card', (req, res) => {
+  rateCard = { ...rateCard, ...req.body };
+  res.json({ message: 'Rate card updated successfully', rateCard });
+});
+
+// Order creation & UPI checkout
+app.post('/api/order/create', (req, res) => {
+  const { fileName, pages, colorMode, duplex, copies, customerPhone } = req.body;
+  
+  let rate = colorMode === 'color' ? rateCard.color : (duplex ? rateCard.bwDuplex / 2 : rateCard.bwSingle);
+  let totalAmount = (pages * rate * (copies || 1)).toFixed(2);
+  let releasePin = Math.floor(1000 + Math.random() * 9000).toString();
+  let orderId = 'ORD-' + Math.floor(1000 + Math.random() * 9000);
+
+  const newOrder = {
+    id: orderId,
+    customer: customerPhone || 'Kiosk Guest',
+    fileName: fileName || 'Document.pdf',
+    pages,
+    colorMode,
+    amount: totalAmount,
+    status: 'Ready',
+    releasePin,
+    createdAt: new Date()
+  };
+
+  orders.unshift(newOrder);
+
+  res.json({
+    success: true,
+    orderId,
+    totalAmount,
+    releasePin,
+    kioskId: kioskState.kioskId,
+    upiIntentUrl: `upi://pay?pa=merchant@upi&pn=ScanPrintKiosk&am=${totalAmount}&tr=${orderId}&cu=INR`
+  });
+});
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Scan to Print API running on port ${PORT}`);
+});
+```
+
+---
+
+## 💻 File 6: `client/package.json`
+```json
+{
+  "name": "scan-print-client",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lucide-react": "^0.395.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.0",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.4",
+    "vite": "^5.2.11"
+  }
+}
+```
+
+---
+
+## 💻 File 7: `client/vite.config.js`
+```javascript
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 3000
+  }
+});
+```
+
+---
+
+## 💻 File 8: `client/index.html`
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scan to Print — Kiosk Web App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-[#0c0e17] text-white font-sans antialiased">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+
+
+```
+
+---
+
+## 💻 File 9: `client/src/index.css` (Glassmorphic Styling)
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  background-color: #0c0e17;
+  color: #f1f5f9;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-panel-active {
+  background: rgba(0, 240, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.2);
+}
+
+.glass-button {
+  background: linear-gradient(135deg, #00f0ff 0%, #3b82f6 100%);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.35);
+}
+```
+
+---
+
+## 💻 File 10: `client/src/main.jsx`
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import './index.css';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <react.strictmode>
+<app></app>
+</react.strictmode>
+);
+```
+
+---
+
+## 💻 File 11: `client/src/App.jsx`
+```jsx
+import React, { useState } from 'react';
+import CustomerScanPrint from './components/CustomerScanPrint';
+import CustomerCheckout from './components/CustomerCheckout';
+import OwnerDashboard from './components/OwnerDashboard';
+import OwnerHardwareDiagnostics from './components/OwnerHardwareDiagnostics';
+
+export default function App() {
+  const [activeTab, setActiveTab] = useState('customer-scan');
+  const [orderData, setOrderData] = useState({
+    fileName: 'Final_Semester_Project.pdf',
+    pages: 14,
+    colorMode: 'bw',
+    duplex: true,
+    copies: 1,
+    total: 28.00
+  });
+
+  return (
+    <div classname="min-h-screen bg-[#0c0e17] text-white flex flex-col items-center p-3 relative overflow-hidden">
+      {/* Background Neon Ambient Blobs */}
+      <div classname="absolute top-10 left-1/2 -translate-x-1/2 w-96 h-96 bg-cyan-500/15 rounded-full blur-[120px] pointer-events-none"></div>
+<div classname="absolute bottom-20 left-10 w-80 h-80 bg-indigo-600/15 rounded-full blur-[100px] pointer-events-none"></div>
+
+      {/* Top Navigation Switcher */}
+      <div classname="w-full max-w-md mb-4 glass-panel rounded-2xl p-1.5 flex justify-between z-10 text-xs font-medium">
+<button =="" onclick="{()"> setActiveTab('customer-scan')}
+          className={`flex-1 py-2 rounded-xl transition ${activeTab === 'customer-scan' ? 'bg-cyan-500 text-black font-semibold' : 'text-slate-400'}`}
+        &gt;
+          Customer Setup
+        </button>
+<button =="" onclick="{()"> setActiveTab('customer-checkout')}
+          className={`flex-1 py-2 rounded-xl transition ${activeTab === 'customer-checkout' ? 'bg-cyan-500 text-black font-semibold' : 'text-slate-400'}`}
+        &gt;
+          Live Dispense
+        </button>
+<button =="" onclick="{()"> setActiveTab('owner-dashboard')}
+          className={`flex-1 py-2 rounded-xl transition ${activeTab === 'owner-dashboard' ? 'bg-indigo-500 text-white font-semibold' : 'text-slate-400'}`}
+        &gt;
+          Owner Hub
+        </button>
+<button =="" onclick="{()"> setActiveTab('owner-hardware')}
+          className={`flex-1 py-2 rounded-xl transition ${activeTab === 'owner-hardware' ? 'bg-indigo-500 text-white font-semibold' : 'text-slate-400'}`}
+        &gt;
+          Diagnostics
+        </button>
 </div>
-<div class="flex flex-col">
-<span class="font-label-sm text-label-sm text-white font-bold">1. Kiosk</span>
-<span class="font-label-sm text-[10px] text-emerald-400 font-semibold">KP-4821 Ready</span>
+
+      {/* Screen Container */}
+      <main classname="w-full max-w-md z-10 pb-16">
+        {activeTab === 'customer-scan' &amp;&amp; (
+          <customerscanprint =="" onproceed="{()" orderdata="{orderData}" setorderdata="{setOrderData}"> setActiveTab('customer-checkout')} 
+          /&gt;
+        )}
+        {activeTab === 'customer-checkout' &amp;&amp; (
+          <customercheckout =="" onback="{()" orderdata="{orderData}"> setActiveTab('customer-scan')} 
+          /&gt;
+        )}
+        {activeTab === 'owner-dashboard' &amp;&amp; (
+          <ownerdashboard =="" onopenhardware="{()"> setActiveTab('owner-hardware')} 
+          /&gt;
+        )}
+        {activeTab === 'owner-hardware' &amp;&amp; (
+          <ownerhardwarediagnostics =="" onback="{()"> setActiveTab('owner-dashboard')} 
+          /&gt;
+        )}
+      </ownerhardwarediagnostics></ownerdashboard></customercheckout></customerscanprint></main>
 </div>
+  );
+}
+```
+
+---
+
+## 💻 File 12: `client/src/components/CustomerScanPrint.jsx`
+```jsx
+import React from 'react';
+
+export default function CustomerScanPrint({ orderData, setOrderData, onProceed }) {
+  const calculateTotal = (colorMode, duplex, copies) =&gt; {
+    const rate = colorMode === 'color' ? 8.00 : 2.00;
+    return (orderData.pages * rate * copies).toFixed(2);
+  };
+
+  const handleColorChange = (mode) =&gt; {
+    const total = calculateTotal(mode, orderData.duplex, orderData.copies);
+    setOrderData({ ...orderData, colorMode: mode, total });
+  };
+
+  const handleDuplexChange = (isDuplex) =&gt; {
+    setOrderData({ ...orderData, duplex: isDuplex });
+  };
+
+  const handleCopies = (delta) =&gt; {
+    const next = Math.max(1, orderData.copies + delta);
+    const total = calculateTotal(orderData.colorMode, orderData.duplex, next);
+    setOrderData({ ...orderData, copies: next, total });
+  };
+
+  return (
+    <div classname="space-y-4">
+      {/* Terminal Connection */}
+      <div classname="glass-panel p-4 rounded-3xl relative overflow-hidden">
+<div classname="flex items-center justify-between mb-3">
+<div classname="flex items-center gap-2">
+<span classname="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse"></span>
+<span classname="text-xs uppercase tracking-wider text-slate-300 font-semibold">Connected Terminal</span>
 </div>
-<div class="h-0.5 w-6 bg-gradient-to-r from-emerald-400/40 to-primary-container/40 rounded-full"></div>
-<!-- Step 2 Active/Done -->
-<div class="flex items-center gap-2">
-<div class="w-6 h-6 rounded-full bg-primary-container/20 border border-primary-container/50 text-primary-fixed flex items-center justify-center font-label-sm text-label-sm shadow-[0_0_10px_rgba(0,240,255,0.4)]">
-<span class="material-symbols-outlined text-[14px]">description</span>
+<button classname="text-xs bg-white/10 hover:bg-white/20 border border-white/20 px-3 py-1 rounded-full text-cyan-300">
+            Re-scan
+          </button>
 </div>
-<div class="flex flex-col">
-<span class="font-label-sm text-label-sm text-primary-fixed-dim font-bold">2. File</span>
-<span class="font-label-sm text-[10px] text-on-surface-variant">1 Uploaded</span>
+<div classname="flex items-center justify-between">
+<div>
+<div classname="flex items-center gap-2">
+<h3 classname="font-bold text-lg text-white">KP-4821</h3>
+<span classname="text-[10px] bg-indigo-500/30 text-indigo-300 border border-indigo-400/40 px-2 py-0.5 rounded-full">
+                Fast Duplex
+              </span>
 </div>
+<p classname="text-xs text-slate-400">Desk 3 · Central Library Station</p>
 </div>
-<div class="h-0.5 w-6 bg-white/10 rounded-full"></div>
-<!-- Step 3 Active Setting -->
-<div class="flex items-center gap-2">
-<div class="w-6 h-6 rounded-full bg-secondary-container/40 border border-secondary/40 text-secondary-fixed flex items-center justify-center font-label-sm text-label-sm shadow-[0_0_8px_rgba(208,188,255,0.3)]">
-<span class="material-symbols-outlined text-[14px]">tune</span>
-</div>
-<div class="flex flex-col">
-<span class="font-label-sm text-label-sm text-white font-semibold">3. Settings</span>
-<span class="font-label-sm text-[10px] text-secondary font-medium">Configure</span>
-</div>
-</div>
-</div>
-</div>
-<div class="flex flex-col gap-space-md p-margin">
-<!-- Viewfinder Simulated Card / Connected Terminal Badge -->
-<div class="relative overflow-hidden rounded-2xl glass-card p-space-md group">
-<!-- Specular reflection highlight beam -->
-<div class="absolute -top-16 -right-12 w-48 h-48 bg-gradient-to-br from-primary-container/25 via-secondary/15 to-transparent rounded-full blur-2xl pointer-events-none"></div>
-<div class="flex items-start justify-between gap-space-sm mb-space-sm relative z-10">
-<div class="flex items-center gap-2">
-<span class="relative flex h-2.5 w-2.5">
-<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400 shadow-[0_0_8px_#34d399]"></span>
-</span>
-<span class="font-label-sm text-label-sm text-emerald-300 font-bold uppercase tracking-wider">Connected Terminal</span>
-</div>
-<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full glass-pill text-primary-fixed font-label-sm text-label-sm active:scale-95 transition-all hover:border-primary-container/50 hover:bg-white/10 shadow-[0_0_12px_rgba(0,240,255,0.15)]" id="rescan-btn">
-<span class="material-symbols-outlined text-[16px] text-primary-container">qr_code_scanner</span>
-<span>Re-scan</span>
-</button>
-</div>
-<!-- Kiosk Scanner Banner with live viewfinder overlay toggle -->
-<div class="relative rounded-xl bg-slate-950/60 border border-white/10 p-3.5 text-on-surface flex items-center justify-between shadow-[inset_0_1px_2px_rgba(0,0,0,0.5)] z-10">
-<div class="flex items-center gap-3 min-w-0">
-<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-container/20 to-secondary/20 border border-white/15 flex items-center justify-center text-primary-fixed shadow-[0_0_12px_rgba(0,240,255,0.2)] flex-shrink-0">
-<span class="material-symbols-outlined text-[22px]">print</span>
-</div>
-<div class="flex flex-col min-w-0">
-<div class="flex items-center gap-1.5">
-<span class="font-code-metric text-code-metric font-bold text-white tracking-wider">KP-4821</span>
-<span class="px-2 py-0.5 rounded-full bg-secondary-container/40 border border-secondary/30 text-secondary-fixed text-[10px] font-label-sm font-semibold tracking-wide">Fast Duplex</span>
-</div>
-<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Desk 3 · Central Library Station</p>
-</div>
-</div>
-<span class="material-symbols-outlined text-primary-container text-[22px] drop-shadow-[0_0_8px_rgba(0,240,255,0.6)]">verified</span>
-</div>
-<div class="mt-2.5 flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm px-1 relative z-10">
-<span class="flex items-center gap-1.5 text-on-surface-variant">
-<span class="material-symbols-outlined text-[15px] text-primary-fixed-dim">speed</span> 42 ppm output ready
-        </span>
-<span class="text-primary-fixed font-semibold cursor-pointer hover:underline flex items-center gap-0.5">Change Kiosk <span class="material-symbols-outlined text-[14px]">arrow_forward</span></span>
-</div>
-</div>
-<!-- Active Document Preview Card -->
-<div class="flex flex-col gap-2.5">
-<div class="flex items-center justify-between">
-<h2 class="font-headline-sm text-headline-sm text-white flex items-center gap-2 font-bold tracking-tight">
-<span class="material-symbols-outlined text-primary-container text-[22px] drop-shadow-[0_0_6px_rgba(0,240,255,0.5)]">draft</span>
-          Document Loaded
-        </h2>
-<span class="font-label-sm text-label-sm text-emerald-300 font-bold bg-emerald-500/15 border border-emerald-400/30 px-2.5 py-0.5 rounded-full shadow-[0_0_10px_rgba(52,211,153,0.2)]">Ready to Print</span>
-</div>
-<!-- Document Tile -->
-<div class="rounded-2xl glass-card p-space-md flex flex-col gap-space-sm relative overflow-hidden">
-<div class="flex items-start gap-space-sm">
-<!-- Rich Icon Graphic mimicking the prompt inspired logo -->
-<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-container/25 to-secondary/30 border border-white/20 flex-shrink-0 flex items-center justify-center relative overflow-hidden shadow-[0_0_18px_rgba(0,240,255,0.25)]">
-<div class="w-9 h-10 rounded-lg bg-gradient-to-b from-primary-container to-cyan-600 flex flex-col items-center justify-center text-slate-950 font-bold shadow-md border border-white/30">
-<span class="material-symbols-outlined text-[20px] font-black">picture_as_pdf</span>
-<span class="font-label-sm text-[8px] font-extrabold uppercase tracking-tighter">PDF</span>
-</div>
-<div class="absolute bottom-0 inset-x-0 h-1 bg-gradient-to-r from-primary-container to-secondary"></div>
-</div>
-<!-- Doc Details -->
-<div class="flex flex-col min-w-0 flex-1">
-<h3 class="font-body-lg text-body-lg text-white font-bold truncate">Final_Semester_Project_Report.pdf</h3>
-<div class="flex items-center gap-2 mt-1 text-on-surface-variant font-label-sm text-label-sm flex-wrap">
-<span class="font-bold text-primary-fixed-dim bg-white/5 border border-white/10 px-1.5 py-0.5 rounded">14 Pages</span>
-<span class="text-white/30">•</span>
-<span>3.4 MB</span>
-<span class="text-white/30">•</span>
-<span class="text-emerald-400 font-semibold flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Rendered OK</span>
-</div>
-</div>
-<button class="w-9 h-9 rounded-full glass-pill hover:bg-white/15 flex items-center justify-center text-on-surface-variant hover:text-white flex-shrink-0 active:scale-95 transition-all" title="Replace File">
-<span class="material-symbols-outlined text-[18px]">cached</span>
-</button>
-</div>
-<!-- Inline Visual Page Thumbnail Reel -->
-<div class="flex items-center gap-2.5 overflow-x-auto pt-1 pb-1">
-<div class="flex-shrink-0 w-16 h-20 rounded-xl glass-panel-subtle p-2 flex flex-col justify-between hover:border-primary-container/40 transition-colors">
-<div class="space-y-1.5">
-<div class="h-1.5 bg-primary-container/60 rounded-full w-3/4 shadow-[0_0_6px_rgba(0,240,255,0.4)]"></div>
-<div class="h-1 bg-white/20 rounded-full w-full"></div>
-<div class="h-1 bg-white/20 rounded-full w-4/5"></div>
-</div>
-<span class="font-label-sm text-[9px] text-center text-on-surface-variant">p. 1 (Cover)</span>
-</div>
-<div class="flex-shrink-0 w-16 h-20 rounded-xl glass-panel-subtle p-2 flex flex-col justify-between hover:border-primary-container/40 transition-colors">
-<div class="space-y-1.5">
-<div class="h-1 bg-white/20 rounded-full w-full"></div>
-<div class="h-1 bg-white/20 rounded-full w-full"></div>
-<div class="h-1 bg-white/20 rounded-full w-2/3"></div>
-</div>
-<span class="font-label-sm text-[9px] text-center text-on-surface-variant">p. 2</span>
-</div>
-<div class="flex-shrink-0 w-16 h-20 rounded-xl glass-panel-subtle p-2 flex flex-col justify-between hover:border-primary-container/40 transition-colors">
-<div class="space-y-1.5">
-<div class="h-1 bg-white/20 rounded-full w-full"></div>
-<div class="h-1 bg-white/20 rounded-full w-5/6"></div>
-<div class="h-1.5 bg-secondary/60 rounded-full w-1/2 shadow-[0_0_6px_rgba(208,188,255,0.4)]"></div>
-</div>
-<span class="font-label-sm text-[9px] text-center text-on-surface-variant">p. 3 (Chart)</span>
-</div>
-<div class="flex-shrink-0 w-16 h-20 rounded-xl glass-pill flex items-center justify-center font-label-sm text-[11px] text-primary-fixed font-bold border-dashed hover:border-primary-container/60 transition-all">
-            +11 more
+<div classname="text-emerald-400 text-xs flex items-center gap-1 font-mono">
+            42 ppm ready
           </div>
 </div>
 </div>
+
+      {/* Document Loaded Preview */}
+      <div classname="glass-panel p-4 rounded-3xl space-y-3">
+<div classname="flex items-center justify-between">
+<div classname="flex items-center gap-2">
+<span classname="text-cyan-400 text-lg">📄</span>
+<span classname="font-semibold text-sm">Document Loaded</span>
 </div>
-<!-- Quick Print Configuration Section -->
-<div class="flex flex-col gap-2.5">
-<div class="flex items-center justify-between">
-<h2 class="font-headline-sm text-headline-sm text-white font-bold tracking-tight">Print Setup</h2>
-<span class="font-label-sm text-label-sm text-on-surface-variant px-2 py-0.5 rounded-full bg-white/5 border border-white/10">Fast Preset Applied</span>
+<span classname="text-[11px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">
+            Ready to Print
+          </span>
 </div>
-<div class="glass-card rounded-2xl p-space-md space-y-space-md">
-<!-- Color Mode Selection -->
+<div classname="p-3 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-between">
 <div>
-<div class="flex justify-between items-center mb-2.5">
-<label class="font-label-md text-label-md text-white font-bold tracking-wide">Color Mode</label>
-<span class="font-label-sm text-label-sm text-primary-fixed-dim font-bold drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]" id="color-rate-tag">₹2.00 / page</span>
-</div>
-<div class="grid grid-cols-2 gap-space-xs">
-<button class="mode-select-btn flex items-center justify-between p-3.5 rounded-xl bg-white/[0.09] border border-primary-container/60 shadow-[inset_0_1px_1px_rgba(255,255,255,0.25),0_0_16px_rgba(0,240,255,0.18)] transition-all active:scale-[0.98]" id="btn-bw" type="button">
-<div class="flex items-center gap-2.5">
-<span class="w-6 h-6 rounded-full bg-slate-900 border border-white/30 flex items-center justify-center text-[10px] text-white font-bold shadow-sm">B</span>
-<div class="text-left">
-<p class="font-label-md text-label-md text-white font-bold">Black &amp; White</p>
-<p class="font-label-sm text-label-sm text-on-surface-variant">₹2 / page</p>
+<p classname="font-medium text-sm text-slate-200">{orderData.fileName}</p>
+<p classname="text-xs text-slate-400">{orderData.pages} Pages · 3.4 MB · Rendered OK</p>
 </div>
 </div>
-<span class="material-symbols-outlined text-primary-container text-[20px] drop-shadow-[0_0_8px_rgba(0,240,255,0.8)]" id="bw-check">check_circle</span>
-</button>
-<button class="mode-select-btn flex items-center justify-between p-3.5 rounded-xl bg-white/[0.03] border border-white/10 opacity-70 transition-all active:scale-[0.98] hover:border-white/20" id="btn-color" type="button">
-<div class="flex items-center gap-2.5">
-<div class="w-6 h-6 rounded-full bg-gradient-to-tr from-amber-400 via-rose-500 to-cyan-400 flex items-center justify-center shadow-[0_0_8px_rgba(244,63,94,0.4)]"></div>
-<div class="text-left">
-<p class="font-label-md text-label-md text-white font-bold">Full Color</p>
-<p class="font-label-sm text-label-sm text-on-surface-variant">₹8 / page</p>
+
+        {/* Thumbnail Preview */}
+        <div classname="flex gap-2">
+          {[1, 2, 3].map((p) =&gt; (
+            <div classname="flex-1 h-14 bg-white/5 border border-white/10 rounded-xl flex flex-col items-center justify-center text-[10px] text-slate-400" key="{p}">
+<span>p. {p}</span>
+</div>
+          ))}
+          <div classname="w-16 h-14 bg-white/5 border border-dashed border-white/20 rounded-xl flex items-center justify-center text-[10px] text-cyan-300">
+            +{orderData.pages - 3} more
+          </div>
 </div>
 </div>
-<span class="material-symbols-outlined text-outline text-[20px]" id="color-check">radio_button_unchecked</span>
-</button>
+
+      {/* Print Setup Customizer */}
+      <div classname="glass-panel p-4 rounded-3xl space-y-4">
+<div classname="flex justify-between items-center">
+<h4 classname="font-semibold text-sm">Print Setup</h4>
+<span classname="text-xs text-slate-400">Fast Preset Applied</span>
 </div>
-</div>
-<!-- Sides (Duplex vs Single) -->
 <div>
-<div class="flex justify-between items-center mb-2.5">
-<label class="font-label-md text-label-md text-white font-bold tracking-wide">Print Sides</label>
-<span class="font-label-sm text-label-sm text-emerald-300 font-semibold bg-emerald-500/10 border border-emerald-400/20 px-2 py-0.5 rounded-full">Duplex saves 50% paper!</span>
-</div>
-<div class="grid grid-cols-2 gap-space-xs">
-<button class="side-select-btn flex items-center gap-3 p-3.5 rounded-xl bg-white/[0.09] border border-primary-container/60 shadow-[inset_0_1px_1px_rgba(255,255,255,0.25),0_0_14px_rgba(0,240,255,0.15)] transition-all" id="btn-duplex" type="button">
-<span class="material-symbols-outlined text-primary-container text-[22px] drop-shadow-[0_0_6px_rgba(0,240,255,0.5)]">auto_stories</span>
-<div class="text-left">
-<p class="font-label-md text-label-md text-white font-bold">Two-Sided</p>
-<p class="font-label-sm text-[11px] text-on-surface-variant">Double sided</p>
-</div>
+<label classname="text-xs text-slate-400 block mb-2">Color Mode</label>
+<div classname="grid grid-cols-2 gap-3">
+<button =="" onclick="{()"> handleColorChange('bw')}
+              className={`p-3 rounded-2xl flex flex-col items-start transition ${
+                orderData.colorMode === 'bw' ? 'glass-panel-active' : 'bg-white/5 border border-white/10'
+              }`}
+            &gt;
+              <span classname="font-bold text-sm">Black &amp; White</span>
+<span classname="text-xs text-cyan-400">₹2.00 / page</span>
 </button>
-<button class="side-select-btn flex items-center gap-3 p-3.5 rounded-xl bg-white/[0.03] border border-white/10 opacity-70 transition-all hover:border-white/20" id="btn-single" type="button">
-<span class="material-symbols-outlined text-outline text-[22px]">file_copy</span>
-<div class="text-left">
-<p class="font-label-md text-label-md text-white font-bold">Single-Sided</p>
-<p class="font-label-sm text-[11px] text-on-surface-variant">One side only</p>
-</div>
-</button>
-</div>
-</div>
-<!-- Copies Stepper & Page Range Split -->
-<div class="grid grid-cols-2 gap-space-sm pt-1">
-<!-- Copies Stepper -->
-<div class="flex flex-col gap-1.5">
-<label class="font-label-md text-label-md text-white font-bold tracking-wide">Copies</label>
-<div class="flex items-center justify-between glass-panel-subtle rounded-xl p-1.5 border border-white/10 shadow-inner">
-<button class="w-10 h-10 rounded-lg glass-pill flex items-center justify-center text-white hover:text-primary-fixed active:scale-90 transition-all" id="btn-minus" type="button">
-<span class="material-symbols-outlined text-[18px]">remove</span>
-</button>
-<span class="font-headline-md text-headline-md text-white font-bold tabular-nums" id="copies-count">1</span>
-<button class="w-10 h-10 rounded-lg glass-pill flex items-center justify-center text-primary-container hover:bg-primary-container/20 active:scale-90 transition-all shadow-[0_0_8px_rgba(0,240,255,0.25)]" id="btn-plus" type="button">
-<span class="material-symbols-outlined text-[18px]">add</span>
+<button =="" onclick="{()"> handleColorChange('color')}
+              className={`p-3 rounded-2xl flex flex-col items-start transition ${
+                orderData.colorMode === 'color' ? 'glass-panel-active' : 'bg-white/5 border border-white/10'
+              }`}
+            &gt;
+              <span classname="font-bold text-sm">Full Color</span>
+<span classname="text-xs text-cyan-400">₹8.00 / page</span>
 </button>
 </div>
 </div>
-<!-- Page Range -->
-<div class="flex flex-col gap-1.5">
-<label class="font-label-md text-label-md text-white font-bold tracking-wide">Pages</label>
-<div class="flex items-center gap-1 glass-panel-subtle rounded-xl p-1.5 border border-white/10">
-<button class="flex-1 py-2 text-center rounded-lg bg-white/15 border border-white/20 text-primary-fixed font-label-md text-label-md font-bold shadow-[0_0_12px_rgba(0,240,255,0.2)] transition-all" id="range-all-btn">
-                All (14)
-              </button>
-<button class="flex-1 py-2 text-center rounded-lg text-on-surface-variant hover:text-white font-label-md text-label-md font-medium transition-all" id="range-custom-btn">
-                Custom
-              </button>
+<div>
+<label classname="text-xs text-slate-400 block mb-2">Print Sides (Duplex saves 50% paper!)</label>
+<div classname="grid grid-cols-2 gap-3">
+<button =="" onclick="{()"> handleDuplexChange(true)}
+              className={`p-3 rounded-2xl text-left ${orderData.duplex ? 'glass-panel-active' : 'bg-white/5 border border-white/10'}`}
+            &gt;
+              <div classname="font-medium text-sm">Two-Sided</div>
+<div classname="text-[11px] text-slate-400">Double sided</div>
+</button>
+<button =="" onclick="{()"> handleDuplexChange(false)}
+              className={`p-3 rounded-2xl text-left ${!orderData.duplex ? 'glass-panel-active' : 'bg-white/5 border border-white/10'}`}
+            &gt;
+              <div classname="font-medium text-sm">Single-Sided</div>
+<div classname="text-[11px] text-slate-400">One side only</div>
+</button>
+</div>
+</div>
+<div classname="flex justify-between items-center pt-2">
+<span classname="text-sm text-slate-300">Copies</span>
+<div classname="flex items-center gap-3 bg-white/5 border border-white/10 px-3 py-1.5 rounded-2xl">
+<button =="" onclick="{()"> handleCopies(-1)} className="text-lg text-slate-400 hover:text-white px-2"&gt;−</button>
+<span classname="font-bold text-sm w-4 text-center">{orderData.copies}</span>
+<button =="" onclick="{()"> handleCopies(1)} className="text-lg text-cyan-400 hover:text-white px-2"&gt;+</button>
 </div>
 </div>
 </div>
+
+      {/* Floating CTA */}
+      <div classname="glass-panel p-4 rounded-3xl flex items-center justify-between">
+<div>
+<div classname="text-[10px] text-slate-400 uppercase tracking-wider">Total Estimated Cost</div>
+<div classname="text-2xl font-black text-white">₹{orderData.total}</div>
+</div>
+<button classname="glass-button text-black font-bold px-6 py-3 rounded-2xl flex items-center gap-2 hover:opacity-95 transition" onclick="{onProceed}">
+<span>Pay &amp; Print</span>
+<span>→</span>
+</button>
 </div>
 </div>
-<!-- Security & Trust Micro-Badge -->
-<div class="flex items-center justify-center gap-2 py-1 text-on-surface-variant font-label-sm text-label-sm">
-<span class="material-symbols-outlined text-[16px] text-emerald-400 drop-shadow-[0_0_6px_rgba(52,211,153,0.5)]">encrypted</span>
-<span>Document automatically purged 10 mins post-print</span>
+  );
+}
+```
+
+---
+
+## 💻 File 13: `client/src/components/CustomerCheckout.jsx`
+```jsx
+import React, { useState } from 'react';
+
+export default function CustomerCheckout({ orderData, onBack }) {
+  const [pinCopied, setPinCopied] = useState(false);
+  const releasePin = '8492';
+
+  const copyPin = () =&gt; {
+    navigator.clipboard.writeText(releasePin);
+    setPinCopied(true);
+    setTimeout(() =&gt; setPinCopied(false), 2000);
+  };
+
+  return (
+    <div classname="space-y-4">
+<div classname="flex items-center justify-between mb-2">
+<button classname="text-xs bg-white/10 px-3 py-1.5 rounded-xl border border-white/15" onclick="{onBack}">
+          ← Back to Setup
+        </button>
+<span classname="text-xs text-slate-400">Order #SP-9921</span>
+</div>
+
+      {/* Live Dispense Hardware Progress */}
+      <div classname="glass-panel p-5 rounded-3xl relative overflow-hidden border-cyan-500/30">
+<div classname="flex justify-between items-center mb-3">
+<div classname="flex items-center gap-2">
+<span classname="w-2.5 h-2.5 bg-cyan-400 rounded-full animate-ping"></span>
+<span classname="font-bold text-sm text-cyan-300">Live Dispense Active</span>
+</div>
+<span classname="text-xs font-mono text-cyan-400 font-bold">65% Complete</span>
+</div>
+<p classname="text-xs text-slate-300 mb-2">Tray 1 dispensing securely: Page 9 of 14 printed</p>
+<div classname="w-full h-3 bg-white/10 rounded-full overflow-hidden p-0.5">
+<div classname="h-full bg-gradient-to-r from-cyan-400 to-indigo-500 rounded-full w-[65%] transition-all duration-500 shadow-[0_0_12px_#00f0ff]"></div>
+</div>
+
+        {/* 4-Digit Release PIN Block */}
+        <div classname="mt-5 p-4 bg-white/5 border border-white/15 rounded-2xl text-center">
+<p classname="text-[11px] text-slate-400 uppercase tracking-widest mb-2 font-semibold">Secure Kiosk Release PIN</p>
+<div classname="flex justify-center gap-3 font-mono text-2xl font-black text-cyan-300">
+            {releasePin.split('').map((char, i) =&gt; (
+              <span classname="w-11 h-12 flex items-center justify-center bg-black/40 border border-cyan-500/40 rounded-xl shadow-inner" key="{i}">
+                {char}
+              </span>
+            ))}
+          </div>
+<button classname="mt-3 text-xs text-slate-300 hover:text-white underline decoration-cyan-400" onclick="{copyPin}">
+            {pinCopied ? 'PIN Copied to Clipboard!' : 'Click to Copy PIN'}
+          </button>
 </div>
 </div>
-<!-- Sticky Bottom Elevation Tray: Cost & Pay CTA -->
-<div class="sticky bottom-0 z-40 bg-[#0d101a]/85 backdrop-blur-2xl border-t border-white/15 p-margin shadow-[0_-8px_32px_rgba(0,0,0,0.6)]">
-<div class="flex items-center justify-between mb-space-xs">
-<div class="flex flex-col">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">Total Estimated Cost</span>
-<div class="flex items-baseline gap-1.5">
-<span class="font-display-lg-mobile text-display-lg-mobile font-black text-white tracking-tight drop-shadow-[0_0_16px_rgba(0,240,255,0.3)]" id="total-price-display">₹28.00</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant" id="breakdown-tag">(14 pgs × ₹2.00)</span>
+
+      {/* Payment Summary */}
+      <div classname="glass-panel p-4 rounded-3xl space-y-2 text-sm">
+<h4 classname="font-semibold text-slate-200 mb-2">Payment Summary</h4>
+<div classname="flex justify-between text-slate-400 text-xs">
+<span>{orderData.pages} Pages × ₹2.00 ({orderData.duplex ? 'Duplex' : 'Single'})</span>
+<span>₹28.00</span>
+</div>
+<div classname="flex justify-between text-slate-400 text-xs">
+<span>GST (18%) &amp; Platform Fee</span>
+<span>₹1.50</span>
+</div>
+<div classname="flex justify-between text-emerald-400 text-xs">
+<span>Paper Saver discount</span>
+<span>-₹2.00</span>
+</div>
+<div classname="border-t border-white/10 pt-2 flex justify-between font-bold text-base text-white">
+<span>Total Payable</span>
+<span classname="text-cyan-400">₹29.50</span>
 </div>
 </div>
-<div class="flex flex-col items-end">
-<span class="inline-flex items-center gap-1.5 font-label-sm text-label-sm text-emerald-300 font-bold bg-emerald-500/15 border border-emerald-400/30 px-2.5 py-1 rounded-full shadow-[0_0_10px_rgba(52,211,153,0.25)]">
-<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-          Instant Release
+
+      {/* 1-Tap UPI Apps */}
+      <div classname="glass-panel p-4 rounded-3xl space-y-3">
+<div classname="flex justify-between items-center">
+<span classname="text-xs font-semibold text-slate-300">1-Tap Instant UPI Authorization</span>
+<span classname="text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+            Instant Clearance
+          </span>
+</div>
+<div classname="grid grid-cols-2 gap-2 text-xs">
+          {['GPay', 'PhonePe', 'Paytm', 'BHIM UPI'].map((app) =&gt; (
+            <button classname="p-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl flex items-center justify-between transition" key="{app}">
+<span classname="font-medium text-slate-200">{app}</span>
+<span classname="text-cyan-400 text-sm">⚡</span>
+</button>
+          ))}
+        </div>
+</div>
+</div>
+  );
+}
+```
+
+---
+
+## 💻 File 14: `client/src/components/OwnerDashboard.jsx`
+```jsx
+import React from 'react';
+
+export default function OwnerDashboard({ onOpenHardware }) {
+  return (
+    <div classname="space-y-4">
+<div classname="glass-panel p-4 rounded-3xl flex items-center justify-between">
+<div>
+<h2 classname="font-bold text-base text-white">FastPrint Sector 18</h2>
+<p classname="text-xs text-slate-400">Kiosk #K-4821 · Online</p>
+</div>
+<span classname="text-xs bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-full font-medium">
+          Accepting Orders
         </span>
-<span class="font-label-sm text-[11px] text-on-surface-variant mt-1">UPI / Cards / Cash</span>
+</div>
+
+      {/* Metrics */}
+      <div classname="grid grid-cols-2 gap-3">
+<div classname="glass-panel p-4 rounded-3xl">
+<span classname="text-xs text-slate-400">Today's Revenue</span>
+<div classname="text-2xl font-black text-cyan-400 mt-1">₹4,850</div>
+<span classname="text-[10px] text-emerald-400 font-semibold">+18% vs yesterday</span>
+</div>
+<div classname="glass-panel p-4 rounded-3xl">
+<span classname="text-xs text-slate-400">Pages Printed</span>
+<div classname="text-2xl font-black text-white mt-1">1,842</div>
+<span classname="text-[10px] text-slate-400">Avg 3.4 pgs/min</span>
 </div>
 </div>
-<button class="relative group overflow-hidden w-full h-14 rounded-2xl bg-gradient-to-r from-[#00f0ff] via-[#00c8e0] to-[#7928ca] text-slate-950 font-headline-md text-[18px] font-extrabold flex items-center justify-center gap-2.5 shadow-[0_0_24px_rgba(0,240,255,0.45),inset_0_1px_1px_rgba(255,255,255,0.6)] hover:shadow-[0_0_32px_rgba(0,240,255,0.65)] active:scale-[0.98] transition-all border border-white/30" id="proceed-btn" type="button">
-<span class="material-symbols-outlined text-[24px] text-slate-950">payments</span>
-<span id="cta-label">Proceed to Review &amp; Pay (₹28.00)</span>
-</button>
+
+      {/* Consumables */}
+      <div classname="glass-panel p-4 rounded-3xl space-y-3">
+<div classname="flex justify-between items-center">
+<h3 classname="font-semibold text-sm">Printer Consumables</h3>
+<button classname="text-xs text-cyan-400 hover:underline" onclick="{onOpenHardware}">
+            Manage →
+          </button>
+</div>
+<div>
+<div classname="flex justify-between text-xs text-slate-400 mb-1">
+<span>Black Toner (OEM Cartridge)</span>
+<span classname="font-mono text-cyan-300">78%</span>
+</div>
+<div classname="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+<div classname="h-full bg-cyan-400 rounded-full w-[78%]"></div>
 </div>
 </div>
-<script>
-  (function() {
-    let pages = 14;
-    let ratePerPage = 2; // 2 for B&W, 8 for Color
-    let copies = 1;
+<div>
+<div classname="flex justify-between text-xs text-slate-400 mb-1">
+<span>Tray 1 (A4 Paper 75gsm)</span>
+<span classname="font-mono text-emerald-300">340 / 500 sheets</span>
+</div>
+<div classname="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+<div classname="h-full bg-emerald-400 rounded-full w-[68%]"></div>
+</div>
+</div>
+</div>
 
-    const btnBw = document.getElementById('btn-bw');
-    const btnColor = document.getElementById('btn-color');
-    const bwCheck = document.getElementById('bw-check');
-    const colorCheck = document.getElementById('color-check');
-    const colorRateTag = document.getElementById('color-rate-tag');
+      {/* Active Spooler Queue */}
+      <div classname="glass-panel p-4 rounded-3xl space-y-2">
+<h3 classname="font-semibold text-sm mb-2">Live Queue (3 Jobs)</h3>
+        {[
+          { name: 'Aarav Mehta', id: '#ORD-9021', pgs: '14 pgs (Color)', price: '₹140', status: 'Printing 8/14' },
+          { name: 'Neha Sharma', id: '#ORD-9020', pgs: '4 pgs (B&amp;W)', price: '₹8', status: 'Waiting' }
+        ].map((job, idx) =&gt; (
+          <div classname="p-3 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-between text-xs" key="{idx}">
+<div>
+<p classname="font-semibold text-white">{job.name} <span classname="text-slate-400 font-normal">{job.id}</span></p>
+<p classname="text-slate-400 text-[11px]">{job.pgs} · {job.price}</p>
+</div>
+<span ${idx="==" 'bg-cyan-500="" 'bg-white="" 0="" 10="" 20="" 30'="" :="" ?="" border="" border-cyan-500="" classname="{`px-2" py-0.5="" rounded-full="" text-[10px]="" text-cyan-300="" text-slate-300'}`}="">
+              {job.status}
+            </span>
+</div>
+        ))}
+      </div>
+</div>
+  );
+}
+```
 
-    const btnDuplex = document.getElementById('btn-duplex');
-    const btnSingle = document.getElementById('btn-single');
+---
 
-    const btnMinus = document.getElementById('btn-minus');
-    const btnPlus = document.getElementById('btn-plus');
-    const copiesCount = document.getElementById('copies-count');
+## 💻 File 14: `client/src/components/OwnerHardwareDiagnostics.jsx`
+```jsx
+import React, { useState } from 'react';
 
-    const totalPriceDisplay = document.getElementById('total-price-display');
-    const breakdownTag = document.getElementById('breakdown-tag');
-    const ctaLabel = document.getElementById('cta-label');
+export default function OwnerHardwareDiagnostics({ onBack }) {
+  const [bwRate, setBwRate] = useState('2.00');
+  const [colorRate, setColorRate] = useState('8.00');
+  const [saved, setSaved] = useState(false);
 
-    function updateCalculations() {
-      const total = pages * ratePerPage * copies;
-      const formattedTotal = '₹' + total.toFixed(2);
-      totalPriceDisplay.textContent = formattedTotal;
-      breakdownTag.textContent = '(' + (pages * copies) + ' pgs × ₹' + ratePerPage.toFixed(2) + ')';
-      ctaLabel.textContent = 'Proceed to Review & Pay (' + formattedTotal + ')';
-    }
+  const saveRate = () =&gt; {
+    setSaved(true);
+    setTimeout(() =&gt; setSaved(false), 2000);
+  };
 
-    // Toggle Color Mode with glass aesthetics
-    btnBw.addEventListener('click', function() {
-      ratePerPage = 2;
-      btnBw.className = 'mode-select-btn flex items-center justify-between p-3.5 rounded-xl bg-white/[0.09] border border-primary-container/60 shadow-[inset_0_1px_1px_rgba(255,255,255,0.25),0_0_16px_rgba(0,240,255,0.18)] transition-all active:scale-[0.98]';
-      btnColor.className = 'mode-select-btn flex items-center justify-between p-3.5 rounded-xl bg-white/[0.03] border border-white/10 opacity-70 transition-all active:scale-[0.98] hover:border-white/20';
-      bwCheck.textContent = 'check_circle';
-      bwCheck.className = 'material-symbols-outlined text-primary-container text-[20px] drop-shadow-[0_0_8px_rgba(0,240,255,0.8)]';
-      colorCheck.textContent = 'radio_button_unchecked';
-      colorCheck.className = 'material-symbols-outlined text-outline text-[20px]';
-      colorRateTag.textContent = '₹2.00 / page';
-      updateCalculations();
-    });
+  return (
+    <div classname="space-y-4">
+<div classname="flex items-center justify-between">
+<button classname="text-xs bg-white/10 px-3 py-1.5 rounded-xl border border-white/15" onclick="{onBack}">
+          ← Back to Dashboard
+        </button>
+<span classname="text-xs text-emerald-400">12ms Ping · 5GHz Wi-Fi</span>
+</div>
 
-    btnColor.addEventListener('click', function() {
-      ratePerPage = 8;
-      btnColor.className = 'mode-select-btn flex items-center justify-between p-3.5 rounded-xl bg-white/[0.09] border border-primary-container/60 shadow-[inset_0_1px_1px_rgba(255,255,255,0.25),0_0_16px_rgba(0,240,255,0.18)] transition-all active:scale-[0.98]';
-      btnBw.className = 'mode-select-btn flex items-center justify-between p-3.5 rounded-xl bg-white/[0.03] border border-white/10 opacity-70 transition-all active:scale-[0.98] hover:border-white/20';
-      colorCheck.textContent = 'check_circle';
-      colorCheck.className = 'material-symbols-outlined text-primary-container text-[20px] drop-shadow-[0_0_8px_rgba(0,240,255,0.8)]';
-      bwCheck.textContent = 'radio_button_unchecked';
-      bwCheck.className = 'material-symbols-outlined text-outline text-[20px]';
-      colorRateTag.textContent = '₹8.00 / page';
-      updateCalculations();
-    });
+      {/* Sensor Diagnostics */}
+      <div classname="glass-panel p-4 rounded-3xl space-y-3">
+<h3 classname="font-semibold text-sm">LaserJet Pro X400 Telemetry</h3>
+<div classname="grid grid-cols-2 gap-2 text-xs">
+<div classname="p-3 bg-white/5 rounded-2xl border border-white/10">
+<span classname="text-slate-400 block text-[10px]">Thermal Fuser</span>
+<span classname="font-bold text-white text-base">195°C</span>
+<span classname="text-emerald-400 text-[10px] block">Normal</span>
+</div>
+<div classname="p-3 bg-white/5 rounded-2xl border border-white/10">
+<span classname="text-slate-400 block text-[10px]">Roller &amp; Feeder</span>
+<span classname="font-bold text-white text-base">Aligned</span>
+<span classname="text-emerald-400 text-[10px] block">0 Jams (48h)</span>
+</div>
+</div>
+</div>
 
-    // Toggle Sides
-    btnDuplex.addEventListener('click', function() {
-      btnDuplex.className = 'side-select-btn flex items-center gap-3 p-3.5 rounded-xl bg-white/[0.09] border border-primary-container/60 shadow-[inset_0_1px_1px_rgba(255,255,255,0.25),0_0_14px_rgba(0,240,255,0.15)] transition-all';
-      btnSingle.className = 'side-select-btn flex items-center gap-3 p-3.5 rounded-xl bg-white/[0.03] border border-white/10 opacity-70 transition-all hover:border-white/20';
-    });
+      {/* Rate Card Manager */}
+      <div classname="glass-panel p-4 rounded-3xl space-y-3">
+<h3 classname="font-semibold text-sm">Pricing &amp; Rate Card (Syncs to Kiosk)</h3>
+<div classname="space-y-2 text-xs">
+<div classname="flex items-center justify-between p-2.5 bg-white/5 border border-white/10 rounded-2xl">
+<div>
+<p classname="font-medium">B&amp;W Single Page</p>
+<p classname="text-[10px] text-slate-400">Standard 75 GSM A4</p>
+</div>
+<div classname="flex items-center gap-1 font-mono">
+<span>₹</span>
+<input =="" onchange="{(e)" type="text" value="{bwRate}"/> setBwRate(e.target.value)} 
+                className="w-12 bg-black/40 border border-white/20 rounded px-1 text-center text-cyan-300" 
+              /&gt;
+            </div>
+</div>
+<div classname="flex items-center justify-between p-2.5 bg-white/5 border border-white/10 rounded-2xl">
+<div>
+<p classname="font-medium">Color Page</p>
+<p classname="text-[10px] text-slate-400">High pigment laser</p>
+</div>
+<div classname="flex items-center gap-1 font-mono">
+<span>₹</span>
+<input =="" onchange="{(e)" type="text" value="{colorRate}"/> setColorRate(e.target.value)} 
+                className="w-12 bg-black/40 border border-white/20 rounded px-1 text-center text-cyan-300" 
+              /&gt;
+            </div>
+</div>
+</div>
+<button classname="w-full glass-button text-black font-bold py-2.5 rounded-2xl text-xs transition" onclick="{saveRate}">
+          {saved ? 'Rates Updated on Kiosks! ✓' : 'Update &amp; Sync Kiosk Rates'}
+        </button>
+</div>
 
-    btnSingle.addEventListener('click', function() {
-      btnSingle.className = 'side-select-btn flex items-center gap-3 p-3.5 rounded-xl bg-white/[0.09] border border-primary-container/60 shadow-[inset_0_1px_1px_rgba(255,255,255,0.25),0_0_14px_rgba(0,240,255,0.15)] transition-all';
-      btnDuplex.className = 'side-select-btn flex items-center gap-3 p-3.5 rounded-xl bg-white/[0.03] border border-white/10 opacity-70 transition-all hover:border-white/20';
-    });
+      {/* Payout */}
+      <div classname="glass-panel p-4 rounded-3xl flex items-center justify-between">
+<div>
+<span classname="text-[11px] text-slate-400">Available Merchant Payout</span>
+<div classname="text-xl font-black text-white">₹4,850.00</div>
+</div>
+<button classname="bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs px-4 py-2 rounded-xl transition">
+          Settle Now
+        </button>
+</div>
+</div>
+  );
+}
+```
 
-    // Copies Counter
-    btnPlus.addEventListener('click', function() {
-      copies += 1;
-      copiesCount.textContent = copies;
-      updateCalculations();
-    });
+---
 
-    btnMinus.addEventListener('click', function() {
-      if (copies > 1) {
-        copies -= 1;
-        copiesCount.textContent = copies;
-        updateCalculations();
-      }
-    });
+## 🚀 GitHub Push &amp; Render Live Commands
+```bash
+# 1. Apne banaye hue folder me jayein
+cd scan-to-print
 
-    // Simulated Action feedback
-    const proceedBtn = document.getElementById('proceed-btn');
-    proceedBtn.addEventListener('click', function() {
-      const orig = ctaLabel.textContent;
-      ctaLabel.textContent = 'Locking Job on Kiosk KP-4821...';
-      proceedBtn.classList.add('brightness-110');
-      setTimeout(function() {
-        ctaLabel.textContent = 'Opening Payment Gateway...';
-      }, 700);
-      setTimeout(function() {
-        ctaLabel.textContent = orig;
-        proceedBtn.classList.remove('brightness-110');
-      }, 2000);
-    });
-  })();
-</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-[#0d101a]/75 backdrop-blur-2xl border-t border-white/10 shadow-[0_-4px_24px_rgba(0,0,0,0.5)]" data-active-classes="text-primary-container font-bold"><div class="flex justify-around items-center h-16 px-space-xs"><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-16 text-primary-container font-bold transition-all drop-shadow-[0_0_8px_rgba(0,240,255,0.4)]" data-path="scan-and-print" href="#"><span class="material-symbols-outlined text-[22px]">document_scanner</span><span class="font-label-sm text-label-sm tracking-tight text-center leading-none mt-1">Scan &amp; Print</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-16 text-on-surface-variant hover:text-white transition-colors" data-path="my-orders-queue" href="#"><span class="material-symbols-outlined text-[22px]">print_connect</span><span class="font-label-sm text-label-sm tracking-tight text-center leading-none mt-1">My Queue</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-16 text-on-surface-variant hover:text-white transition-colors" data-path="owner-dashboard" href="#"><span class="material-symbols-outlined text-[22px]">admin_panel_settings</span><span class="font-label-sm text-label-sm tracking-tight text-center leading-none mt-1">Owner Hub</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] w-16 text-on-surface-variant hover:text-white transition-colors" data-path="settings" href="#"><span class="material-symbols-outlined text-[22px]">tune</span><span class="font-label-sm text-label-sm tracking-tight text-center leading-none mt-1">Settings</span></a></div></nav></body></html>
+# 2. Git initialize &amp; commit
+git init
+git add .
+git commit -m "feat: complete scan to print glassmorphism repo"
+
+# 3. GitHub par push karein
+git branch -M main
+git remote add origin https://github.com/<your_github_username>/scan-to-print.git
+git push -u origin main
+```
+Render.com par jakar **New + → Blueprint** chun kar apni GitHub repository link karein, site 2 minute me automatically live ho jayegi!
+
+})();
+
+</your_github_username></div>
+<!-- STITCH_THREEJS_END:ANIMATION_25 -->
+</body>
+</html>

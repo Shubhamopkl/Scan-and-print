@@ -713,70 +713,141 @@
       document.getElementById('grandTotal').innerText = `₹${finalAmount.toFixed(2)}`;
     }
 
-    // File Upload Simulation
-    function handleFileChange(e) {
+    // Backend-connected document workflow (UI/layout unchanged)
+    let uploadedDocument = null;
+    let currentOrder = null;
+
+    async function api(path, options = {}) {
+      const res = await fetch(path, options);
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
+      return data;
+    }
+
+    async function handleFileChange(e) {
       const file = e.target.files[0];
-      if (file) {
-        document.getElementById('docTitle').innerText = file.name;
-        // Mock page calculation
-        state.pages = Math.floor(Math.random() * 15) + 3;
-        const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
-        document.getElementById('docMeta').innerText = `${state.pages} Pages · ${sizeMb} MB · Rendered OK`;
+      if (!file) return;
+      try {
+        const form = new FormData();
+        form.append('document', file);
+        showQuickAlert('Uploading and reading document…');
+        const data = await api('/api/upload', { method: 'POST', body: form });
+        uploadedDocument = data;
+        state.pages = data.pages;
+        document.getElementById('docTitle').innerText = data.filename;
+        const sizeMb = (data.size / (1024 * 1024)).toFixed(1);
+        document.getElementById('docMeta').innerText = `${data.pages} Pages · ${sizeMb} MB · Ready to print`;
         recalculatePrice();
-        showQuickAlert(`File loaded: ${file.name} (${state.pages} pages)`);
+        showQuickAlert(`✓ ${data.pages} page${data.pages === 1 ? '' : 's'} detected: ${data.filename}`);
+      } catch (err) {
+        uploadedDocument = null;
+        showQuickAlert(`Upload failed: ${err.message}`);
       }
     }
 
-    function simulateScan() {
-      showQuickAlert('Kiosk QR Re-scanned: Terminal KP-4821 Synced!');
+    async function simulateScan() {
+      try {
+        const health = await api('/api/health');
+        showQuickAlert(`✓ Kiosk connected · ${health.service}`);
+      } catch (err) {
+        showQuickAlert('Kiosk/backend is offline');
+      }
     }
 
-    // Select UPI Button
-    function selectUpi(appName) {
-      showQuickAlert(`${appName} selected for 1-Tap Authorization`);
+    async function selectUpi(appName) {
+      try {
+        if (!uploadedDocument) throw new Error('Upload a document first');
+        const order = await createOrder(appName);
+        currentOrder = order;
+        showQuickAlert(`${appName} selected · Order ${order.id} · ₹${order.amount.toFixed(2)}`);
+        // The actual UPI payment gateway/VPA is intentionally not hard-coded into the UI.
+        // If a UPI_VPA is configured on the server, open a native UPI payment intent.
+        try {
+          const cfg = await api('/api/payment-config');
+          if (cfg.upiVpa) {
+            const url = `upi://pay?pa=${encodeURIComponent(cfg.upiVpa)}&pn=${encodeURIComponent(cfg.payeeName || 'Scan and Print')}&am=${order.amount.toFixed(2)}&cu=INR&tn=${encodeURIComponent(order.id)}`;
+            window.location.href = url;
+          }
+        } catch (_) {}
+      } catch (err) {
+        showQuickAlert(err.message);
+      }
     }
 
-    // Trigger Print & Hardware Progress Simulation
-    function triggerPrintProcess() {
+    async function createOrder(paymentMethod = null) {
+      if (!uploadedDocument) throw new Error('Upload a PDF/document first');
+      return api('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fileId: uploadedDocument.fileId,
+          filename: uploadedDocument.filename,
+          pages: state.pages,
+          copies: state.copies,
+          colorMode: state.colorMode,
+          duplex: state.isDuplex,
+          paymentMethod
+        })
+      });
+    }
+
+    // Sends the selected document to the connected local browser printer.
+    async function triggerPrintProcess() {
       const liveCard = document.getElementById('liveDispenseCard');
       liveCard.classList.remove('hidden');
       liveCard.scrollIntoView({ behavior: 'smooth' });
-
-      let progress = 0;
       const bar = document.getElementById('dispenseProgressBar');
       const percentText = document.getElementById('dispensePercent');
       const statusText = document.getElementById('dispenseStatusText');
 
-      const interval = setInterval(() => {
-        progress += 10;
-        if (progress > 100) progress = 100;
+      try {
+        if (!uploadedDocument) throw new Error('Upload a document first');
+        if (!currentOrder) currentOrder = await createOrder(null);
+        const result = await api(`/api/orders/${currentOrder.id}/print`, { method: 'POST' });
+        bar.style.width = '35%'; percentText.innerText = '35%';
+        statusText.innerText = 'Document sent to local print dialog…';
 
-        bar.style.width = progress + '%';
-        percentText.innerText = progress + '%';
-
-        if (progress < 30) {
-          statusText.innerText = 'Spooling document to LaserJet Pro X400...';
-        } else if (progress < 70) {
-          const currentPage = Math.ceil((progress / 100) * state.pages);
-          statusText.innerText = `Printing Tray 1: Page ${currentPage} of ${state.pages} dispensed...`;
-        } else if (progress < 100) {
-          statusText.innerText = 'Fusing toner & releasing to output tray...';
-        } else {
-          statusText.innerText = '✓ Print Completed! Please collect your document from Tray 1.';
-          clearInterval(interval);
-        }
-      }, 400);
+        const printWindow = window.open(result.fileUrl, '_blank');
+        if (!printWindow) throw new Error('Popup blocked. Allow popups for this site.');
+        const poll = setInterval(() => {
+          try {
+            if (printWindow.document.readyState === 'complete') {
+              clearInterval(poll);
+              bar.style.width = '70%'; percentText.innerText = '70%';
+              statusText.innerText = 'Document ready. Opening printer dialog…';
+              setTimeout(() => { try { printWindow.print(); } catch (_) {} }, 400);
+              setTimeout(() => {
+                bar.style.width = '100%'; percentText.innerText = '100%';
+                statusText.innerText = '✓ Print job sent. Check your printer queue/output tray.';
+              }, 1200);
+            }
+          } catch (_) {}
+        }, 300);
+        setTimeout(() => clearInterval(poll), 10000);
+      } catch (err) {
+        bar.style.width = '0%'; percentText.innerText = '0%';
+        statusText.innerText = `Print failed: ${err.message}`;
+        showQuickAlert(err.message);
+      }
     }
 
     // Owner Rate Card Sync
-    function saveOwnerRates() {
+    async function saveOwnerRates() {
       const bw = parseFloat(document.getElementById('ownerRateBw').value) || 2.0;
       const clr = parseFloat(document.getElementById('ownerRateColor').value) || 8.0;
-
-      state.rateBw = bw;
-      state.rateColor = clr;
-      recalculatePrice();
-      showQuickAlert('✓ Rates Updated and Synced to all Kiosks!');
+      try {
+        const saved = await api('/api/settings', {
+          method: 'PUT', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ rateBw: bw, rateColor: clr })
+        });
+        state.rateBw = saved.rateBw;
+        state.rateColor = saved.rateColor;
+        recalculatePrice();
+        showQuickAlert('✓ Rates saved to the server and synced for new orders.');
+      } catch (err) {
+        state.rateBw = bw; state.rateColor = clr; recalculatePrice();
+        showQuickAlert(`Rates changed locally: ${err.message}`);
+      }
     }
 
     // Notification toast
